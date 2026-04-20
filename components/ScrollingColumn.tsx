@@ -18,7 +18,7 @@ export default function ScrollingColumn({
 }: ScrollingColumnProps) {
   const columnRef = useRef<HTMLDivElement>(null);
 
-  // Triple the images for seamless loop
+  // Triple the images for seamless loop.
   const tripled = [...images, ...images, ...images];
 
   return (
