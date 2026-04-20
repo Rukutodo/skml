@@ -1,0 +1,296 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+const REASONS = [
+  {
+    number: "01",
+    title: "Affordable Production",
+    description: "We optimize every aspect of the production pipeline, delivering cinema-quality results at budgets that make filmmaking accessible to emerging creators.",
+  },
+  {
+    number: "02",
+    title: "OTT Release Expertise",
+    description: "Deep relationships with Amazon Prime Video, Aha, and YouTube enable seamless content delivery with optimized metadata and compliance.",
+  },
+  {
+    number: "03",
+    title: "End-to-End Support",
+    description: "From pre-production planning and casting to post-production, marketing, and distribution — we handle the complete filmmaking journey.",
+  },
+  {
+    number: "04",
+    title: "Proven Track Record",
+    description: "With 6+ films produced and distributed, reaching over 50 million viewers across multiple platforms, our results speak for themselves.",
+  },
+];
+
+export default function WhyChooseUs() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [clapAngle, setClapAngle] = useState(-30); // starts open
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // Calculate how far the section is through the viewport
+      // When section top hits bottom of viewport: progress = 0
+      // When section top hits top of viewport: progress = 1
+      const progress = 1 - (rect.top / vh);
+      const clamped = Math.max(0, Math.min(1, progress));
+
+      // Map progress to clapper angle: -30deg (open) -> 0deg (closed)
+      const angle = -30 * (1 - clamped);
+      setClapAngle(angle);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // For the reveal animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const els = entry.target.querySelectorAll(".scroll-reveal");
+            els.forEach((el) => el.classList.add("revealed"));
+          } else {
+            const els = entry.target.querySelectorAll(".scroll-reveal");
+            els.forEach((el) => el.classList.remove("revealed"));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="why-choose"
+      style={{
+        background: "#111118",
+        overflow: "hidden",
+        padding: "3.5rem 1rem",
+      }}
+    >
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+
+        {/* ═══════ CLAPBOARD CONTAINER ═══════ */}
+        <div
+          className="clapboard-wrapper"
+          style={{
+            position: "relative",
+            borderRadius: "1rem",
+            overflow: "visible",
+          }}
+        >
+          {/* ── TOP CLAPPER (animated) ── */}
+          <div
+            className="clapper-hinge"
+            style={{
+              position: "relative",
+              zIndex: 3,
+              transformOrigin: "left bottom",
+              transform: `rotate(${clapAngle}deg)`,
+              transition: "transform 0.05s linear",
+            }}
+          >
+            <div style={{
+              height: "40px",
+              borderRadius: "0.75rem 0.75rem 0 0",
+              overflow: "hidden",
+              position: "relative",
+              background: "#0A0A0F",
+              boxShadow: clapAngle > -5 ? "0 4px 20px rgba(0,0,0,0.5)" : "none",
+            }}>
+              {/* Diagonal stripes */}
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 10px, #0A0A0F 10px, #0A0A0F 20px)",
+                opacity: 0.85,
+              }} />
+              {/* Text on the clapper */}
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "0 1.5rem",
+              }}>
+                <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
+                  SCENE
+                </span>
+                <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
+                  TAKE
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* ── BOTTOM STRIPE (fixed, sits under the clapper) ── */}
+          <div style={{
+            position: "relative",
+            zIndex: 2,
+            height: "36px",
+            overflow: "hidden",
+            background: "#0A0A0F",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+          }}>
+            <div style={{
+              position: "absolute",
+              inset: 0,
+              background: "repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 10px, #0A0A0F 10px, #0A0A0F 20px)",
+              opacity: 0.12,
+            }} />
+            {/* Board info text */}
+            <div style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 1.5rem",
+              zIndex: 1,
+            }}>
+              <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>
+                SKML Motion Pictures
+              </span>
+              <span style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(255,255,255,0.25)" }}>
+                PROD. 2018 — PRESENT
+              </span>
+            </div>
+          </div>
+
+          {/* ═══════ BOARD CONTENT (the actual section content) ═══════ */}
+          <div style={{
+            position: "relative",
+            zIndex: 1,
+            background: "#0A0A0F",
+            borderRadius: "0 0 1rem 1rem",
+            padding: "2rem 1.25rem 2.5rem",
+            border: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "none",
+          }}>
+            {/* Section Label */}
+            <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
+              <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
+              <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)" }}>Why Us</span>
+              <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
+            </div>
+
+            <div className="scroll-reveal" style={{ marginBottom: "3rem", textAlign: "center", maxWidth: "560px", margin: "0 auto 3rem" }}>
+              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(2rem, 4.5vw, 2.75rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff" }}>
+                Why Choose SKML
+              </h2>
+              <p style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
+                We combine passion for storytelling with practical expertise to deliver exceptional value at every stage of filmmaking.
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem" }} className="reasons-grid">
+              {REASONS.map((reason, i) => (
+                <div
+                  key={reason.number}
+                  className={`scroll-reveal reveal-delay-${i + 1}`}
+                  style={{
+                    padding: "1.75rem 2rem",
+                    borderRadius: "0.75rem",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.03)",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "1.25rem",
+                    transition: "transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease, border-color 0.4s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-3px)";
+                    e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.3)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  }}
+                >
+                  <div style={{
+                    flexShrink: 0,
+                    width: "44px",
+                    height: "44px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "0.625rem",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    fontFamily: "var(--font-playfair), serif",
+                    fontSize: "1rem",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                  }}>
+                    {reason.number}
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.01em", color: "#ffffff" }}>
+                      {reason.title}
+                    </h3>
+                    <p style={{ marginTop: "0.5rem", fontSize: "13.5px", lineHeight: 1.75, color: "rgba(255,255,255,0.4)" }}>
+                      {reason.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        /* ── Mobile compact ── */
+        .reasons-grid { gap: 0.75rem !important; }
+
+        .reasons-grid > div {
+          padding: 1.25rem 1rem !important;
+          gap: 1rem !important;
+        }
+
+        .reasons-grid > div > div:first-child {
+          width: 36px !important;
+          height: 36px !important;
+          font-size: 0.875rem !important;
+        }
+
+        .reasons-grid h3 { font-size: 0.9rem !important; }
+
+        .reasons-grid p {
+          font-size: 12.5px !important;
+          margin-top: 0.25rem !important;
+          line-height: 1.6 !important;
+        }
+
+        @media (min-width: 768px) {
+          .reasons-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.25rem !important; }
+          .reasons-grid > div { padding: 1.75rem 2rem !important; gap: 1.25rem !important; }
+          .reasons-grid > div > div:first-child { width: 44px !important; height: 44px !important; font-size: 1rem !important; }
+          .reasons-grid h3 { font-size: 1rem !important; }
+          .reasons-grid p { font-size: 13.5px !important; margin-top: 0.5rem !important; line-height: 1.75 !important; }
+          #why-choose { padding: 6rem 1.5rem !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
