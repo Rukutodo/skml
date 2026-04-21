@@ -3,7 +3,16 @@
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
-const FILMS = [
+export interface ShowcaseFilm {
+  src: string;
+  title: string;
+}
+
+interface FilmShowcaseProps {
+  films?: ShowcaseFilm[];
+}
+
+const FALLBACK_FILMS: ShowcaseFilm[] = [
   { src: "/assets/images/poster-aghora.png", title: "Aghora" },
   { src: "/assets/images/poster-antha-akkade.png", title: "Antha Akkade" },
   { src: "/assets/images/poster-hello-baby.png", title: "Hello Baby" },
@@ -11,7 +20,8 @@ const FILMS = [
   { src: "/assets/images/poster-prema-kadha.png", title: "Prema Kadha" },
 ];
 
-export default function FilmShowcase() {
+export default function FilmShowcase({ films }: FilmShowcaseProps) {
+  const FILMS = films && films.length > 0 ? films : FALLBACK_FILMS;
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);

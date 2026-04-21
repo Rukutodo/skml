@@ -5,7 +5,7 @@ import Image from "next/image";
 
 type MovieCategory = "produced" | "distributed";
 
-interface Movie {
+export interface MovieItem {
   title: string;
   year: string;
   genre: string;
@@ -14,7 +14,11 @@ interface Movie {
   category: MovieCategory;
 }
 
-const MOVIES: Movie[] = [
+interface MoviesSectionProps {
+  films?: MovieItem[];
+}
+
+const FALLBACK_MOVIES: MovieItem[] = [
   { title: "Aghora", year: "2020", genre: "Horror / Thriller", platform: "Amazon Prime", poster: "/assets/images/poster-aghora.png", category: "produced" },
   { title: "Antha Akkade", year: "2021", genre: "Drama", platform: "Aha", poster: "/assets/images/poster-antha-akkade.png", category: "produced" },
   { title: "Hello Baby", year: "2023", genre: "Comedy / Drama", platform: "Amazon Prime", poster: "/assets/images/poster-hello-baby.png", category: "distributed" },
@@ -29,7 +33,9 @@ const TABS: { label: string; value: MovieCategory | "all" }[] = [
   { label: "Distributed", value: "distributed" },
 ];
 
-export default function MoviesSection() {
+export default function MoviesSection({ films }: MoviesSectionProps) {
+  const MOVIES = films && films.length > 0 ? films : FALLBACK_MOVIES;
+
   const sectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<MovieCategory | "all">("all");
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
@@ -165,6 +171,7 @@ export default function MoviesSection() {
                   className="movie-poster"
                   style={{ objectFit: "cover" }}
                   quality={80}
+                  unoptimized={movie.poster.startsWith("https://")}
                 />
                 <div className="movie-overlay" style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", background: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3) 50%, transparent)" }}>
                   <span className="movie-category-badge" style={{

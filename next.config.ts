@@ -8,7 +8,14 @@ const nextConfig: NextConfig = {
         search: "",
       },
     ],
-    qualities: [75],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/**",
+      },
+    ],
+    qualities: [75, 80, 85],
   },
 };
 
