@@ -50,19 +50,19 @@ export default async function Home() {
       <Hero />
       <MarqueeSection />
       <AboutSection
-        headline={aboutData?.headline}
-        headlineAccent={aboutData?.headlineAccent}
-        description={aboutData?.description}
-        ctaText={aboutData?.ctaText}
-        stats={aboutData?.stats}
+        headline={aboutData?.headline || undefined}
+        headlineAccent={aboutData?.headlineAccent || undefined}
+        description={aboutData?.description || undefined}
+        ctaText={aboutData?.ctaText || undefined}
+        stats={aboutData?.stats || undefined}
       />
       <ProducerSection
-        firstName={producerData?.firstName}
-        lastName={producerData?.lastName}
-        role={producerData?.role}
-        portraitUrl={producerPortraitUrl}
-        bio={producerData?.bio}
-        quote={producerData?.quote}
+        firstName={producerData?.firstName || undefined}
+        lastName={producerData?.lastName || undefined}
+        role={producerData?.role || undefined}
+        portraitUrl={producerPortraitUrl || undefined}
+        bio={producerData?.bio || undefined}
+        quote={producerData?.quote || undefined}
       />
       <ServicesSection />
       <FilmShowcase films={showcaseFilms.length > 0 ? showcaseFilms : undefined} />
