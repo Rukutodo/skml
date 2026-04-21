@@ -120,11 +120,35 @@ export async function updateFilmPoster(filmId: string, imageAssetId: string) {
 }
 
 export async function deleteFilm(id: string) {
-  return writeClient.delete(id);
+  // Find the film's poster asset ID before deleting the film
+  const film = await writeClient.fetch(
+    `*[_type == "film" && _id == $id][0]{"posterId": poster.asset->_id}`, 
+    { id }
+  );
+  
+  // Delete the film document
+  await writeClient.delete(id);
+  
+  // If it had a poster, permanently delete the actual image asset to free up storage
+  if (film?.posterId) {
+    await writeClient.delete(film.posterId);
+  }
 }
 
 export async function removeFilmPoster(filmId: string) {
-  return writeClient.patch(filmId).unset(["poster"]).commit();
+  // Find the film's poster asset ID before unsetting it
+  const film = await writeClient.fetch(
+    `*[_type == "film" && _id == $id][0]{"posterId": poster.asset->_id}`, 
+    { id: filmId }
+  );
+  
+  // Unset the poster reference from the film document
+  await writeClient.patch(filmId).unset(["poster"]).commit();
+  
+  // Permanently delete the actual image asset to free up storage
+  if (film?.posterId) {
+    await writeClient.delete(film.posterId);
+  }
 }
 
 // ── Image Upload ───────────────────────────────────────
