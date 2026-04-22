@@ -119,6 +119,14 @@ export async function updateFilmPoster(filmId: string, imageAssetId: string) {
     .commit();
 }
 
+export async function updateFilmsOrder(updates: { id: string; order: number }[]) {
+  const transaction = writeClient.transaction();
+  for (const update of updates) {
+    transaction.patch(update.id, (p) => p.set({ order: update.order }));
+  }
+  return transaction.commit();
+}
+
 export async function deleteFilm(id: string) {
   // Find the film's poster asset ID before deleting the film
   const film = await writeClient.fetch(

@@ -166,14 +166,18 @@ export default function FilmShowcase({ films }: FilmShowcaseProps) {
                 boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
               }}
             >
-              <Image
-                src={film.src}
-                alt={film.title}
-                fill
-                sizes="(max-width: 768px) 65vw, 22vw"
-                style={{ objectFit: "cover" }}
-                unoptimized
-              />
+              {film.src ? (
+                <Image
+                  src={film.src}
+                  alt={film.title}
+                  fill
+                  sizes="(max-width: 768px) 65vw, 22vw"
+                  style={{ objectFit: "cover" }}
+                  unoptimized
+                />
+              ) : (
+                <div style={{ width: "100%", height: "100%", background: "rgba(255,255,255,0.05)" }} />
+              )}
               {/* Title overlay at bottom */}
               <div style={{
                 position: "absolute",

@@ -163,16 +163,20 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
               }}
             >
               <div style={{ position: "relative", aspectRatio: "2/3", width: "100%", overflow: "hidden", borderRadius: "1rem", background: "#EBEBF0", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-                <Image
-                  src={movie.poster}
-                  alt={`${movie.title} movie poster`}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                  className="movie-poster"
-                  style={{ objectFit: "cover" }}
-                  quality={80}
-                  unoptimized={movie.poster.startsWith("https://")}
-                />
+                {movie.poster ? (
+                  <Image
+                    src={movie.poster}
+                    alt={`${movie.title} movie poster`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                    className="movie-poster"
+                    style={{ objectFit: "cover" }}
+                    quality={80}
+                    unoptimized={movie.poster.startsWith("https://")}
+                  />
+                ) : (
+                  <div style={{ width: "100%", height: "100%", background: "#EBEBF0" }} />
+                )}
                 <div className="movie-overlay" style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", background: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3) 50%, transparent)" }}>
                   <span className="movie-category-badge" style={{
                     display: "inline-block",

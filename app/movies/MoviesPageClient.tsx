@@ -245,14 +245,18 @@ export default function MoviesPageClient({ films }: MoviesPageClientProps) {
                     background: "#1A1A24",
                   }}
                 >
-                  <Image
-                    src={film.poster}
-                    alt={`${film.title} poster`}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    style={{ objectFit: "cover", transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                    unoptimized={film.poster.startsWith("https://")}
-                  />
+                  {film.poster ? (
+                    <Image
+                      src={film.poster}
+                      alt={`${film.title} poster`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      style={{ objectFit: "cover", transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)" }}
+                      unoptimized={film.poster.startsWith("https://")}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "100%", background: "#1A1A24" }} />
+                  )}
                   {/* Hover overlay */}
                   <div
                     className="film-card-overlay"
@@ -364,14 +368,18 @@ export default function MoviesPageClient({ films }: MoviesPageClientProps) {
           >
             {/* Poster */}
             <div style={{ position: "relative", aspectRatio: "2/3", width: "100%", maxHeight: "50vh" }}>
-              <Image
-                src={selectedFilm.poster}
-                alt={selectedFilm.title}
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="480px"
-                unoptimized={selectedFilm.poster.startsWith("https://")}
-              />
+              {selectedFilm.poster ? (
+                <Image
+                  src={selectedFilm.poster}
+                  alt={selectedFilm.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="480px"
+                  unoptimized={selectedFilm.poster.startsWith("https://")}
+                />
+              ) : (
+                <div style={{ width: "100%", height: "100%", background: "#1A1A24" }} />
+              )}
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #1A1A24 0%, transparent 40%)", pointerEvents: "none" }} />
 
               {/* Close button */}
