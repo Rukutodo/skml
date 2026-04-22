@@ -28,6 +28,20 @@ export const producer = defineType({
       title: "Portrait Photo",
       type: "image",
       options: { hotspot: true },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          description: "Crucial for SEO and accessibility.",
+        },
+        {
+          name: "caption",
+          title: "Caption",
+          type: "string",
+          description: "Image credit or short description.",
+        },
+      ],
     }),
     defineField({
       name: "bio",

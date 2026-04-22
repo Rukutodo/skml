@@ -95,3 +95,20 @@ export async function getFilmsByCategory(
     { category }
   );
 }
+export async function getFilmBySlug(slug: string): Promise<FilmData | null> {
+  return client.fetch(
+    `*[_type == "film" && slug.current == $slug][0]{
+      _id,
+      title,
+      slug,
+      poster,
+      genre,
+      year,
+      category,
+      ottPlatform,
+      releaseType,
+      order
+    }`,
+    { slug }
+  );
+}

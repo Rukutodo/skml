@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type MovieCategory = "produced" | "distributed";
 
@@ -12,6 +13,8 @@ export interface MovieItem {
   platform: string;
   poster: string;
   category: MovieCategory;
+  alt?: string;
+  caption?: string;
 }
 
 interface MoviesSectionProps {
@@ -39,7 +42,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<MovieCategory | "all">("all");
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const filteredMovies = activeTab === "all" ? MOVIES : MOVIES.filter((m) => m.category === activeTab);
 
@@ -150,12 +153,14 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
         {/* Movie Grid */}
         <div className="movies-grid" style={{ display: "grid" }}>
           {filteredMovies.map((movie, i) => (
-            <div
+            <Link
               key={`${movie.title}-${activeTab}`}
+              href={movie.slug ? `/films/${movie.slug}` : "#"}
               ref={(el) => { cardRefs.current[i] = el; }}
               data-index={i}
               className="movie-card"
               style={{
+                textDecoration: "none",
                 cursor: "pointer",
                 opacity: revealedCards.has(i) ? 1 : 0,
                 transform: revealedCards.has(i) ? "translateY(0)" : "translateY(50px)",
@@ -166,7 +171,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
                 {movie.poster ? (
                   <Image
                     src={movie.poster}
-                    alt={`${movie.title} movie poster`}
+                    alt={movie.alt || `${movie.title} movie poster`}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                     className="movie-poster"
@@ -201,7 +206,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
                 <h3 style={{ fontWeight: 700, color: "#111118" }}>{movie.title}</h3>
                 <p style={{ color: "#6A6A7A" }}>{movie.year} • {movie.genre}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

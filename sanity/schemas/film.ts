@@ -37,6 +37,20 @@ export const film = defineType({
       type: "image",
       group: "media",
       options: { hotspot: true },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          description: "Crucial for SEO and accessibility.",
+        },
+        {
+          name: "caption",
+          title: "Caption",
+          type: "string",
+          description: "Image credit or short description.",
+        },
+      ],
       validation: (rule) => rule.required(),
     }),
     defineField({

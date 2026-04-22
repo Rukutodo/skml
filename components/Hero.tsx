@@ -30,7 +30,7 @@ function getColumnSpeed(colIndex: number): number {
   return speeds[colIndex % speeds.length];
 }
 
-export default function Hero() {
+export default function Hero({ images }: { images?: string[] }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -38,6 +38,19 @@ export default function Hero() {
   }, []);
 
   const desktopCols = 4;
+  const ACTIVE_POSTERS = images && images.length > 0 ? images : POSTERS;
+
+  // Distribute posters across columns with varied arrangements
+  function getColImages(colIndex: number): string[] {
+    const offset = colIndex * 2;
+    const result: string[] = [];
+    for (let i = 0; i < ACTIVE_POSTERS.length; i++) {
+      result.push(ACTIVE_POSTERS[(i + offset) % ACTIVE_POSTERS.length]);
+    }
+    // Ensure we have enough images to fill the scroll
+    while (result.length < 10) result.push(...result);
+    return result;
+  }
 
   return (
     <section
@@ -61,7 +74,7 @@ export default function Hero() {
           {Array.from({ length: desktopCols }).map((_, i) => (
             <ScrollingColumn
               key={`desktop-${i}`}
-              images={getColumnImages(i, desktopCols)}
+              images={getColImages(i)}
               direction={i % 2 === 0 ? "up" : "down"}
               speed={getColumnSpeed(i)}
               columnIndex={i}
@@ -74,7 +87,7 @@ export default function Hero() {
           {Array.from({ length: 3 }).map((_, i) => (
             <ScrollingColumn
               key={`tablet-${i}`}
-              images={getColumnImages(i, 3)}
+              images={getColImages(i)}
               direction={i % 2 === 0 ? "up" : "down"}
               speed={getColumnSpeed(i) + 10}
               columnIndex={i}
@@ -87,7 +100,7 @@ export default function Hero() {
           {Array.from({ length: 2 }).map((_, i) => (
             <ScrollingColumn
               key={`mobile-${i}`}
-              images={getColumnImages(i, 2)}
+              images={getColImages(i)}
               direction={i % 2 === 0 ? "up" : "down"}
               speed={getColumnSpeed(i) + 20}
               columnIndex={i}
@@ -218,36 +231,34 @@ export default function Hero() {
       </div>
 
       {/* ── Bottom fade to white ── */}
-<div
-  style={{
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 20,
-    pointerEvents: "none",
-    height: "3rem",
-    backgroundColor: "white",
-    WebkitMaskImage: `
-      linear-gradient(
-        to top,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.8) 30%,
-        rgba(0,0,0,0.4) 60%,
-        rgba(0,0,0,0) 100%
-      )
-    `,
-    maskImage: `
-      linear-gradient(
-        to top,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.8) 30%,
-        rgba(0,0,0,0.4) 60%,
-        rgba(0,0,0,0) 100%
-      )
-    `,
-  }}
-/>
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 20,
+          pointerEvents: "none",
+          height: "1.25rem",
+          backgroundColor: "white",
+          WebkitMaskImage: `
+            linear-gradient(
+              to top,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,0.8) 50%,
+              rgba(0,0,0,0) 100%
+            )
+          `,
+          maskImage: `
+            linear-gradient(
+              to top,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,0.8) 50%,
+              rgba(0,0,0,0) 100%
+            )
+          `,
+        }}
+      />
     </section>
   );
 }

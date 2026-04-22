@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import "./admin.css";
@@ -9,6 +9,14 @@ const NAV = [
   { label: "About", href: "/admin/about", ico: "info", sec: "Content" },
   { label: "Founder", href: "/admin/producer", ico: "user", sec: "Content" },
   { label: "Films", href: "/admin/films", ico: "film", sec: "Content" },
+];
+
+const THEMES = [
+  { id: "light", lbl: "Light", c: "#FFFFFF" },
+  { id: "dark", lbl: "Dark", c: "#12141C" },
+  { id: "midnight", lbl: "Midnight", c: "#0F172A" },
+  { id: "gold", lbl: "Gold", c: "#C8A951" },
+  { id: "beige", lbl: "Beige", c: "#F7F3F0" },
 ];
 
 function Ico({ t, s = 18 }: { t: string; s?: number }) {
@@ -25,6 +33,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const [out, setOut] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  // Load theme from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("skml-admin-theme") || "light";
+    setTheme(saved);
+  }, []);
+
+  // Update localStorage and data attribute
+  const updateTheme = (t: string) => {
+    setTheme(t);
+    localStorage.setItem("skml-admin-theme", t);
+  };
 
   if (path === "/admin/login") return <div className="adm">{children}</div>;
 
@@ -34,10 +55,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const secs = [...new Set(NAV.map(n => n.sec))];
 
   return (
-    <div className="adm" style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+    <div className="adm" data-theme={theme} style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       {open && <div className="adm-overlay" onClick={() => setOpen(false)} />}
 
-      {/* Sidebar (desktop + mobile drawer) */}
+      {/* Sidebar */}
       <aside className={`adm-side${open ? " open" : ""}`}>
         <div className="side-brand">
           <div className="side-brand-ico">
@@ -45,7 +66,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
           <div>
             <h3>SKML Motion</h3>
-            <span>Admin</span>
+            <span>Admin Control</span>
           </div>
         </div>
         <nav className="side-nav">
@@ -72,19 +93,44 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
 
-      {/* Main */}
+      {/* Main Content */}
       <div className="adm-body">
         <header className="adm-top">
           <button onClick={() => setOpen(!open)} className="adm-ham">
             <svg width={18} height={18} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
           <h2>{cur}</h2>
-          <div className="adm-live"><i />Live</div>
+          
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            {/* Theme Switcher */}
+            <div style={{ 
+              display: "flex", gap: "6px", background: "var(--bg)", 
+              padding: "4px", borderRadius: "var(--r-sm)", border: "1px solid var(--border-lt)" 
+            }}>
+              {THEMES.map(t => (
+                <button
+                  key={t.id}
+                  title={t.lbl}
+                  onClick={() => updateTheme(t.id)}
+                  style={{
+                    width: "18px", height: "18px", borderRadius: "4px", border: theme === t.id ? "1.5px solid var(--accent)" : "1px solid var(--border)",
+                    background: t.c, cursor: "pointer", transition: "all 0.2s ease",
+                    boxShadow: theme === t.id ? "0 0 8px var(--accent)" : "none",
+                    opacity: theme === t.id ? 1 : 0.6
+                  }}
+                />
+              ))}
+            </div>
+            <div className="divider-v" style={{ width: "1px", height: "16px", background: "var(--border-lt)" }} />
+            <a href="/" target="_blank" className="adm-live" style={{ textDecoration: "none" }}>
+              <i /> View Site
+            </a>
+          </div>
         </header>
         <main className="adm-main">{children}</main>
       </div>
 
-      {/* Mobile Bottom Nav */}
+      {/* Mobile Nav */}
       <nav className="mob-nav">
         <div className="mob-nav-inner">
           {NAV.map(n => {

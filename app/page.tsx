@@ -35,19 +35,30 @@ export default async function Home() {
     genre: f.genre || "",
     platform: f.ottPlatform || "",
     poster: f.poster ? urlFor(f.poster).width(600).quality(80).url() : "",
+    alt: f.poster?.alt,
+    caption: f.poster?.caption,
     category: f.category as "produced" | "distributed",
+    slug: f.slug?.current,
   }));
 
-  // Transform films for FilmShowcase (first 5)
-  const showcaseFilms = filmsData.slice(0, 5).map((f) => ({
-    src: f.poster ? urlFor(f.poster).width(700).quality(80).url() : "",
-    title: f.title,
-  }));
+  // Transform films for FilmShowcase (only 'produced' category)
+  const showcaseFilms = filmsData
+    .filter((f) => f.category === "produced")
+    .slice(0, 6)
+    .map((f) => ({
+      src: f.poster ? urlFor(f.poster).width(700).quality(80).url() : "",
+      title: f.title,
+    }));
+
+  // Extract posters for Hero background (only 'produced')
+  const heroPosters = filmsData
+    .filter((f) => f.category === "produced" && f.poster)
+    .map((f) => urlFor(f.poster).width(400).quality(60).url());
 
   return (
     <main>
       <Navbar />
-      <Hero />
+      <Hero images={heroPosters.length > 0 ? heroPosters : undefined} />
       <MarqueeSection />
       <AboutSection
         headline={aboutData?.headline || undefined}
@@ -61,6 +72,8 @@ export default async function Home() {
         lastName={producerData?.lastName || undefined}
         role={producerData?.role || undefined}
         portraitUrl={producerPortraitUrl || undefined}
+        portraitAlt={producerData?.portrait?.alt}
+        portraitCaption={producerData?.portrait?.caption}
         bio={producerData?.bio || undefined}
         quote={producerData?.quote || undefined}
       />

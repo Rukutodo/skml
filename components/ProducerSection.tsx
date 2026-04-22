@@ -8,6 +8,8 @@ interface ProducerSectionProps {
   lastName?: string;
   role?: string;
   portraitUrl?: string;
+  portraitAlt?: string;
+  portraitCaption?: string;
   bio?: string[];
   quote?: string;
 }
@@ -23,6 +25,8 @@ export default function ProducerSection({
   lastName = "Adhinarayana",
   role = "Founder & Producer",
   portraitUrl = "/assets/images/producer-portrait.jpeg",
+  portraitAlt,
+  portraitCaption,
   bio = DEFAULT_BIO,
   quote = "Every story deserves its screen.",
 }: ProducerSectionProps) {
@@ -82,7 +86,7 @@ export default function ProducerSection({
             }}>
               <Image
                 src={portraitUrl}
-                alt={`${firstName} ${lastName} — ${role}`}
+                alt={portraitAlt || `${firstName} ${lastName} — ${role}`}
                 fill
                 sizes="(max-width: 768px) 80vw, 30vw"
                 style={{ objectFit: "cover" }}
