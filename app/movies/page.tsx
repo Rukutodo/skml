@@ -34,6 +34,7 @@ export default async function MoviesPage() {
           genre: f.genre || "",
           category: f.category,
           ottPlatform: f.ottPlatform || "",
+          releaseType: f.releaseType || "",
           poster: f.poster ? urlFor(f.poster).width(800).quality(85).url() : "",
         }))
       : FALLBACK_FILMS;

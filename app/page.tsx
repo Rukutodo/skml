@@ -39,6 +39,7 @@ export default async function Home() {
     caption: f.poster?.caption,
     category: f.category as "produced" | "distributed",
     slug: f.slug?.current,
+    releaseType: f.releaseType || "",
   }));
 
   // Transform films for FilmShowcase (only 'produced' category)
@@ -48,6 +49,11 @@ export default async function Home() {
     .map((f) => ({
       src: f.poster ? urlFor(f.poster).width(700).quality(80).url() : "",
       title: f.title,
+      year: f.year || "",
+      genre: f.genre || "",
+      category: f.category as "produced" | "distributed",
+      ottPlatform: f.ottPlatform || "",
+      releaseType: f.releaseType || "",
     }));
 
   // Extract posters for Hero background (only 'produced')
