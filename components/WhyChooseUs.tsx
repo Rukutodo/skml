@@ -209,28 +209,29 @@ export default function WhyChooseUs() {
 
               {/* Mobile Headings Grid (Frosted Glass Rounded Rectangles) */}
               <div className="mobile-only" style={{ 
-                display: "grid", 
-                gridTemplateColumns: "1fr 1fr", 
-                gap: "1rem", 
-                marginBottom: "2.5rem"
+                display: "grid !important", 
+                gridTemplateColumns: "repeat(2, 1fr) !important", 
+                gap: "0.75rem", 
+                marginBottom: "2.5rem",
+                width: "100%"
               }}>
                 {REASONS.map((r) => (
                   <div key={r.number} style={{
-                    padding: "1rem 0.75rem",
-                    background: "rgba(255,255,255,0.05)",
+                    padding: "0.875rem 0.5rem",
+                    background: "rgba(255,255,255,0.06)",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",
                     border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: "1.25rem",
+                    borderRadius: "1rem",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
                     textAlign: "center",
-                    minHeight: "80px"
+                    aspectRatio: "1.6 / 1"
                   }}>
-                    <span style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.3)", marginBottom: "0.375rem" }}>{r.number}</span>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#ffffff", lineHeight: 1.3 }}>{r.title}</span>
+                    <span style={{ fontSize: "9px", fontWeight: 700, color: "rgba(255,255,255,0.3)", marginBottom: "0.25rem" }}>{r.number}</span>
+                    <span style={{ fontSize: "10px", fontWeight: 700, color: "#ffffff", lineHeight: 1.2 }}>{r.title}</span>
                   </div>
                 ))}
               </div>
