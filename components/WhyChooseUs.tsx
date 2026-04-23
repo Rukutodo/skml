@@ -353,13 +353,13 @@ export default function WhyChooseUs() {
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .mobile-only { display: flex; }
-        .desktop-only { display: none; }
+        .mobile-only { display: flex !important; }
+        .desktop-only { display: none !important; }
 
         @media (min-width: 768px) {
-          .mobile-only { display: none; }
-          .desktop-only { display: block; }
-          .reasons-grid.desktop-only { display: grid; }
+          .mobile-only { display: none !important; }
+          .desktop-only { display: block !important; }
+          .reasons-grid.desktop-only { display: grid !important; }
         }
 
         /* ── Mobile compact ── */
