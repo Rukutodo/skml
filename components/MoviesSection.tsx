@@ -167,68 +167,131 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
             </div>
           </div>
 
-          {/* Movie Grid */}
-          <div className="movies-grid" style={{ display: "grid" }}>
-            {filteredMovies.map((movie, i) => (
-              <div
-                key={`${movie.title}-${activeTab}`}
-                ref={(el) => { cardRefs.current[i] = el; }}
-                data-index={i}
-                className="movie-card"
-                onClick={() => setSelectedFilm(movie)}
-                style={{
-                  textDecoration: "none", cursor: "pointer",
-                  opacity: revealedCards.has(i) ? 1 : 0,
-                  transform: revealedCards.has(i) ? "translateY(0)" : "translateY(50px)",
-                  transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 150}ms, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 150}ms`,
-                }}
-              >
-                <div style={{ position: "relative", aspectRatio: "2/3", width: "100%", overflow: "hidden", borderRadius: "1rem", background: "#EBEBF0", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-                  {movie.poster ? (
-                    <Image
-                      src={movie.poster}
-                      alt={movie.alt || `${movie.title} movie poster`}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                      className="movie-poster"
-                      style={{ objectFit: "cover" }}
-                      quality={80}
-                      unoptimized={movie.poster.startsWith("https://")}
-                    />
-                  ) : (
-                    <div style={{ width: "100%", height: "100%", background: "#EBEBF0" }} />
-                  )}
-                  {/* Hover overlay */}
-                  <div className="movie-overlay" style={{
-                    position: "absolute", inset: 0, display: "flex",
-                    flexDirection: "column", justifyContent: "flex-end",
-                    padding: "1.25rem",
-                    background: "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 40%, transparent 80%)",
-                  }}>
-                    <span className="movie-category-badge" style={{
-                      display: "inline-block", width: "fit-content", fontWeight: 700,
-                      textTransform: "uppercase", borderRadius: "9999px",
-                      background: String(movie.category).toLowerCase() === "produced" ? "#ffffff" : "rgba(255,255,255,0.2)",
-                      color: String(movie.category).toLowerCase() === "produced" ? "#000000" : "#ffffff",
-                      border: String(movie.category).toLowerCase() === "distributed" ? "1px solid rgba(255,255,255,0.3)" : "none",
-                      padding: "0.25rem 0.75rem", fontSize: "10px", letterSpacing: "0.15em",
+          {/* Movie Grid with Fade-out Bleed Effect */}
+          <div style={{ position: "relative" }}>
+            <div className="movies-grid" style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(2, 1fr)", 
+              gap: "1.5rem",
+              position: "relative"
+            }}>
+              {filteredMovies.slice(0, 9).map((movie, i) => (
+                <div
+                  key={`${movie.title}-${activeTab}`}
+                  ref={(el) => { cardRefs.current[i] = el; }}
+                  data-index={i}
+                  className="movie-card"
+                  onClick={() => setSelectedFilm(movie)}
+                  style={{
+                    textDecoration: "none", cursor: "pointer",
+                    opacity: revealedCards.has(i) ? 1 : 0,
+                    transform: revealedCards.has(i) ? "translateY(0)" : "translateY(50px)",
+                    transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 150}ms, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 150}ms`,
+                    visibility: i >= 9 ? 'hidden' : 'visible'
+                  }}
+                >
+                  <div style={{ position: "relative", aspectRatio: "2/3", width: "100%", overflow: "hidden", borderRadius: "1rem", background: "#EBEBF0", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                    {movie.poster ? (
+                      <Image
+                        src={movie.poster}
+                        alt={movie.alt || `${movie.title} movie poster`}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                        className="movie-poster"
+                        style={{ objectFit: "cover" }}
+                        quality={80}
+                        unoptimized={movie.poster.startsWith("https://")}
+                      />
+                    ) : (
+                      <div style={{ width: "100%", height: "100%", background: "#EBEBF0" }} />
+                    )}
+                    {/* Hover overlay */}
+                    <div className="movie-overlay" style={{
+                      position: "absolute", inset: 0, display: "flex",
+                      flexDirection: "column", justifyContent: "flex-end",
+                      padding: "1.25rem",
+                      background: "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 40%, transparent 80%)",
                     }}>
-                      {movie.category}
-                    </span>
+                      <span className="movie-category-badge" style={{
+                        display: "inline-block", width: "fit-content", fontWeight: 700,
+                        textTransform: "uppercase", borderRadius: "9999px",
+                        background: String(movie.category).toLowerCase() === "produced" ? "#ffffff" : "rgba(255,255,255,0.2)",
+                        color: String(movie.category).toLowerCase() === "produced" ? "#000000" : "#ffffff",
+                        border: String(movie.category).toLowerCase() === "distributed" ? "1px solid rgba(255,255,255,0.3)" : "none",
+                        padding: "0.25rem 0.75rem", fontSize: "10px", letterSpacing: "0.15em",
+                      }}>
+                        {movie.category}
+                      </span>
+                    </div>
+                  </div>
+                  {/* Info below poster */}
+                  <div className="movie-info" style={{ paddingLeft: "0.25rem" }}>
+                    <h3 style={{ fontWeight: 700, color: "#111118" }}>{movie.title}</h3>
+                    <p style={{ color: "#6A6A7A" }}>{movie.year} • {movie.genre}</p>
                   </div>
                 </div>
-                {/* Info below poster */}
-                <div className="movie-info" style={{ paddingLeft: "0.25rem" }}>
-                  <h3 style={{ fontWeight: 700, color: "#111118" }}>{movie.title}</h3>
-                  <p style={{ color: "#6A6A7A" }}>{movie.year} • {movie.genre}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Bleed / Shade Overlay */}
+            <div style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "40%",
+              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.8) 40%, #ffffff 95%)",
+              pointerEvents: "none",
+              zIndex: 10
+            }} />
+
+            {/* View More CTA */}
+            <div style={{
+              position: "absolute",
+              bottom: "-1.5rem",
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 20,
+              textAlign: "center",
+              width: "100%"
+            }}>
+              <a 
+                href="/movies"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  padding: "1.25rem 3rem",
+                  background: "#111118",
+                  color: "#ffffff",
+                  borderRadius: "9999px",
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  boxShadow: "0 20px 40px -10px rgba(0,0,0,0.2)",
+                  transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow = "0 25px 50px -12px rgba(0,0,0,0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 20px 40px -10px rgba(0,0,0,0.2)";
+                }}
+              >
+                Explore Full Catalog
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
         <style jsx>{`
-          .movies-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+          @media (min-width: 1024px) {
+            .movies-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 2rem !important; }
           .movie-overlay { padding: 1rem; }
           .movie-category-badge { padding: 0.2rem 0.6rem; font-size: 8px; letter-spacing: 0.1em; }
           .movie-info { margin-top: 0.75rem; }
