@@ -28,6 +28,7 @@ const REASONS = [
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
   const [clapAngle, setClapAngle] = useState(-30); // starts open
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -175,15 +176,21 @@ export default function WhyChooseUs() {
           </div>
 
           {/* ═══════ BOARD CONTENT (the actual section content) ═══════ */}
-          <div style={{
-            position: "relative",
-            zIndex: 1,
-            background: "#0A0A0F",
-            borderRadius: "0 0 1rem 1rem",
-            padding: "2rem 1.25rem 2.5rem",
-            border: "1px solid rgba(255,255,255,0.06)",
-            borderTop: "none",
-          }}>
+          <div 
+            onClick={() => {
+              if (window.innerWidth < 768) setIsPopupOpen(true);
+            }}
+            style={{
+              position: "relative",
+              zIndex: 1,
+              background: "#0A0A0F",
+              borderRadius: "0 0 1rem 1rem",
+              padding: "2rem 1.25rem 2.5rem",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderTop: "none",
+              cursor: "pointer",
+            }}
+          >
             {/* Section Label */}
             <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
               <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
@@ -191,16 +198,22 @@ export default function WhyChooseUs() {
               <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
             </div>
 
-            <div className="scroll-reveal" style={{ marginBottom: "3rem", textAlign: "center", maxWidth: "560px", margin: "0 auto 3rem" }}>
-              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(2rem, 4.5vw, 2.75rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff" }}>
+            <div className="scroll-reveal" style={{ textAlign: "center", maxWidth: "560px", margin: "0 auto" }}>
+              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(1.75rem, 4.5vw, 2.75rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff" }}>
                 Why Choose SKML
               </h2>
-              <p style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
+              <p className="desktop-only" style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
                 We combine passion for storytelling with practical expertise to deliver exceptional value at every stage of filmmaking.
               </p>
+              <div className="mobile-only" style={{ marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", color: "rgba(255,255,255,0.3)" }}>
+                <span style={{ fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Tap to see why</span>
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem" }} className="reasons-grid">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem" }} className="reasons-grid desktop-only">
               {REASONS.map((reason, i) => (
                 <div
                   key={reason.number}
@@ -260,7 +273,95 @@ export default function WhyChooseUs() {
         </div>
       </div>
 
+      {/* ── MOBILE POPUP MODAL ── */}
+      {isPopupOpen && (
+        <div 
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 10000,
+            background: "rgba(0,0,0,0.85)",
+            backdropFilter: "blur(12px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1.5rem",
+            animation: "fadeIn 0.3s ease"
+          }}
+          onClick={() => setIsPopupOpen(false)}
+        >
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "500px",
+              maxHeight: "85vh",
+              background: "#0A0A0F",
+              borderRadius: "2rem",
+              padding: "2.5rem 1.5rem",
+              border: "1px solid rgba(255,255,255,0.1)",
+              overflowY: "auto",
+              position: "relative",
+              animation: "slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setIsPopupOpen(false)}
+              style={{
+                position: "absolute",
+                top: "1.25rem",
+                right: "1.25rem",
+                background: "rgba(255,255,255,0.05)",
+                border: "none",
+                borderRadius: "50%",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#ffffff",
+                cursor: "pointer"
+              }}
+            >
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "1.75rem", fontWeight: 700, color: "#ffffff", marginBottom: "2rem", textAlign: "center" }}>
+              Why Choose Us
+            </h2>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {REASONS.map((reason) => (
+                <div key={reason.number} style={{ padding: "1.25rem", background: "rgba(255,255,255,0.03)", borderRadius: "1rem", border: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "1rem" }}>
+                  <div style={{ flexShrink: 0, width: "32px", height: "32px", borderRadius: "8px", background: "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffffff", fontWeight: 700, fontSize: "13px" }}>
+                    {reason.number}
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#ffffff" }}>{reason.title}</h3>
+                    <p style={{ marginTop: "0.25rem", fontSize: "12.5px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{reason.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .mobile-only { display: flex; }
+        .desktop-only { display: none; }
+
+        @media (min-width: 768px) {
+          .mobile-only { display: none; }
+          .desktop-only { display: block; }
+          .reasons-grid.desktop-only { display: grid; }
+        }
+
         /* ── Mobile compact ── */
         .reasons-grid { gap: 0.75rem !important; }
 
