@@ -207,31 +207,52 @@ export default function WhyChooseUs() {
                 We combine passion for storytelling with practical expertise to deliver exceptional value at every stage of filmmaking.
               </p>
 
-              {/* Mobile Headings Grid (Frosted Glass Rounded Rectangles) */}
+              {/* Mobile Headings Grid (Frosted Glass Side-by-Side) */}
               <div className="mobile-only" style={{ 
                 display: "grid !important", 
                 gridTemplateColumns: "repeat(2, 1fr) !important", 
-                gap: "0.75rem", 
+                gap: "0.6rem", 
                 marginBottom: "2.5rem",
                 width: "100%"
               }}>
                 {REASONS.map((r) => (
                   <div key={r.number} style={{
-                    padding: "0.875rem 0.5rem",
+                    padding: "0.75rem",
                     background: "rgba(255,255,255,0.06)",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",
                     border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: "1rem",
+                    borderRadius: "0.85rem",
                     display: "flex",
-                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    aspectRatio: "1.6 / 1"
+                    gap: "0.6rem",
+                    textAlign: "left",
+                    minHeight: "56px"
                   }}>
-                    <span style={{ fontSize: "9px", fontWeight: 700, color: "rgba(255,255,255,0.3)", marginBottom: "0.25rem" }}>{r.number}</span>
-                    <span style={{ fontSize: "10px", fontWeight: 700, color: "#ffffff", lineHeight: 1.2 }}>{r.title}</span>
+                    <div style={{
+                      flexShrink: 0,
+                      width: "28px",
+                      height: "28px",
+                      background: "rgba(255,255,255,0.1)",
+                      borderRadius: "6px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "10px",
+                      fontWeight: 800,
+                      color: "#ffffff"
+                    }}>
+                      {r.number}
+                    </div>
+                    <span style={{ 
+                      fontSize: "9px", 
+                      fontWeight: 700, 
+                      color: "#ffffff", 
+                      lineHeight: 1.2,
+                      letterSpacing: "-0.01em" 
+                    }}>
+                      {r.title}
+                    </span>
                   </div>
                 ))}
               </div>
