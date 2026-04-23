@@ -41,7 +41,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<MovieCategory | "all">("all");
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
-  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const filteredMovies = activeTab === "all" ? MOVIES : MOVIES.filter((m) => m.category === activeTab);
 
