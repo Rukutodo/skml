@@ -47,31 +47,45 @@ export default function ContactSection() {
 
   return (
     <section ref={sectionRef} id="contact" style={{ background: "#000000", overflow: "hidden", padding: "8rem 0", position: "relative" }}>
-      {/* Background Glow to make glass blur visible */}
+      {/* Background Glow centered behind the unified card */}
       <div style={{ 
         position: "absolute", 
         top: "50%", 
-        right: "10%", 
-        width: "500px", 
-        height: "500px", 
-        background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)", 
-        filter: "blur(60px)",
+        left: "50%", 
+        transform: "translate(-50%, -50%)",
+        width: "800px", 
+        height: "800px", 
+        background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)", 
+        filter: "blur(80px)",
         pointerEvents: "none",
         zIndex: 0
       }} />
 
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.5rem", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem", position: "relative", zIndex: 1 }}>
         {/* Section Label */}
-        <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div className="scroll-reveal" style={{ marginBottom: "2.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
           <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
           <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.3em", color: "rgba(255,255,255,0.35)" }}>
             Get In Touch
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "4rem" }} className="contact-grid">
-          {/* Left — Contact Info */}
-          <div className="scroll-reveal-left">
+        {/* Unified Glass Card */}
+        <div 
+          className="scroll-reveal"
+          style={{ 
+            padding: "clamp(2rem, 5vw, 4rem)", 
+            borderRadius: "2.5rem", 
+            border: "1px solid rgba(255,255,255,0.12)", 
+            background: "rgba(255,255,255,0.04)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            boxShadow: "0 40px 100px -20px rgba(0, 0, 0, 0.9), inset 0 0 0 1px rgba(255,255,255,0.05)"
+          }}
+        >
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "4rem" }} className="contact-grid">
+            {/* Left — Contact Info */}
+            <div className="scroll-reveal-left">
             <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(2.25rem, 5vw, 3rem)", fontWeight: 700, lineHeight: 1.12, letterSpacing: "-0.02em", color: "#ffffff" }}>
               Let&apos;s Create
               <br />
@@ -131,17 +145,8 @@ export default function ContactSection() {
             </a>
           </div>
 
-          {/* Right — Form */}
-          <div className="scroll-reveal-right">
-            <div style={{ 
-              padding: "3rem", 
-              borderRadius: "2rem", 
-              border: "1px solid rgba(255,255,255,0.15)", 
-              background: "rgba(255,255,255,0.07)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255,255,255,0.1)"
-            }}>
+            {/* Right — Form */}
+            <div className="scroll-reveal-right">
               <h3 style={{ marginBottom: "2rem", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(255,255,255,0.45)" }}>
                 Send us a message
               </h3>
