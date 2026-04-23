@@ -43,8 +43,9 @@ export default function WhyChooseUs() {
       const progress = 1 - (rect.top / vh);
       const clamped = Math.max(0, Math.min(1, progress));
 
-      // Map progress to clapper angle: -30deg (open) -> 0deg (closed)
-      const angle = -30 * (1 - clamped);
+      // Map progress to clapper angle: -35deg (open) -> 0deg (closed)
+      // We use a power function to make the 'clap' feel more snappy
+      const angle = -35 * Math.pow(1 - clamped, 1.5);
       setClapAngle(angle);
     };
 
@@ -106,12 +107,12 @@ export default function WhyChooseUs() {
             }}
           >
             <div style={{
-              height: "40px",
+              height: "clamp(30px, 8vw, 44px)",
               borderRadius: "0.75rem 0.75rem 0 0",
               overflow: "hidden",
               position: "relative",
               background: "#0A0A0F",
-              boxShadow: clapAngle > -5 ? "0 4px 20px rgba(0,0,0,0.5)" : "none",
+              boxShadow: clapAngle > -3 ? "0 4px 25px rgba(0,0,0,0.7)" : "none",
             }}>
               {/* Diagonal stripes */}
               <div style={{
@@ -129,10 +130,10 @@ export default function WhyChooseUs() {
                 justifyContent: "space-between",
                 padding: "0 1.5rem",
               }}>
-                <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
+                <span style={{ fontSize: "clamp(8px, 2.5vw, 11px)", fontWeight: 800, letterSpacing: "0.2em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
                   SCENE
                 </span>
-                <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
+                <span style={{ fontSize: "clamp(8px, 2.5vw, 11px)", fontWeight: 800, letterSpacing: "0.2em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
                   TAKE
                 </span>
               </div>
@@ -151,7 +152,7 @@ export default function WhyChooseUs() {
             <div style={{
               position: "absolute",
               inset: 0,
-              background: "repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 10px, #0A0A0F 10px, #0A0A0F 20px)",
+              background: "repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 8px, #0A0A0F 8px, #0A0A0F 16px)",
               opacity: 0.12,
             }} />
             {/* Board info text */}
