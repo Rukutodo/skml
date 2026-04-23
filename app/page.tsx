@@ -64,7 +64,7 @@ export default async function Home() {
   return (
     <main>
       <Navbar />
-      <Hero images={heroPosters.length > 0 ? heroPosters : undefined} />
+      <Hero />
       <MarqueeSection />
       <AboutSection
         headline={aboutData?.headline || undefined}

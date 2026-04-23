@@ -30,7 +30,7 @@ function getColumnSpeed(colIndex: number): number {
   return speeds[colIndex % speeds.length];
 }
 
-export default function Hero({ images }: { images?: string[] }) {
+export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -38,14 +38,13 @@ export default function Hero({ images }: { images?: string[] }) {
   }, []);
 
   const desktopCols = 4;
-  const ACTIVE_POSTERS = images && images.length > 0 ? images : POSTERS;
 
   // Distribute posters across columns with varied arrangements
   function getColImages(colIndex: number): string[] {
     const offset = colIndex * 2;
     const result: string[] = [];
-    for (let i = 0; i < ACTIVE_POSTERS.length; i++) {
-      result.push(ACTIVE_POSTERS[(i + offset) % ACTIVE_POSTERS.length]);
+    for (let i = 0; i < POSTERS.length; i++) {
+      result.push(POSTERS[(i + offset) % POSTERS.length]);
     }
     // Ensure we have enough images to fill the scroll
     while (result.length < 10) result.push(...result);
