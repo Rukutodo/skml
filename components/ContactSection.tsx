@@ -46,8 +46,21 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" style={{ background: "#000000", overflow: "hidden", padding: "8rem 0" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.5rem" }}>
+    <section ref={sectionRef} id="contact" style={{ background: "#000000", overflow: "hidden", padding: "8rem 0", position: "relative" }}>
+      {/* Background Glow to make glass blur visible */}
+      <div style={{ 
+        position: "absolute", 
+        top: "50%", 
+        right: "10%", 
+        width: "500px", 
+        height: "500px", 
+        background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)", 
+        filter: "blur(60px)",
+        pointerEvents: "none",
+        zIndex: 0
+      }} />
+
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.5rem", position: "relative", zIndex: 1 }}>
         {/* Section Label */}
         <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
           <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
@@ -122,12 +135,12 @@ export default function ContactSection() {
           <div className="scroll-reveal-right">
             <div style={{ 
               padding: "3rem", 
-              borderRadius: "1.5rem", 
-              border: "1px solid rgba(255,255,255,0.12)", 
-              background: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05)"
+              borderRadius: "2rem", 
+              border: "1px solid rgba(255,255,255,0.15)", 
+              background: "rgba(255,255,255,0.07)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255,255,255,0.1)"
             }}>
               <h3 style={{ marginBottom: "2rem", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(255,255,255,0.45)" }}>
                 Send us a message
