@@ -199,14 +199,43 @@ export default function WhyChooseUs() {
             </div>
 
             <div className="scroll-reveal" style={{ textAlign: "center", maxWidth: "560px", margin: "0 auto" }}>
-              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(1.75rem, 4.5vw, 2.75rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff" }}>
+              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(1.5rem, 4vw, 2rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff", marginBottom: "1.5rem" }}>
                 Why Choose SKML
               </h2>
-              <p className="desktop-only" style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
+              
+              <p className="desktop-only" style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)", marginBottom: "3rem" }}>
                 We combine passion for storytelling with practical expertise to deliver exceptional value at every stage of filmmaking.
               </p>
-              <div className="mobile-only" style={{ marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", color: "rgba(255,255,255,0.3)" }}>
-                <span style={{ fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Tap to see why</span>
+
+              {/* Mobile Headings Grid (Frosted Glass) */}
+              <div className="mobile-only" style={{ 
+                display: "grid", 
+                gridTemplateColumns: "1fr 1fr", 
+                gap: "0.75rem", 
+                marginBottom: "2rem"
+              }}>
+                {REASONS.map((r) => (
+                  <div key={r.number} style={{
+                    padding: "0.75rem 0.5rem",
+                    background: "rgba(255,255,255,0.04)",
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "0.75rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center"
+                  }}>
+                    <span style={{ fontSize: "9px", fontWeight: 700, color: "rgba(255,255,255,0.3)", marginBottom: "0.25rem" }}>{r.number}</span>
+                    <span style={{ fontSize: "10px", fontWeight: 700, color: "#ffffff", lineHeight: 1.2 }}>{r.title}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mobile-only" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", color: "rgba(255,255,255,0.3)" }}>
+                <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Tap for details</span>
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
