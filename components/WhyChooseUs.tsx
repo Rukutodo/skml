@@ -28,7 +28,7 @@ const REASONS = [
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
   const [clapAngle, setClapAngle] = useState(-30); // starts open
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [activeReason, setActiveReason] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -177,9 +177,6 @@ export default function WhyChooseUs() {
 
           {/* ═══════ BOARD CONTENT (the actual section content) ═══════ */}
           <div 
-            onClick={() => {
-              if (window.innerWidth < 768) setIsPopupOpen(true);
-            }}
             style={{
               position: "relative",
               zIndex: 1,
@@ -188,7 +185,6 @@ export default function WhyChooseUs() {
               padding: "2rem 1.25rem 2.5rem",
               border: "1px solid rgba(255,255,255,0.06)",
               borderTop: "none",
-              cursor: "pointer",
             }}
           >
             {/* Section Label */}
@@ -209,20 +205,25 @@ export default function WhyChooseUs() {
 
               {/* Mobile Headings Grid (Frosted Glass Side-by-Side) */}
               <div className="mobile-only mobile-grid-container">
-                {REASONS.map((r) => (
-                  <div key={r.number} style={{
-                    padding: "0.75rem",
-                    background: "rgba(255,255,255,0.06)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: "0.85rem",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.6rem",
-                    textAlign: "left",
-                    minHeight: "56px"
-                  }}>
+                {REASONS.map((r, i) => (
+                  <div 
+                    key={r.number} 
+                    onClick={() => setActiveReason(i)}
+                    style={{
+                      padding: "0.75rem",
+                      background: "rgba(255,255,255,0.06)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "0.85rem",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.6rem",
+                      textAlign: "left",
+                      minHeight: "56px",
+                      cursor: "pointer"
+                    }}
+                  >
                     <div style={{
                       flexShrink: 0,
                       width: "28px",
@@ -320,7 +321,7 @@ export default function WhyChooseUs() {
       </div>
 
       {/* ── MOBILE POPUP MODAL ── */}
-      {isPopupOpen && (
+      {activeReason !== null && (
         <div 
           style={{
             position: "fixed",
@@ -334,25 +335,23 @@ export default function WhyChooseUs() {
             padding: "1.5rem",
             animation: "fadeIn 0.3s ease"
           }}
-          onClick={() => setIsPopupOpen(false)}
+          onClick={() => setActiveReason(null)}
         >
           <div 
             style={{
               width: "100%",
               maxWidth: "500px",
-              maxHeight: "85vh",
               background: "#0A0A0F",
               borderRadius: "2rem",
-              padding: "2.5rem 1.5rem",
-              border: "1px solid rgba(255,255,255,0.1)",
-              overflowY: "auto",
+              padding: "2.5rem 2rem",
+              border: "1px solid rgba(255,255,255,0.15)",
               position: "relative",
               animation: "slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
             }}
             onClick={(e) => e.stopPropagation()}
           >
             <button 
-              onClick={() => setIsPopupOpen(false)}
+              onClick={() => setActiveReason(null)}
               style={{
                 position: "absolute",
                 top: "1.25rem",
@@ -374,23 +373,36 @@ export default function WhyChooseUs() {
               </svg>
             </button>
 
-            <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "1.75rem", fontWeight: 700, color: "#ffffff", marginBottom: "2rem", textAlign: "center" }}>
-              Why Choose Us
+            <div style={{
+              width: "48px",
+              height: "48px",
+              borderRadius: "12px",
+              background: "rgba(255,255,255,0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#ffffff",
+              fontWeight: 800,
+              fontSize: "1.25rem",
+              marginBottom: "1.5rem",
+              margin: "0 auto 1.5rem"
+            }}>
+              {REASONS[activeReason].number}
+            </div>
+
+            <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "1.75rem", fontWeight: 700, color: "#ffffff", marginBottom: "1rem", textAlign: "center" }}>
+              {REASONS[activeReason].title}
             </h2>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {REASONS.map((reason) => (
-                <div key={reason.number} style={{ padding: "1.25rem", background: "rgba(255,255,255,0.03)", borderRadius: "1rem", border: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "1rem" }}>
-                  <div style={{ flexShrink: 0, width: "32px", height: "32px", borderRadius: "8px", background: "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#ffffff", fontWeight: 700, fontSize: "13px" }}>
-                    {reason.number}
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: "0.95rem", fontWeight: 700, color: "#ffffff" }}>{reason.title}</h3>
-                    <p style={{ marginTop: "0.25rem", fontSize: "12.5px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{reason.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <p style={{ 
+              fontSize: "15px", 
+              color: "rgba(255,255,255,0.5)", 
+              lineHeight: 1.7, 
+              textAlign: "center",
+              margin: "0 auto" 
+            }}>
+              {REASONS[activeReason].description}
+            </p>
           </div>
         </div>
       )}
