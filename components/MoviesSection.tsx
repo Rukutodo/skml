@@ -239,8 +239,8 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
               bottom: 0,
               left: 0,
               right: 0,
-              height: "40%",
-              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.8) 40%, #ffffff 95%)",
+              height: "60%",
+              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95) 25%, #ffffff 60%)",
               pointerEvents: "none",
               zIndex: 10
             }} />
