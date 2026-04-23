@@ -208,13 +208,7 @@ export default function WhyChooseUs() {
               </p>
 
               {/* Mobile Headings Grid (Frosted Glass Side-by-Side) */}
-              <div className="mobile-only" style={{ 
-                display: "grid !important", 
-                gridTemplateColumns: "repeat(2, 1fr) !important", 
-                gap: "0.6rem", 
-                marginBottom: "2.5rem",
-                width: "100%"
-              }}>
+              <div className="mobile-only mobile-grid-container">
                 {REASONS.map((r) => (
                   <div key={r.number} style={{
                     padding: "0.75rem",
@@ -407,6 +401,14 @@ export default function WhyChooseUs() {
 
         .mobile-only { display: flex !important; }
         .desktop-only { display: none !important; }
+
+        .mobile-grid-container {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0.65rem !important;
+          width: 100% !important;
+          margin-bottom: 2.5rem !important;
+        }
 
         @media (min-width: 768px) {
           .mobile-only { display: none !important; }
