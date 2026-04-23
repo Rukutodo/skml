@@ -46,7 +46,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" style={{ background: "#0A0A0F", overflow: "hidden", padding: "6rem 0" }}>
+    <section ref={sectionRef} id="contact" style={{ background: "#000000", overflow: "hidden", padding: "8rem 0" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.5rem" }}>
         {/* Section Label */}
         <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -120,7 +120,15 @@ export default function ContactSection() {
 
           {/* Right — Form */}
           <div className="scroll-reveal-right">
-            <div style={{ padding: "2.5rem", borderRadius: "1rem", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.03)" }}>
+            <div style={{ 
+              padding: "3rem", 
+              borderRadius: "1.5rem", 
+              border: "1px solid rgba(255,255,255,0.1)", 
+              background: "rgba(255,255,255,0.03)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+            }}>
               <h3 style={{ marginBottom: "2rem", fontSize: "14px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(255,255,255,0.45)" }}>
                 Send us a message
               </h3>
