@@ -21,7 +21,6 @@ type FilterTab = "all" | "produced" | "distributed";
 
 export default function MoviesPageClient({ films }: MoviesPageClientProps) {
   const [activeTab, setActiveTab] = useState<FilterTab>("all");
-  const [selectedFilm, setSelectedFilm] = useState<Film | null>(null);
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -68,14 +67,7 @@ export default function MoviesPageClient({ films }: MoviesPageClientProps) {
     return () => clearTimeout(t);
   }, [activeTab]);
 
-  // Close modal on Escape
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedFilm(null);
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, []);
+
 
   const TABS: { label: string; value: FilterTab; count: number }[] = [
     { label: "All Films", value: "all", count: films.length },
@@ -224,10 +216,8 @@ export default function MoviesPageClient({ films }: MoviesPageClientProps) {
                 key={`${film.id}-${activeTab}`}
                 ref={(el) => { cardRefs.current[i] = el; }}
                 data-index={i}
-                onClick={() => setSelectedFilm(film)}
                 className="film-card-wrap"
                 style={{
-                  cursor: "pointer",
                   opacity: revealedCards.has(i) ? 1 : 0,
                   transform: revealedCards.has(i) ? "translateY(0) scale(1)" : "translateY(40px) scale(0.97)",
                   transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${i * 100}ms`,
@@ -265,53 +255,30 @@ export default function MoviesPageClient({ films }: MoviesPageClientProps) {
                       inset: 0,
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "0.75rem",
-                      background: "rgba(0,0,0,0.6)",
+                      justifyContent: "flex-end",
+                      padding: "1.25rem",
+                      background: "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 40%, transparent 80%)",
                       opacity: 0,
                       transition: "opacity 0.4s ease",
                     }}
                   >
-                    <div
-                      style={{
-                        width: "48px",
-                        height: "48px",
-                        borderRadius: "9999px",
-                        border: "2px solid rgba(255,255,255,0.4)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#ffffff" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                      </svg>
-                    </div>
-                    <span style={{ fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.7)" }}>
-                      View Details
-                    </span>
-                  </div>
-
-                  {/* Category badge */}
-                  <div style={{ position: "absolute", top: "0.75rem", left: "0.75rem", zIndex: 2 }}>
-                    <span
-                      style={{
-                        padding: "0.25rem 0.75rem",
-                        fontSize: "9px",
-                        fontWeight: 700,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.1em",
-                        borderRadius: "9999px",
-                        background: film.category === "produced" ? "#ffffff" : "rgba(255,255,255,0.15)",
-                        color: film.category === "produced" ? "#000000" : "#ffffff",
-                        border: film.category === "distributed" ? "1px solid rgba(255,255,255,0.25)" : "none",
-                        backdropFilter: "blur(8px)",
-                      }}
-                    >
+                    <span style={{
+                      display: "inline-block",
+                      width: "fit-content",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      borderRadius: "9999px",
+                      background: String(film.category).toLowerCase() === "produced" ? "#ffffff" : "rgba(255,255,255,0.2)",
+                      color: String(film.category).toLowerCase() === "produced" ? "#000000" : "#ffffff",
+                      border: String(film.category).toLowerCase() === "distributed" ? "1px solid rgba(255,255,255,0.3)" : "none",
+                      padding: "0.25rem 0.75rem",
+                      fontSize: "10px",
+                      letterSpacing: "0.15em",
+                    }}>
                       {film.category}
                     </span>
                   </div>
+
                 </div>
 
                 {/* Film info */}
@@ -333,125 +300,6 @@ export default function MoviesPageClient({ films }: MoviesPageClientProps) {
           </div>
         </div>
       </section>
-
-      {/* ── FILM DETAIL MODAL ── */}
-      {selectedFilm && (
-        <div
-          onClick={() => setSelectedFilm(null)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(0,0,0,0.85)",
-            backdropFilter: "blur(12px)",
-            animation: "fadeIn 0.3s ease",
-            padding: "2rem",
-          }}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              maxWidth: "480px",
-              width: "100%",
-              background: "#1A1A24",
-              borderRadius: "1.25rem",
-              overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 40px 100px rgba(0,0,0,0.5)",
-              animation: "slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-          >
-            {/* Poster */}
-            <div style={{ position: "relative", aspectRatio: "2/3", width: "100%", maxHeight: "50vh" }}>
-              {selectedFilm.poster ? (
-                <Image
-                  src={selectedFilm.poster}
-                  alt={selectedFilm.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="480px"
-                  unoptimized={selectedFilm.poster.startsWith("https://")}
-                />
-              ) : (
-                <div style={{ width: "100%", height: "100%", background: "#1A1A24" }} />
-              )}
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #1A1A24 0%, transparent 40%)", pointerEvents: "none" }} />
-
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedFilm(null)}
-                style={{
-                  position: "absolute",
-                  top: "1rem",
-                  right: "1rem",
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "9999px",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  background: "rgba(0,0,0,0.5)",
-                  backdropFilter: "blur(8px)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  color: "#fff",
-                }}
-              >
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Details */}
-            <div style={{ padding: "1.5rem 2rem 2rem", marginTop: "-2rem", position: "relative", zIndex: 2 }}>
-              <span
-                style={{
-                  display: "inline-block",
-                  marginBottom: "0.75rem",
-                  padding: "0.25rem 0.75rem",
-                  fontSize: "9px",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  borderRadius: "9999px",
-                  background: selectedFilm.category === "produced" ? "#ffffff" : "rgba(255,255,255,0.1)",
-                  color: selectedFilm.category === "produced" ? "#000" : "#fff",
-                  border: selectedFilm.category === "distributed" ? "1px solid rgba(255,255,255,0.2)" : "none",
-                }}
-              >
-                {selectedFilm.category}
-              </span>
-
-              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "1.75rem", fontWeight: 700, color: "#ffffff", lineHeight: 1.2 }}>
-                {selectedFilm.title}
-              </h2>
-
-              <div style={{ marginTop: "1.25rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {[
-                  { label: "Year", value: selectedFilm.year },
-                  { label: "Genre", value: selectedFilm.genre },
-                  ...(selectedFilm.ottPlatform ? [{ label: "Platform", value: selectedFilm.ottPlatform }] : []),
-                ].map((item) => (
-                  <div key={item.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "0.75rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                    <span style={{ fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.35)" }}>
-                      {item.label}
-                    </span>
-                    <span style={{ fontSize: "14px", fontWeight: 500, color: "rgba(255,255,255,0.8)" }}>
-                      {item.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <style jsx>{`
         @keyframes fadeIn {

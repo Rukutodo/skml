@@ -81,27 +81,7 @@ export default async function AdminDashboard() {
             </div>
           </div>
 
-          {/* Activity Feed */}
-          <div>
-            <p className="sec-t">Recent System Activity</p>
-            <div className="card">
-              <div className="act-feed">
-                {[
-                  { t: "Film Metadata Updated", d: "Aghora (2020) alt-text synchronized", c: "var(--gold)", time: "2 hours ago" },
-                  { t: "New Asset Uploaded", d: "Poster-Mr-Lonely-HighRes.png (2.4MB)", c: "var(--blue)", time: "5 hours ago" },
-                  { t: "Structure Rebuild", d: "Sanity Singletons locked for production", c: "var(--ok)", time: "Yesterday" },
-                ].map((item, i) => (
-                  <div key={i} className="act-item">
-                    <div className="act-dot" style={{ background: item.c }} />
-                    <div className="act-info">
-                      <p><strong>{item.t}</strong> — {item.d}</p>
-                      <span>{item.time}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+
         </div>
 
         {/* Right Column: Widgets */}
@@ -140,22 +120,7 @@ export default async function AdminDashboard() {
             </div>
           </div>
 
-          {/* Performance Trends Mockup */}
-          <div className="card card-p">
-            <p className="stat-lbl">Engagement Trends</p>
-            <div className="chart-wrap">
-              {[40, 70, 45, 90, 65, 80, 55].map((h, i) => (
-                <div 
-                  key={i} 
-                  className={`chart-bar ${i === 3 ? 'active' : ''}`} 
-                  style={{ height: `${h}%` }}
-                />
-              ))}
-            </div>
-            <p style={{ fontSize: "0.6875rem", color: "var(--ink-3)", marginTop: "1rem", textAlign: "center" }}>
-              Portfolio Visibility: <strong>+12.5%</strong> this week
-            </p>
-          </div>
+
         </div>
       </div>
 

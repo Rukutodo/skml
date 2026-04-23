@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 type MovieCategory = "produced" | "distributed";
 
@@ -153,15 +152,13 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
         {/* Movie Grid */}
         <div className="movies-grid" style={{ display: "grid" }}>
           {filteredMovies.map((movie, i) => (
-            <Link
+            <div
               key={`${movie.title}-${activeTab}`}
-              href={movie.slug ? `/films/${movie.slug}` : "#"}
               ref={(el) => { cardRefs.current[i] = el; }}
               data-index={i}
               className="movie-card"
               style={{
                 textDecoration: "none",
-                cursor: "pointer",
                 opacity: revealedCards.has(i) ? 1 : 0,
                 transform: revealedCards.has(i) ? "translateY(0)" : "translateY(50px)",
                 transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 150}ms, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 150}ms`,
@@ -182,23 +179,30 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
                 ) : (
                   <div style={{ width: "100%", height: "100%", background: "#EBEBF0" }} />
                 )}
-                <div className="movie-overlay" style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", background: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3) 50%, transparent)" }}>
+                <div className="movie-overlay" style={{ 
+                  position: "absolute", 
+                  inset: 0, 
+                  display: "flex", 
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  padding: "1.25rem",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 40%, transparent 80%)",
+                }}>
                   <span className="movie-category-badge" style={{
                     display: "inline-block",
                     width: "fit-content",
-                    marginBottom: "0.5rem",
                     fontWeight: 700,
                     textTransform: "uppercase",
                     borderRadius: "9999px",
-                    background: movie.category === "produced" ? "#ffffff" : "rgba(255,255,255,0.2)",
-                    color: movie.category === "produced" ? "#000000" : "#ffffff",
-                    border: movie.category === "distributed" ? "1px solid rgba(255,255,255,0.3)" : "none",
+                    background: String(movie.category).toLowerCase() === "produced" ? "#ffffff" : "rgba(255,255,255,0.2)",
+                    color: String(movie.category).toLowerCase() === "produced" ? "#000000" : "#ffffff",
+                    border: String(movie.category).toLowerCase() === "distributed" ? "1px solid rgba(255,255,255,0.3)" : "none",
+                    padding: "0.25rem 0.75rem",
+                    fontSize: "10px",
+                    letterSpacing: "0.15em",
                   }}>
                     {movie.category}
                   </span>
-                  <h3 className="movie-overlay-title" style={{ fontWeight: 700, color: "#ffffff" }}>{movie.title}</h3>
-                  <p className="movie-overlay-year" style={{ color: "rgba(255,255,255,0.6)" }}>{movie.year} • {movie.genre}</p>
-                  <p className="movie-overlay-platform" style={{ fontWeight: 600, textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>{movie.platform}</p>
                 </div>
               </div>
               {/* Info below poster */}
@@ -206,7 +210,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
                 <h3 style={{ fontWeight: 700, color: "#111118" }}>{movie.title}</h3>
                 <p style={{ color: "#6A6A7A" }}>{movie.year} • {movie.genre}</p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

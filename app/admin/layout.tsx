@@ -15,7 +15,6 @@ const THEMES = [
   { id: "light", lbl: "Light", c: "#FFFFFF" },
   { id: "dark", lbl: "Dark", c: "#12141C" },
   { id: "midnight", lbl: "Midnight", c: "#0F172A" },
-  { id: "gold", lbl: "Gold", c: "#C8A951" },
   { id: "beige", lbl: "Beige", c: "#F7F3F0" },
 ];
 
