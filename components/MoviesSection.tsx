@@ -173,7 +173,9 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
               display: "grid", 
               gridTemplateColumns: "repeat(2, 1fr)", 
               gap: "1.5rem",
-              position: "relative"
+              position: "relative",
+              maxHeight: "clamp(800px, 110vw, 1100px)",
+              overflow: "hidden"
             }}>
               {filteredMovies.slice(0, 9).map((movie, i) => (
                 <div
@@ -239,8 +241,8 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
               bottom: 0,
               left: 0,
               right: 0,
-              height: "60%",
-              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.95) 25%, #ffffff 60%)",
+              height: "200px",
+              background: "linear-gradient(to bottom, transparent, #ffffff 80%)",
               pointerEvents: "none",
               zIndex: 10
             }} />
@@ -248,7 +250,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
             {/* View More CTA */}
             <div style={{
               position: "absolute",
-              bottom: "-1.5rem",
+              bottom: "1rem",
               left: "50%",
               transform: "translateX(-50%)",
               zIndex: 20,
