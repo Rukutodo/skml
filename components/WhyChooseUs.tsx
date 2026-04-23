@@ -207,29 +207,30 @@ export default function WhyChooseUs() {
                 We combine passion for storytelling with practical expertise to deliver exceptional value at every stage of filmmaking.
               </p>
 
-              {/* Mobile Headings Grid (Frosted Glass) */}
+              {/* Mobile Headings Grid (Frosted Glass Rounded Rectangles) */}
               <div className="mobile-only" style={{ 
                 display: "grid", 
                 gridTemplateColumns: "1fr 1fr", 
-                gap: "0.75rem", 
-                marginBottom: "2rem"
+                gap: "1rem", 
+                marginBottom: "2.5rem"
               }}>
                 {REASONS.map((r) => (
                   <div key={r.number} style={{
-                    padding: "0.75rem 0.5rem",
-                    background: "rgba(255,255,255,0.04)",
-                    backdropFilter: "blur(8px)",
-                    WebkitBackdropFilter: "blur(8px)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: "0.75rem",
+                    padding: "1rem 0.75rem",
+                    background: "rgba(255,255,255,0.05)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderRadius: "1.25rem",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    textAlign: "center"
+                    textAlign: "center",
+                    minHeight: "80px"
                   }}>
-                    <span style={{ fontSize: "9px", fontWeight: 700, color: "rgba(255,255,255,0.3)", marginBottom: "0.25rem" }}>{r.number}</span>
-                    <span style={{ fontSize: "10px", fontWeight: 700, color: "#ffffff", lineHeight: 1.2 }}>{r.title}</span>
+                    <span style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.3)", marginBottom: "0.375rem" }}>{r.number}</span>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#ffffff", lineHeight: 1.3 }}>{r.title}</span>
                   </div>
                 ))}
               </div>
