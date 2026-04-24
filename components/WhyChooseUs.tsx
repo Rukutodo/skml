@@ -28,6 +28,7 @@ const REASONS = [
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
   const [clapAngle, setClapAngle] = useState(-30); // starts open
+  const [activeReason, setActiveReason] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,8 +44,9 @@ export default function WhyChooseUs() {
       const progress = 1 - (rect.top / vh);
       const clamped = Math.max(0, Math.min(1, progress));
 
-      // Map progress to clapper angle: -30deg (open) -> 0deg (closed)
-      const angle = -30 * (1 - clamped);
+      // Map progress to clapper angle: -35deg (open) -> 0deg (closed)
+      // We use a power function to make the 'clap' feel more snappy
+      const angle = -35 * Math.pow(1 - clamped, 1.5);
       setClapAngle(angle);
     };
 
@@ -106,12 +108,12 @@ export default function WhyChooseUs() {
             }}
           >
             <div style={{
-              height: "40px",
+              height: "clamp(30px, 8vw, 44px)",
               borderRadius: "0.75rem 0.75rem 0 0",
               overflow: "hidden",
               position: "relative",
               background: "#0A0A0F",
-              boxShadow: clapAngle > -5 ? "0 4px 20px rgba(0,0,0,0.5)" : "none",
+              boxShadow: clapAngle > -3 ? "0 4px 25px rgba(0,0,0,0.7)" : "none",
             }}>
               {/* Diagonal stripes */}
               <div style={{
@@ -129,10 +131,10 @@ export default function WhyChooseUs() {
                 justifyContent: "space-between",
                 padding: "0 1.5rem",
               }}>
-                <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
+                <span style={{ fontSize: "clamp(8px, 2.5vw, 11px)", fontWeight: 800, letterSpacing: "0.2em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
                   SCENE
                 </span>
-                <span style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "0.15em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
+                <span style={{ fontSize: "clamp(8px, 2.5vw, 11px)", fontWeight: 800, letterSpacing: "0.2em", color: "#ffffff", textShadow: "0 1px 3px rgba(0,0,0,0.8)", zIndex: 1 }}>
                   TAKE
                 </span>
               </div>
@@ -151,7 +153,7 @@ export default function WhyChooseUs() {
             <div style={{
               position: "absolute",
               inset: 0,
-              background: "repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 10px, #0A0A0F 10px, #0A0A0F 20px)",
+              background: "repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 8px, #0A0A0F 8px, #0A0A0F 16px)",
               opacity: 0.12,
             }} />
             {/* Board info text */}
@@ -174,15 +176,17 @@ export default function WhyChooseUs() {
           </div>
 
           {/* ═══════ BOARD CONTENT (the actual section content) ═══════ */}
-          <div style={{
-            position: "relative",
-            zIndex: 1,
-            background: "#0A0A0F",
-            borderRadius: "0 0 1rem 1rem",
-            padding: "2rem 1.25rem 2.5rem",
-            border: "1px solid rgba(255,255,255,0.06)",
-            borderTop: "none",
-          }}>
+          <div 
+            style={{
+              position: "relative",
+              zIndex: 1,
+              background: "#0A0A0F",
+              borderRadius: "0 0 1rem 1rem",
+              padding: "2rem 1.25rem 2.5rem",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderTop: "none",
+            }}
+          >
             {/* Section Label */}
             <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
               <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
@@ -190,16 +194,73 @@ export default function WhyChooseUs() {
               <div style={{ height: "1px", width: "3rem", background: "rgba(255,255,255,0.2)" }} />
             </div>
 
-            <div className="scroll-reveal" style={{ marginBottom: "3rem", textAlign: "center", maxWidth: "560px", margin: "0 auto 3rem" }}>
-              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(2rem, 4.5vw, 2.75rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff" }}>
+            <div className="scroll-reveal" style={{ textAlign: "center", maxWidth: "560px", margin: "0 auto" }}>
+              <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(1.5rem, 4vw, 2rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.02em", color: "#ffffff", marginBottom: "1.5rem" }}>
                 Why Choose SKML
               </h2>
-              <p style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
+              
+              <p className="desktop-only" style={{ marginTop: "1.25rem", fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.5)", marginBottom: "3rem" }}>
                 We combine passion for storytelling with practical expertise to deliver exceptional value at every stage of filmmaking.
               </p>
+
+              {/* Mobile Headings Grid (Frosted Glass Side-by-Side) */}
+              <div className="mobile-only mobile-grid-container">
+                {REASONS.map((r, i) => (
+                  <div 
+                    key={r.number} 
+                    onClick={() => setActiveReason(i)}
+                    style={{
+                      padding: "0.75rem",
+                      background: "rgba(255,255,255,0.06)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "0.85rem",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.6rem",
+                      textAlign: "left",
+                      minHeight: "56px",
+                      cursor: "pointer"
+                    }}
+                  >
+                    <div style={{
+                      flexShrink: 0,
+                      width: "28px",
+                      height: "28px",
+                      background: "rgba(255,255,255,0.1)",
+                      borderRadius: "6px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "10px",
+                      fontWeight: 800,
+                      color: "#ffffff"
+                    }}>
+                      {r.number}
+                    </div>
+                    <span style={{ 
+                      fontSize: "9px", 
+                      fontWeight: 700, 
+                      color: "#ffffff", 
+                      lineHeight: 1.2,
+                      letterSpacing: "-0.01em" 
+                    }}>
+                      {r.title}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mobile-only" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", color: "rgba(255,255,255,0.3)" }}>
+                <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}>Tap for details</span>
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem" }} className="reasons-grid">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem" }} className="reasons-grid desktop-only">
               {REASONS.map((reason, i) => (
                 <div
                   key={reason.number}
@@ -259,7 +320,114 @@ export default function WhyChooseUs() {
         </div>
       </div>
 
+      {/* ── MOBILE POPUP MODAL ── */}
+      {activeReason !== null && (
+        <div 
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 10000,
+            background: "rgba(0,0,0,0.85)",
+            backdropFilter: "blur(12px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1.5rem",
+            animation: "fadeIn 0.3s ease"
+          }}
+          onClick={() => setActiveReason(null)}
+        >
+          <div 
+            style={{
+              width: "100%",
+              maxWidth: "500px",
+              background: "#0A0A0F",
+              borderRadius: "2rem",
+              padding: "2.5rem 2rem",
+              border: "1px solid rgba(255,255,255,0.15)",
+              position: "relative",
+              animation: "slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setActiveReason(null)}
+              style={{
+                position: "absolute",
+                top: "1.25rem",
+                right: "1.25rem",
+                background: "rgba(255,255,255,0.05)",
+                border: "none",
+                borderRadius: "50%",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#ffffff",
+                cursor: "pointer"
+              }}
+            >
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div style={{
+              width: "48px",
+              height: "48px",
+              borderRadius: "12px",
+              background: "rgba(255,255,255,0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#ffffff",
+              fontWeight: 800,
+              fontSize: "1.25rem",
+              marginBottom: "1.5rem",
+              margin: "0 auto 1.5rem"
+            }}>
+              {REASONS[activeReason].number}
+            </div>
+
+            <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "1.75rem", fontWeight: 700, color: "#ffffff", marginBottom: "1rem", textAlign: "center" }}>
+              {REASONS[activeReason].title}
+            </h2>
+
+            <p style={{ 
+              fontSize: "15px", 
+              color: "rgba(255,255,255,0.5)", 
+              lineHeight: 1.7, 
+              textAlign: "center",
+              margin: "0 auto" 
+            }}>
+              {REASONS[activeReason].description}
+            </p>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .mobile-only { display: flex !important; }
+        .desktop-only { display: none !important; }
+
+        .mobile-grid-container {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0.65rem !important;
+          width: 100% !important;
+          margin-bottom: 2.5rem !important;
+        }
+
+        @media (min-width: 768px) {
+          .mobile-only { display: none !important; }
+          .desktop-only { display: block !important; }
+          .reasons-grid.desktop-only { display: grid !important; }
+        }
+
         /* ── Mobile compact ── */
         .reasons-grid { gap: 0.75rem !important; }
 

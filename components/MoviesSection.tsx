@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type MovieCategory = "produced" | "distributed";
 
@@ -52,7 +53,6 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
   const [activeTab, setActiveTab] = useState<MovieCategory | "all">("all");
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const [selectedFilm, setSelectedFilm] = useState<MovieItem | null>(null);
-  const [ctaHovered, setCtaHovered] = useState(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const allFiltered = activeTab === "all" ? MOVIES : MOVIES.filter((m) => m.category === activeTab);
@@ -234,77 +234,25 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
 
           {/* ── CINEMATIC "EXPLORE MORE" CTA ── */}
           {hasMore && (
-            <a
-              href="/movies"
-              onMouseEnter={() => setCtaHovered(true)}
-              onMouseLeave={() => setCtaHovered(false)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                marginTop: "3rem",
-                padding: "1rem 1.75rem",
-                textDecoration: "none",
-                border: ctaHovered ? "1px solid #111118" : "1px solid rgba(0,0,0,0.1)",
-                borderRadius: "9999px",
-                background: ctaHovered ? "#111118" : "#F5F5F8",
-                width: "fit-content",
-                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                cursor: "pointer",
-                transform: ctaHovered ? "translateY(-2px)" : "translateY(0)",
-                boxShadow: ctaHovered ? "0 8px 30px rgba(0,0,0,0.12)" : "none",
-              }}
-            >
+            <Link href="/movies" className="ms-explore-cta">
+              {/* Left accent line */}
+              <span className="ms-cta-line" />
+
               {/* Counter pill */}
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minWidth: "34px",
-                  height: "34px",
-                  borderRadius: "9999px",
-                  background: ctaHovered ? "#ffffff" : "#111118",
-                  color: ctaHovered ? "#111118" : "#ffffff",
-                  fontSize: "13px",
-                  fontWeight: 700,
-                  letterSpacing: "-0.02em",
-                  padding: "0 0.5rem",
-                  transition: "all 0.4s ease",
-                  transform: ctaHovered ? "scale(1.08)" : "scale(1)",
-                }}
-              >
-                +{remainingCount}
-              </span>
+              <span className="ms-cta-count">+{remainingCount}</span>
 
               {/* Text */}
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: ctaHovered ? "#ffffff" : "#111118",
-                  letterSpacing: "0.01em",
-                  transition: "color 0.4s ease",
-                }}
-              >
-                Explore all movies
+              <span className="ms-cta-text">
+                Explore the full collection
               </span>
 
               {/* Arrow */}
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  color: ctaHovered ? "#ffffff" : "#6A6A7A",
-                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                  transform: ctaHovered ? "translateX(4px)" : "translateX(0)",
-                }}
-              >
+              <span className="ms-cta-arrow">
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
-            </a>
+            </Link>
           )}
         </div>
 
@@ -342,6 +290,100 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
             .movie-overlay { padding: 1.75rem; }
             .movie-category-badge { padding: 0.3rem 0.875rem; font-size: 10px; }
             .movie-info { margin-top: 1.125rem; }
+          }
+
+          /* ── EXPLORE CTA ── */
+          .ms-explore-cta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 9999px;
+            background: #F5F5F8;
+            width: fit-content;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+          }
+          .ms-explore-cta:hover {
+            background: #111118;
+            border-color: #111118;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+          }
+
+          /* Left accent bar */
+          .ms-cta-line {
+            width: 2rem;
+            height: 2px;
+            background: #6A6A7A;
+            border-radius: 9999px;
+            transition: background 0.4s ease, width 0.4s ease;
+          }
+          .ms-explore-cta:hover .ms-cta-line {
+            background: rgba(255,255,255,0.3);
+            width: 1.5rem;
+          }
+
+          /* Counter pill */
+          .ms-cta-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: #111118;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            padding: 0 0.5rem;
+            transition: all 0.4s ease;
+          }
+          .ms-explore-cta:hover .ms-cta-count {
+            background: #ffffff;
+            color: #111118;
+            transform: scale(1.1);
+          }
+
+          /* Text */
+          .ms-cta-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111118;
+            letter-spacing: 0.01em;
+            transition: color 0.4s ease;
+          }
+          .ms-explore-cta:hover .ms-cta-text {
+            color: #ffffff;
+          }
+
+          /* Arrow */
+          .ms-cta-arrow {
+            display: flex;
+            align-items: center;
+            color: #6A6A7A;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(0);
+          }
+          .ms-explore-cta:hover .ms-cta-arrow {
+            color: #ffffff;
+            transform: translateX(4px);
+          }
+
+          /* Mobile adjustments */
+          @media (max-width: 480px) {
+            .ms-explore-cta {
+              padding: 0.75rem 1rem;
+              gap: 0.625rem;
+              margin-top: 2rem;
+            }
+            .ms-cta-line { width: 1.25rem; }
+            .ms-cta-count { min-width: 28px; height: 28px; font-size: 11px; }
+            .ms-cta-text { font-size: 12px; }
           }
         `}</style>
       </section>
