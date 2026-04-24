@@ -234,7 +234,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
 
           {/* ── CINEMATIC "EXPLORE MORE" CTA ── */}
           {hasMore && (
-            <Link href="/movies" className="ms-explore-cta">
+            <a href="/movies" className="ms-explore-cta">
               {/* Left accent line */}
               <span className="ms-cta-line" />
 
@@ -243,7 +243,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
 
               {/* Text */}
               <span className="ms-cta-text">
-                Explore the full collection
+                Explore all movies
               </span>
 
               {/* Arrow */}
@@ -252,7 +252,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
-            </Link>
+            </a>
           )}
         </div>
 
