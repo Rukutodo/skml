@@ -36,6 +36,8 @@ const TABS: { label: string; value: MovieCategory | "all" }[] = [
   { label: "Distributed", value: "distributed" },
 ];
 
+const MAX_DISPLAY = 6;
+
 const getReleaseLabel = (rt?: string) => {
   if (!rt) return null;
   if (rt === "theatrical") return "🎬 Theatrical";
@@ -50,9 +52,13 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
   const [activeTab, setActiveTab] = useState<MovieCategory | "all">("all");
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const [selectedFilm, setSelectedFilm] = useState<MovieItem | null>(null);
+  const [ctaHovered, setCtaHovered] = useState(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const filteredMovies = activeTab === "all" ? MOVIES : MOVIES.filter((m) => m.category === activeTab);
+  const allFiltered = activeTab === "all" ? MOVIES : MOVIES.filter((m) => m.category === activeTab);
+  const filteredMovies = allFiltered.slice(0, MAX_DISPLAY);
+  const hasMore = allFiltered.length > MAX_DISPLAY;
+  const remainingCount = allFiltered.length - MAX_DISPLAY;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -126,7 +132,7 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
   return (
     <>
       <section ref={sectionRef} id="movies" className="section-padding" style={{ background: "#FFFFFF", overflow: "hidden" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.5rem" }}>
+        <div className="ms-container">
           {/* Section Label */}
           <div className="scroll-reveal" style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
             <div style={{ height: "1px", width: "3rem", background: "#6A6A7A" }} />
@@ -225,9 +231,98 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
               </div>
             ))}
           </div>
+
+          {/* ── CINEMATIC "EXPLORE MORE" CTA ── */}
+          {hasMore && (
+            <a
+              href="/movies"
+              onMouseEnter={() => setCtaHovered(true)}
+              onMouseLeave={() => setCtaHovered(false)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1rem",
+                marginTop: "3rem",
+                padding: "1rem 1.75rem",
+                textDecoration: "none",
+                border: ctaHovered ? "1px solid #111118" : "1px solid rgba(0,0,0,0.1)",
+                borderRadius: "9999px",
+                background: ctaHovered ? "#111118" : "#F5F5F8",
+                width: "fit-content",
+                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                cursor: "pointer",
+                transform: ctaHovered ? "translateY(-2px)" : "translateY(0)",
+                boxShadow: ctaHovered ? "0 8px 30px rgba(0,0,0,0.12)" : "none",
+              }}
+            >
+              {/* Counter pill */}
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minWidth: "34px",
+                  height: "34px",
+                  borderRadius: "9999px",
+                  background: ctaHovered ? "#ffffff" : "#111118",
+                  color: ctaHovered ? "#111118" : "#ffffff",
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  letterSpacing: "-0.02em",
+                  padding: "0 0.5rem",
+                  transition: "all 0.4s ease",
+                  transform: ctaHovered ? "scale(1.08)" : "scale(1)",
+                }}
+              >
+                +{remainingCount}
+              </span>
+
+              {/* Text */}
+              <span
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: ctaHovered ? "#ffffff" : "#111118",
+                  letterSpacing: "0.01em",
+                  transition: "color 0.4s ease",
+                }}
+              >
+                Explore all movies
+              </span>
+
+              {/* Arrow */}
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: ctaHovered ? "#ffffff" : "#6A6A7A",
+                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                  transform: ctaHovered ? "translateX(4px)" : "translateX(0)",
+                }}
+              >
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </a>
+          )}
         </div>
 
         <style jsx>{`
+          /* ── Container ── */
+          .ms-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+          }
+          @media (min-width: 640px) {
+            .ms-container { padding: 0 1.5rem; }
+          }
+          @media (min-width: 1024px) {
+            .ms-container { padding: 0 2rem; }
+          }
+
+          /* ── Grid ── */
           .movies-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
           .movie-overlay { padding: 1rem; }
           .movie-category-badge { padding: 0.2rem 0.6rem; font-size: 8px; letter-spacing: 0.1em; }
