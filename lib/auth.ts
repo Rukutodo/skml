@@ -6,7 +6,7 @@ const JWT_SECRET = new TextEncoder().encode(
 );
 
 const COOKIE_NAME = "skml-admin-session";
-const EXPIRY = "7d"; // Session lasts 7 days
+const EXPIRY = "3h"; // Session lasts 3 hours
 
 export interface SessionPayload {
   email: string;
@@ -43,7 +43,7 @@ export async function setSession(payload: SessionPayload): Promise<void> {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7, // 7 days in seconds
+    maxAge: 60 * 60 * 3, // 3 hours in seconds
   });
 }
 

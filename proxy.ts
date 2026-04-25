@@ -8,11 +8,17 @@ const JWT_SECRET = new TextEncoder().encode(
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Only protect /admin routes (but NOT /admin/login)
-  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
+  const isProtectedPath = 
+    (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) ||
+    pathname.startsWith("/api/admin");
+
+  if (isProtectedPath) {
     const token = request.cookies.get("skml-admin-session")?.value;
 
     if (!token) {
+      if (pathname.startsWith("/api/")) {
+        return new NextResponse(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+      }
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
 
@@ -20,10 +26,10 @@ export async function proxy(request: NextRequest) {
       await jwtVerify(token, JWT_SECRET);
       return NextResponse.next();
     } catch {
-      // Invalid or expired token
-      const response = NextResponse.redirect(
-        new URL("/admin/login", request.url)
-      );
+      if (pathname.startsWith("/api/")) {
+        return new NextResponse(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+      }
+      const response = NextResponse.redirect(new URL("/admin/login", request.url));
       response.cookies.delete("skml-admin-session");
       return response;
     }
@@ -33,5 +39,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };

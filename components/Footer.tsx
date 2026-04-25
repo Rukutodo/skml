@@ -177,22 +177,46 @@ export default function Footer() {
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", margin: 0, position: "relative", zIndex: 1 }}>
             © {new Date().getFullYear()} SKML Motion Pictures. All rights reserved.
           </p>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", position: "relative", zIndex: 1 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", position: "relative", zIndex: 1 }}>
             <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em", margin: 0 }}>
               Where Legacy Meets the Silver Screen
             </p>
-            <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.15)", letterSpacing: "0.05em", margin: 0, display: "flex", alignItems: "center", gap: "4px" }}>
-              Powered by 
-              <motion.a 
-                href="https://github.com/StackXpvt" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ color: "rgba(255,255,255,0.8)" }}
-                style={{ color: "rgba(255,255,255,0.3)", textDecoration: "none", fontWeight: 700 }}
-              >
-                StackX
-              </motion.a>
-            </p>
+            
+            <motion.a 
+              href="https://stackx.co.in" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ y: -2, scale: 1.02, backgroundColor: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.2)" }}
+              whileTap={{ scale: 0.98 }}
+              style={{ 
+                display: "inline-flex", 
+                alignItems: "center", 
+                gap: "10px", 
+                background: "rgba(255,255,255,0.02)", 
+                border: "1px solid rgba(255,255,255,0.08)", 
+                padding: "8px 20px", 
+                borderRadius: "100px",
+                textDecoration: "none",
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+                backdropFilter: "blur(10px)"
+              }}
+            >
+              <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                Powered By
+              </span>
+              <div style={{ height: "18px", width: "1px", background: "rgba(255,255,255,0.1)" }} />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Image 
+                  src="/assets/images/StackX.png" 
+                  alt="StackX Logo" 
+                  width={65} 
+                  height={18} 
+                  style={{ objectFit: "contain", filter: "brightness(1.1) contrast(1.1)" }} 
+                  unoptimized 
+                />
+              </div>
+            </motion.a>
           </div>
         </motion.div>
       </motion.div>

@@ -5,12 +5,12 @@ import ScrollingColumn from "./ScrollingColumn";
 
 // Poster images from public directory
 const POSTERS = [
-  "/assets/images/poster-aghora.png",
-  "/assets/images/poster-antha-akkade.png",
-  "/assets/images/poster-hello-baby.png",
-  "/assets/images/poster-mr-lonely.png",
-  "/assets/images/poster-prema-kadha.png",
-  "/assets/images/poster-visakha-express.png",
+  "/assets/images/poster-aaj.jpeg",
+  "/assets/images/poster-aghora.jpeg",
+  "/assets/images/poster-ddd.jpeg",
+  "/assets/images/poster-hb.jpeg",
+  "/assets/images/poster-mrlonely.jpeg",
+  "/assets/images/poster-vyuntapali.jpeg",
 ];
 
 // Distribute posters across columns with varied arrangements
