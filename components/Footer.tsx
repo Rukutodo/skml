@@ -177,9 +177,23 @@ export default function Footer() {
           <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)", margin: 0, position: "relative", zIndex: 1 }}>
             © {new Date().getFullYear()} SKML Motion Pictures. All rights reserved.
           </p>
-          <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em", margin: 0, position: "relative", zIndex: 1 }}>
-            Where Legacy Meets the Silver Screen
-          </p>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", position: "relative", zIndex: 1 }}>
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em", margin: 0 }}>
+              Where Legacy Meets the Silver Screen
+            </p>
+            <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.15)", letterSpacing: "0.05em", margin: 0, display: "flex", alignItems: "center", gap: "4px" }}>
+              Powered by 
+              <motion.a 
+                href="https://github.com/StackXpvt" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ color: "rgba(255,255,255,0.8)" }}
+                style={{ color: "rgba(255,255,255,0.3)", textDecoration: "none", fontWeight: 700 }}
+              >
+                StackX
+              </motion.a>
+            </p>
+          </div>
         </motion.div>
       </motion.div>
 
