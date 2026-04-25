@@ -172,14 +172,7 @@ export default function AboutSection({
       </div>
 
       {/* Responsive grid CSS */}
-      <style jsx>{`
-        @media (min-width: 1024px) {
-          .lg-two-cols { grid-template-columns: 1fr 1fr !important; gap: 5rem !important; }
-        }
-        @media (min-width: 768px) {
-          .stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
-        }
-      `}</style>
+      
     </section>
   );
 }

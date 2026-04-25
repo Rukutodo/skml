@@ -79,13 +79,16 @@ export default function FilmEditorClient({ id, initialData }: Props) {
   };
 
   return (
-    <div style={{maxWidth:880}}>
+    <div style={{maxWidth:880, margin:"0 auto"}}>
       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:"1.75rem",flexWrap:"wrap",gap:"1rem"}}>
         <div>
-          <a href="/admin/films" style={{fontSize:".8125rem",color:"var(--ink-3)",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:".25rem",marginBottom:".375rem"}}>← Back to Films</a>
-          <h1 className="pg-t" style={{fontSize:"1.5rem"}}>{isNew ? "Add New Film" : "Edit Film"}</h1>
+          <a href="/admin/films" className="back-link">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Back to Films
+          </a>
+          <h1 className="pg-t" style={{fontSize:"1.5rem", marginTop: 0}}>{isNew ? "Add New Film" : "Edit Film"}</h1>
         </div>
-        <button onClick={save} disabled={saving} className="btn btn-p" style={{flexShrink:0}}>
+        <button onClick={save} disabled={saving} className="btn btn-p btn-save" style={{flexShrink:0}}>
           <svg width={14} height={14} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
           {saving ? "Saving…" : "Save Film"}
         </button>

@@ -69,21 +69,7 @@ export default function MarqueeSection() {
         </div>
       </div>
 
-      <style jsx>{`
-        .marquee-content {
-          animation: autoScroll 35s linear infinite;
-        }
-
-        @keyframes autoScroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            /* Scroll exactly one set of logos. We have 3 sets. Scrolling by -33.33% targets exactly one set's width */
-            transform: translateX(-33.3333%);
-          }
-        }
-      `}</style>
+      
     </section>
   );
 }

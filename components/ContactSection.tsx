@@ -282,20 +282,7 @@ export default function ContactSection() {
         </div>
       </div>
 
-      <style jsx>{`
-        .contact-card-content { padding: 1.5rem; }
-        .contact-form-card { padding: 1.5rem; }
-        
-        @media (min-width: 640px) {
-          .contact-card-content { padding: 3rem 2rem; }
-          .contact-form-card { padding: 2rem; }
-        }
-        @media (min-width: 1024px) {
-          .contact-card-content { padding: 4rem; }
-          .contact-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
-      `}</style>
+      
     </section>
   );
 }

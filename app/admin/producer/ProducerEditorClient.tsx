@@ -34,13 +34,17 @@ export default function ProducerEditorClient({ initialData }: Props) {
   const uBio = (i:number,v:string) => { const b=[...form.bio]; b[i]=v; setForm({...form,bio:b}); };
 
   return (
-    <div style={{maxWidth:880}}>
+    <div style={{maxWidth:880, margin:"0 auto"}}>
       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:"1.75rem",flexWrap:"wrap",gap:"1rem"}}>
         <div>
-          <h1 className="pg-t" style={{fontSize:"1.5rem"}}>Founder Profile</h1>
-          <p className="pg-sub">Update the producer / founder section on your site.</p>
+          <a href="/admin" className="back-link">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Back to Dashboard
+          </a>
+          <h1 className="pg-t" style={{fontSize:"1.5rem", marginTop: 0}}>Founder Profile</h1>
+          <p className="pg-sub" style={{marginTop: ".25rem"}}>Update the producer / founder section on your site.</p>
         </div>
-        <button onClick={save} disabled={saving} className="btn btn-p" style={{flexShrink:0}}>
+        <button onClick={save} disabled={saving} className="btn btn-p btn-save" style={{flexShrink:0}}>
           <svg width={14} height={14} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
           {saving?"Saving…":"Save Changes"}
         </button>

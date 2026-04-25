@@ -213,3 +213,327 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
+
+/* ─── Extracted from components ─── */
+/* From AboutSection.tsx */
+
+        @media (min-width: 1024px) {
+          .lg-two-cols { grid-template-columns: 1fr 1fr !important; gap: 5rem !important; }
+        }
+        @media (min-width: 768px) {
+          .stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
+        }
+      
+/* From ContactSection.tsx */
+
+        .contact-card-content { padding: 1.5rem; }
+        .contact-form-card { padding: 1.5rem; }
+        
+        @media (min-width: 640px) {
+          .contact-card-content { padding: 3rem 2rem; }
+          .contact-form-card { padding: 2rem; }
+        }
+        @media (min-width: 1024px) {
+          .contact-card-content { padding: 4rem; }
+          .contact-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+      
+/* From Footer.tsx */
+
+        @media (min-width: 768px) {
+          .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
+          .footer-bottom { flex-direction: row !important; text-align: left !important; }
+        }
+      
+/* From MarqueeSection.tsx */
+
+        .marquee-content {
+          animation: autoScroll 35s linear infinite;
+        }
+
+        @keyframes autoScroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            /* Scroll exactly one set of logos. We have 3 sets. Scrolling by -33.33% targets exactly one set's width */
+            transform: translateX(-33.3333%);
+          }
+        }
+      
+/* From OTTPlatforms.tsx */
+
+        @media (min-width: 768px) {
+          .platforms-grid { grid-template-columns: repeat(4, 1fr) !important; }
+        }
+      
+/* From ProducerSection.tsx */
+
+        @media (min-width: 1024px) {
+          .producer-grid {
+            grid-template-columns: 2fr 3fr !important;
+            gap: 5rem !important;
+          }
+        }
+      
+/* From ServicesSection.tsx */
+
+        @media (min-width: 768px) {
+          .services-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+      
+/* From WhyChooseUs.tsx */
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .mobile-only { display: flex !important; }
+        .desktop-only { display: none !important; }
+
+        .mobile-grid-container {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0.65rem !important;
+          width: 100% !important;
+          margin-bottom: 2.5rem !important;
+        }
+
+        @media (min-width: 768px) {
+          .mobile-only { display: none !important; }
+          .desktop-only { display: block !important; }
+          .reasons-grid.desktop-only { display: grid !important; }
+        }
+
+        /* ── Mobile compact ── */
+        .reasons-grid { gap: 0.75rem !important; }
+
+        .reasons-grid > div {
+          padding: 1.25rem 1rem !important;
+          gap: 1rem !important;
+        }
+
+        .reasons-grid > div > div:first-child {
+          width: 36px !important;
+          height: 36px !important;
+          font-size: 0.875rem !important;
+        }
+
+        .reasons-grid h3 { font-size: 0.9rem !important; }
+
+        .reasons-grid p {
+          font-size: 12.5px !important;
+          margin-top: 0.25rem !important;
+          line-height: 1.6 !important;
+        }
+
+        @media (min-width: 768px) {
+          .reasons-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.25rem !important; }
+          .reasons-grid > div { padding: 1.75rem 2rem !important; gap: 1.25rem !important; }
+          .reasons-grid > div > div:first-child { width: 44px !important; height: 44px !important; font-size: 1rem !important; }
+          .reasons-grid h3 { font-size: 1rem !important; }
+          .reasons-grid p { font-size: 13.5px !important; margin-top: 0.5rem !important; line-height: 1.75 !important; }
+          #why-choose { padding: 6rem 1.5rem !important; }
+        }
+      
+/* ─── From MoviesSection ─── */
+.ms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+@media (min-width: 640px) {
+  .ms-container { padding: 0 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .ms-container { padding: 0 2rem; }
+}
+
+.movies-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.movie-overlay { padding: 1rem; }
+.movie-category-badge { padding: 0.2rem 0.6rem; font-size: 8px; letter-spacing: 0.1em; }
+.movie-info { margin-top: 0.75rem; }
+.movie-info h3 { font-size: 0.85rem; }
+.movie-info p { font-size: 11px; margin-top: 0.15rem; }
+@media (min-width: 640px) {
+  .movies-grid { gap: 1.5rem; }
+  .movie-overlay { padding: 1.5rem; }
+  .movie-category-badge { padding: 0.25rem 0.75rem; font-size: 9px; letter-spacing: 0.15em; }
+  .movie-info { margin-top: 1rem; }
+  .movie-info h3 { font-size: 1rem; }
+  .movie-info p { font-size: 13px; margin-top: 0.25rem; }
+}
+@media (min-width: 1024px) {
+  .movies-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .movie-overlay { padding: 1.75rem; }
+  .movie-category-badge { padding: 0.3rem 0.875rem; font-size: 10px; }
+  .movie-info { margin-top: 1.125rem; }
+}
+
+.ms-explore-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 9999px;
+  background: #F5F5F8;
+  width: fit-content;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.ms-explore-cta:hover {
+  background: #111118;
+  border-color: #111118;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.ms-cta-line {
+  width: 2rem;
+  height: 2px;
+  background: #6A6A7A;
+  border-radius: 9999px;
+  transition: background 0.4s ease, width 0.4s ease;
+}
+.ms-explore-cta:hover .ms-cta-line {
+  background: rgba(255,255,255,0.3);
+  width: 1.5rem;
+}
+
+.ms-cta-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background: #111118;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  padding: 0 0.5rem;
+  transition: all 0.4s ease;
+}
+.ms-explore-cta:hover .ms-cta-count {
+  background: #ffffff;
+  color: #111118;
+  transform: scale(1.1);
+}
+
+.ms-cta-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111118;
+  letter-spacing: 0.01em;
+  transition: color 0.4s ease;
+}
+.ms-explore-cta:hover .ms-cta-text {
+  color: #ffffff;
+}
+
+.ms-cta-arrow {
+  display: flex;
+  align-items: center;
+  color: #6A6A7A;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(0);
+}
+.ms-explore-cta:hover .ms-cta-arrow {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+@media (max-width: 480px) {
+  .ms-explore-cta {
+    padding: 0.75rem 1rem;
+    gap: 0.625rem;
+    margin-top: 2rem;
+  }
+  .ms-cta-line { width: 1.25rem; }
+  .ms-cta-count { min-width: 28px; height: 28px; font-size: 11px; }
+  .ms-cta-text { font-size: 12px; }
+}
+
+@keyframes msFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes msPopIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+.ms-backdrop {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+  padding: 1rem; animation: msFadeIn 0.2s ease;
+}
+.ms-card {
+  position: relative; display: flex; flex-direction: column;
+  width: 100%; max-width: 260px;
+  background: #111; border-radius: 0.75rem; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  animation: msPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ms-thumb {
+  position: relative; width: 100%; aspect-ratio: 2/3;
+  flex-shrink: 0; overflow: hidden; background: #000;
+}
+.ms-info {
+  padding: 1rem; display: flex; flex-direction: column;
+}
+@media (min-width: 640px) {
+  .ms-card {
+    flex-direction: row; max-width: 480px; min-height: 0;
+  }
+  .ms-thumb {
+    width: 180px; aspect-ratio: unset; min-height: 240px;
+  }
+  .ms-info {
+    flex: 1; padding: 1.25rem; justify-content: center; min-width: 0;
+  }
+}
+.ms-close {
+  position: absolute; top: 0.5rem; right: 0.5rem; z-index: 10;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff; transition: background 0.2s;
+}
+.ms-close:hover { background: rgba(255,255,255,0.25); }
+.ms-title {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.1rem; font-weight: 600; color: #fff;
+  line-height: 1.3; margin: 0 0 0.25rem;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.ms-meta {
+  margin: 0 0 0.65rem; font-size: 0.8rem; color: rgba(255,255,255,0.6);
+}
+.ms-dot { color: rgba(255,255,255,0.3); }
+.ms-tags {
+  display: flex; flex-wrap: wrap; gap: 0.35rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+.ms-badge {
+  padding: 0.15rem 0.45rem; font-size: 0.6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; border-radius: 4px;
+}
+.ms-badge--produced { background: #fff; color: #000; }
+.ms-badge--distributed { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.ms-release-tag {
+  padding: 0.15rem 0.45rem; font-size: 0.6rem; font-weight: 600;
+  border-radius: 4px; color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+.ms-platform {
+  display: flex; align-items: center; gap: 0.3rem; font-size: 0.75rem;
+}
+.ms-platform-label { color: rgba(255,255,255,0.35); }
+.ms-platform-value { color: rgba(255,255,255,0.8); font-weight: 500; }
+

@@ -62,13 +62,13 @@ export default async function AdminDashboard() {
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: "1.5rem", marginBottom: "2.5rem" }} className="g2">
+      <div className="g2" style={{ gap: "1.5rem", marginBottom: "2.5rem" }}>
         {/* Left Column: Management & Activity */}
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           {/* Quick Actions */}
           <div>
             <p className="sec-t">Content Management</p>
-            <div className="g-act" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
+            <div className="g-act">
               {actions.map(a => (
                 <a key={a.href} href={a.href} className="act">
                   <div className="act-ico" style={{ background: a.bg }}>

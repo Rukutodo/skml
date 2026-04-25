@@ -127,11 +127,7 @@ export default function ServicesSection() {
         </div>
       </div>
 
-      <style jsx>{`
-        @media (min-width: 768px) {
-          .services-grid { grid-template-columns: repeat(3, 1fr) !important; }
-        }
-      `}</style>
+      
     </section>
   );
 }

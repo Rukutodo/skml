@@ -88,11 +88,7 @@ export default function OTTPlatforms() {
         </div>
       </div>
 
-      <style jsx>{`
-        @media (min-width: 768px) {
-          .platforms-grid { grid-template-columns: repeat(4, 1fr) !important; }
-        }
-      `}</style>
+      
     </section>
   );
 }

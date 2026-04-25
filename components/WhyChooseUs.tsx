@@ -407,58 +407,7 @@ export default function WhyChooseUs() {
         </div>
       )}
 
-      <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .mobile-only { display: flex !important; }
-        .desktop-only { display: none !important; }
-
-        .mobile-grid-container {
-          display: grid !important;
-          grid-template-columns: repeat(2, 1fr) !important;
-          gap: 0.65rem !important;
-          width: 100% !important;
-          margin-bottom: 2.5rem !important;
-        }
-
-        @media (min-width: 768px) {
-          .mobile-only { display: none !important; }
-          .desktop-only { display: block !important; }
-          .reasons-grid.desktop-only { display: grid !important; }
-        }
-
-        /* ── Mobile compact ── */
-        .reasons-grid { gap: 0.75rem !important; }
-
-        .reasons-grid > div {
-          padding: 1.25rem 1rem !important;
-          gap: 1rem !important;
-        }
-
-        .reasons-grid > div > div:first-child {
-          width: 36px !important;
-          height: 36px !important;
-          font-size: 0.875rem !important;
-        }
-
-        .reasons-grid h3 { font-size: 0.9rem !important; }
-
-        .reasons-grid p {
-          font-size: 12.5px !important;
-          margin-top: 0.25rem !important;
-          line-height: 1.6 !important;
-        }
-
-        @media (min-width: 768px) {
-          .reasons-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.25rem !important; }
-          .reasons-grid > div { padding: 1.75rem 2rem !important; gap: 1.25rem !important; }
-          .reasons-grid > div > div:first-child { width: 44px !important; height: 44px !important; font-size: 1rem !important; }
-          .reasons-grid h3 { font-size: 1rem !important; }
-          .reasons-grid p { font-size: 13.5px !important; margin-top: 0.5rem !important; line-height: 1.75 !important; }
-          #why-choose { padding: 6rem 1.5rem !important; }
-        }
-      `}</style>
+      
     </section>
   );
 }

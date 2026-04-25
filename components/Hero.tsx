@@ -118,7 +118,7 @@ export default function Hero() {
       <div style={{ position: "relative", zIndex: 20, display: "flex", flexDirection: "column", alignItems: "center", maxWidth: "56rem", padding: "0 1.5rem", textAlign: "center" }}>
         {/* Small label */}
         <div
-          className={mounted ? "animate-fade-in-up" : ""}
+          className="animate-fade-in-up"
           style={{
             marginBottom: "1.5rem",
             borderRadius: "9999px",
@@ -130,7 +130,6 @@ export default function Hero() {
             textTransform: "uppercase" as const,
             letterSpacing: "0.25em",
             color: "rgba(255,255,255,0.5)",
-            opacity: mounted ? undefined : 0,
           }}
         >
           Est. 2018 • Film Production & Distribution
@@ -138,7 +137,7 @@ export default function Hero() {
 
         {/* Main Heading */}
         <h1
-          className={mounted ? "animate-fade-in-up animation-delay-200" : ""}
+          className="animate-fade-in-up animation-delay-200"
           style={{
             fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(2.25rem, 6vw, 4.5rem)",
@@ -146,7 +145,6 @@ export default function Hero() {
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
             color: "#ffffff",
-            opacity: mounted ? undefined : 0,
           }}
         >
           Where Legacy Meets
@@ -158,14 +156,13 @@ export default function Hero() {
 
         {/* Subtext */}
         <p
-          className={mounted ? "animate-fade-in-up animation-delay-400" : ""}
+          className="animate-fade-in-up animation-delay-400"
           style={{
             marginTop: "1.75rem",
             maxWidth: "40rem",
             fontSize: "clamp(1rem, 2vw, 1.25rem)",
             lineHeight: 1.65,
             color: "rgba(255,255,255,0.5)",
-            opacity: mounted ? undefined : 0,
           }}
         >
           Producing high-quality cinema at optimized costs and navigating global
@@ -174,10 +171,7 @@ export default function Hero() {
 
         {/* CTA Button */}
         <div
-          className={`
-            mt-8 md:mt-10
-            ${mounted ? "animate-fade-in-up animation-delay-600" : "opacity-0"}
-          `}
+          className="mt-8 md:mt-10 animate-fade-in-up animation-delay-600"
         >
           <a
             href="#movies"

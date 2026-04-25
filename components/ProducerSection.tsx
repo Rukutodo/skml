@@ -127,14 +127,7 @@ export default function ProducerSection({
         </div>
       </div>
 
-      <style jsx>{`
-        @media (min-width: 1024px) {
-          .producer-grid {
-            grid-template-columns: 2fr 3fr !important;
-            gap: 5rem !important;
-          }
-        }
-      `}</style>
+      
     </section>
   );
 }

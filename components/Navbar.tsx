@@ -24,6 +24,7 @@ export default function Navbar() {
       setIsScrolled(scrollY > 50);
       setIsPastHero(scrollY > window.innerHeight * 0.85);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -113,14 +114,9 @@ export default function Navbar() {
             }}>
               SKML
             </span>
-            <span className="logo-subtitle" style={{ 
-              fontSize: "7px", 
-              fontWeight: 600, 
-              textTransform: "uppercase", 
-              letterSpacing: "0.2em", 
+            <span className="text-[7px] lg:text-[9px] tracking-[0.2em] lg:tracking-[0.3em] font-semibold uppercase transition-all duration-500" style={{ 
               color: isPastHero ? "#6A6A7A" : "rgba(255,255,255,0.7)",
-              lineHeight: 1.2,
-              transition: "all 0.5s ease"
+              lineHeight: 1.2
             }}>
               Motion Pictures
             </span>
@@ -136,7 +132,7 @@ export default function Navbar() {
             margin: 0,
             padding: 0,
           }}
-          className="desktop-only"
+          className="hidden lg:flex"
           id="nav-links-desktop"
         >
           {NAV_LINKS.map((link) => (
@@ -177,7 +173,7 @@ export default function Navbar() {
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I'm%20interested%20in%20your%20film%20production%20services.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="desktop-only"
+            className="hidden lg:inline-flex"
             style={{
               alignItems: "center",
               gap: "0.5rem",
@@ -204,7 +200,7 @@ export default function Navbar() {
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mobile-only"
+            className="flex lg:hidden"
             style={{
               alignItems: "center",
               justifyContent: "center",
@@ -226,7 +222,7 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="mobile-only"
+            className="flex lg:hidden"
             style={{
               flexDirection: "column",
               alignItems: "center",
@@ -342,20 +338,6 @@ export default function Navbar() {
         </div>
       )}
 
-      <style jsx>{`
-        /* Manage layout visibility explicitly with media queries,
-           avoiding conflicts with inline display properties. */
-        
-        .desktop-only { display: none !important; }
-        .mobile-only { display: flex !important; }
-        
-        @media (min-width: 1024px) {
-          .desktop-only { display: flex !important; }
-          .mobile-only { display: none !important; }
-          a.desktop-only { display: inline-flex !important; }
-          .logo-subtitle { font-size: 9px !important; letter-spacing: 0.3em !important; }
-        }
-      `}</style>
     </nav>
   );
 }
