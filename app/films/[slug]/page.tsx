@@ -14,12 +14,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const film = await getFilmBySlug(slug);
   if (!film) return { title: "Film Not Found" };
 
+  const posterUrl = film.poster ? urlFor(film.poster).width(1200).quality(80).url() : "/og-image.jpg";
+  const canonicalUrl = `https://skmlmotionpictures.com/films/${slug}`;
+
   return {
-    title: `${film.title} | SKML Motion Pictures`,
-    description: `Details about the film ${film.title} produced/distributed by SKML.`,
+    title: film.title,
+    description: `${film.title} (${film.year || ""}) — A ${film.genre || ""} film ${film.category === "produced" ? "produced" : "distributed"} by SKML Motion Pictures${film.ottPlatform ? `, available on ${film.ottPlatform}` : ""}.`,
+    keywords: [
+      film.title,
+      film.genre || "",
+      film.ottPlatform || "",
+      "SKML Motion Pictures",
+      "Telugu film",
+      film.category === "produced" ? "Telugu production" : "Telugu distribution",
+    ].filter(Boolean),
+    alternates: { canonical: canonicalUrl },
     openGraph: {
-      images: [film.poster ? urlFor(film.poster).url() : ""],
+      type: "video.movie",
+      url: canonicalUrl,
+      title: `${film.title} | SKML Motion Pictures`,
+      description: `${film.title} — A ${film.genre || ""} film by SKML Motion Pictures${film.ottPlatform ? `, streaming on ${film.ottPlatform}` : ""}.`,
+      images: [
+        {
+          url: posterUrl,
+          width: 1200,
+          height: 630,
+          alt: `${film.title} poster`,
+        },
+      ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${film.title} | SKML Motion Pictures`,
+      description: `${film.title} — A ${film.genre || ""} film by SKML Motion Pictures.`,
+      images: [posterUrl],
+    },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -32,8 +62,39 @@ export default async function FilmPage({ params }: Props) {
   const posterUrl = film.poster ? urlFor(film.poster).width(800).quality(90).url() : "";
   const bgUrl = film.poster ? urlFor(film.poster).width(1200).quality(40).blur(50).url() : "";
 
+  /* JSON-LD — Movie schema for search snippets */
+  const movieJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    name: film.title,
+    ...(film.year ? { datePublished: film.year } : {}),
+    ...(film.genre ? { genre: film.genre } : {}),
+    image: posterUrl || undefined,
+    url: `https://skmlmotionpictures.com/films/${slug}`,
+    productionCompany: {
+      "@type": "Organization",
+      name: "SKML Motion Pictures",
+      url: "https://skmlmotionpictures.com",
+    },
+    ...(film.ottPlatform
+      ? {
+          countryOfOrigin: { "@type": "Country", name: "India" },
+          offers: {
+            "@type": "Offer",
+            availability: "https://schema.org/InStock",
+            seller: { "@type": "Organization", name: film.ottPlatform },
+          },
+        }
+      : {}),
+  };
+
   return (
     <div style={{ background: "#050505", color: "#fff", minHeight: "100vh" }}>
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(movieJsonLd) }}
+      />
       <Navbar />
       
       {/* Cinematic Hero */}

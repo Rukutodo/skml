@@ -7,9 +7,42 @@ import { getFilms } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
-  title: "Our Films | SKML Motion Pictures",
+  title: "Our Films",
   description:
     "Explore the complete filmography of SKML Motion Pictures — from productions to distributions across OTT and theatrical releases.",
+  keywords: [
+    "SKML films",
+    "Telugu movies list",
+    "SKML productions",
+    "SKML distributions",
+    "OTT Telugu movies",
+    "Tollywood filmography",
+  ],
+  alternates: {
+    canonical: "https://skmlmotionpictures.com/movies",
+  },
+  openGraph: {
+    url: "https://skmlmotionpictures.com/movies",
+    title: "Our Films | SKML Motion Pictures",
+    description:
+      "Explore the complete filmography of SKML Motion Pictures — from productions to distributions across OTT and theatrical releases.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SKML Motion Pictures Filmography",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Films | SKML Motion Pictures",
+    description:
+      "Explore the complete filmography of SKML Motion Pictures — OTT and theatrical releases.",
+    images: ["/og-image.jpg"],
+  },
+  robots: { index: true, follow: true },
 };
 
 // Fallback if Sanity has no data yet

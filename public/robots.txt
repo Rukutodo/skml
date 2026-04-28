@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block admin and Sanity Studio
+Disallow: /admin/
+Disallow: /studio/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://skmlmotionpictures.com/sitemap.xml

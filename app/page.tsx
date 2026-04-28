@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import MarqueeSection from "@/components/MarqueeSection";
@@ -14,6 +15,37 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 import { getAbout, getProducer, getFilms } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
+
+const BASE_URL = "https://skmlmotionpictures.com";
+
+export const metadata: Metadata = {
+  alternates: { canonical: BASE_URL },
+  openGraph: {
+    url: BASE_URL,
+    type: "website",
+  },
+};
+
+/* JSON-LD — Organization schema for Google Knowledge Panel */
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "SKML Motion Pictures",
+  url: BASE_URL,
+  logo: `${BASE_URL}/icon.png`,
+  description:
+    "A premier film production and distribution company producing high-quality Telugu cinema. Distributed across theaters, Amazon Prime, and Aha.",
+  founder: {
+    "@type": "Person",
+    name: "Kandregula Adhinarayana",
+  },
+  sameAs: [],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    availableLanguage: ["Telugu", "English"],
+  },
+};
 
 export default async function Home() {
   // Fetch all CMS data in parallel
@@ -63,6 +95,11 @@ export default async function Home() {
 
   return (
     <main>
+      {/* JSON-LD structured data for search engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       <Navbar />
       <Hero />
       <MarqueeSection />
