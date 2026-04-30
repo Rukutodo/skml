@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Block admin and Sanity Studio
+# Block protected system routes
 Disallow: /admin/
 Disallow: /studio/
 Disallow: /api/

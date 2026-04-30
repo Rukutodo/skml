@@ -18,6 +18,9 @@ import { urlFor } from "@/lib/sanity/image";
 
 const BASE_URL = "https://skmlmotionpictures.com";
 
+export const revalidate = 3600; // Revalidate every hour
+
+
 export const metadata: Metadata = {
   alternates: { canonical: BASE_URL },
   openGraph: {

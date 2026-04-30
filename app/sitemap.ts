@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic film routes from Sanity
+  // Dynamic film routes from database
   let filmRoutes: MetadataRoute.Sitemap = [];
   try {
     const films = await getFilms();
@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }));
   } catch {
-    // Sanity unavailable — return only static routes
+    // Database unavailable — return only static routes
   }
 
   return [...staticRoutes, ...filmRoutes];

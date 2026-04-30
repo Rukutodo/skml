@@ -1,9 +1,11 @@
-import { getFilmBySlug } from "@/lib/sanity/queries";
+import { getFilmBySlug, getFilms } from "@/lib/sanity/queries";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/lib/sanity/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
+
+export const revalidate = 3600; // Revalidate every hour
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -51,6 +53,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     robots: { index: true, follow: true },
   };
+}
+
+export async function generateStaticParams() {
+  const films = await getFilms().catch(() => []);
+  return films
+    .filter((film) => film.slug?.current)
+    .map((film) => ({
+      slug: film.slug.current,
+    }));
 }
 
 export default async function FilmPage({ params }: Props) {

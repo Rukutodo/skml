@@ -1,0 +1,20 @@
+# SKML Motion Pictures
+
+SKML Motion Pictures is a premier film production and distribution company based in India, specializing in high-quality Telugu cinema.
+
+## Core Information
+- **Founder:** Kandregula Adhinarayana
+- **Focus:** Production optimization, global distribution (Theatrical, OTT).
+- **OTT Partners:** Amazon Prime Video, Aha.
+- **Key Films:** Aghora, Antha Akkade, Hello Baby, Mr. Lonely, Visakha Express.
+
+## Sitemap & Routes
+- `/`: Homepage with featured films, producer bio, and company stats.
+- `/movies`: Complete filmography (Produced & Distributed).
+- `/films/[slug]`: Detailed film page with poster, genre, year, and platform links.
+
+## Technical Stack
+- Framework: Next.js (ISR)
+- CMS: Professional Content Management System
+- Styling: Tailwind CSS / Vanilla CSS
+- Analytics: SEO Optimized with JSON-LD and Open Graph.

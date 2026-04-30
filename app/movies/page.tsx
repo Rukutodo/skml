@@ -6,7 +6,10 @@ import MoviesPageClient from "./MoviesPageClient";
 import { getFilms } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
 
+export const revalidate = 3600; // Revalidate every hour
+
 export const metadata: Metadata = {
+
   title: "Our Films",
   description:
     "Explore the complete filmography of SKML Motion Pictures — from productions to distributions across OTT and theatrical releases.",

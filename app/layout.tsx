@@ -110,6 +110,11 @@ export const metadata: Metadata = {
   //   google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN",
   //   yandex: "YOUR_YANDEX_TOKEN",
   // },
+
+  /* ── Other ── */
+  other: {
+    "search": "/opensearch.xml",
+  },
 };
 
 export default function RootLayout({
