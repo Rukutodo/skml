@@ -132,7 +132,7 @@ export default function Hero() {
             color: "rgba(255,255,255,0.5)",
           }}
         >
-          Est. 2018 • Film Production & Distribution
+          Est. 2013 • Film Production & Distribution
         </div>
 
         {/* Main Heading */}
