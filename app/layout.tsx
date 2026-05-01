@@ -99,6 +99,16 @@ export const metadata: Metadata = {
     ],
   },
 
+  /* ── iOS / Mobile Optimization ── */
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "SKML Motion Pictures",
+  },
+  formatDetection: {
+    telephone: true,
+  },
+
   /* ── Canonical & alternates ── */
   alternates: {
     canonical: BASE_URL,
