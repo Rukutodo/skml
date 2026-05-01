@@ -364,7 +364,7 @@ body {
   .movie-info p { font-size: 13px; margin-top: 0.25rem; }
 }
 @media (min-width: 1024px) {
-  .movies-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .movies-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
   .movie-overlay { padding: 1.75rem; }
   .movie-category-badge { padding: 0.3rem 0.875rem; font-size: 10px; }
   .movie-info { margin-top: 1.125rem; }
