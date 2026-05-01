@@ -8,7 +8,7 @@ const DEFAULTS = {
   lastName: "Adhinarayana",
   role: "Founder & Producer",
   bio: [
-    "With a deep passion for cinema and a visionary approach to filmmaking, Kandregula Adhinarayana founded SKML Motion Pictures in 2018.",
+    "With a deep passion for cinema and a visionary approach to filmmaking, Kandregula Adhinarayana founded SKML Motion Pictures in 2013.",
     "Under his leadership, SKML has produced over 6 feature films and successfully navigated OTT distribution across major platforms.",
   ],
   quote: "Every story deserves its screen.",

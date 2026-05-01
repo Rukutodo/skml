@@ -19,7 +19,7 @@ const DEFAULT_STATS: Stat[] = [
   { value: "6+", label: "Films Produced" },
   { value: "50M+", label: "Audience Reached" },
   { value: "3", label: "OTT Platforms" },
-  { value: "2018", label: "Established" },
+  { value: "2013", label: "Established" },
 ];
 
 const DEFAULT_DESC = [

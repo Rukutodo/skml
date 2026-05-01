@@ -170,7 +170,7 @@ export default function WhyChooseUs() {
                 SKML Motion Pictures
               </span>
               <span style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", color: "rgba(255,255,255,0.25)" }}>
-                PROD. 2018 — PRESENT
+                PROD. 2013 — PRESENT
               </span>
             </div>
           </div>

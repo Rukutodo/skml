@@ -15,7 +15,7 @@ interface ProducerSectionProps {
 }
 
 const DEFAULT_BIO = [
-  "With a deep passion for cinema and a visionary approach to filmmaking, Kandregula Adhinarayana founded SKML Motion Pictures in 2018. His journey in the film industry began with a simple belief — that great stories deserve to be told, regardless of budget constraints.",
+  "With a deep passion for cinema and a visionary approach to filmmaking, Kandregula Adhinarayana founded SKML Motion Pictures in 2013. His journey in the film industry began with a simple belief — that great stories deserve to be told, regardless of budget constraints.",
   "Under his leadership, SKML has produced over 6 feature films and successfully navigated OTT distribution across major platforms including Amazon Prime Video and Aha.",
   "Adhinarayana continues to champion affordable production solutions, making cinema accessible to emerging directors and storytellers who share his vision for impactful storytelling.",
 ];
