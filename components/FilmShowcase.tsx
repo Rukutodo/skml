@@ -49,6 +49,60 @@ export default function FilmShowcase({ films }: FilmShowcaseProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Map horizontal scroll/swipe to vertical scroll
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchStartX || !touchStartY) return;
+      const dx = touchStartX - e.touches[0].clientX;
+      const dy = touchStartY - e.touches[0].clientY;
+      
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 5) {
+        const rect = section.getBoundingClientRect();
+        const isWithin = rect.top <= 0 && rect.bottom >= window.innerHeight;
+        if (isWithin) {
+          e.preventDefault();
+          // Apply a multiplier for faster swipe response
+          window.scrollBy({ top: dx * 2.5 });
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        const rect = section.getBoundingClientRect();
+        const isWithin = rect.top <= 0 && rect.bottom >= window.innerHeight;
+        if (isWithin) {
+          e.preventDefault();
+          // Apply a multiplier for faster scroll response
+          window.scrollBy({ top: e.deltaX * 2.5 });
+        }
+      }
+    };
+
+    section.addEventListener("touchstart", handleTouchStart, { passive: true });
+    section.addEventListener("touchmove", handleTouchMove, { passive: false });
+    section.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      section.removeEventListener("touchstart", handleTouchStart);
+      section.removeEventListener("touchmove", handleTouchMove);
+      section.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
   // Close modal on Escape + lock body scroll
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedFilm(null); };
