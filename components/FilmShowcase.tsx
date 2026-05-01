@@ -48,8 +48,7 @@ export default function FilmShowcase({ films }: FilmShowcaseProps) {
     return "🎬 Theatrical + 📺 OTT";
   };
 
-  // Combine films and "See More" into a single set for the marquee
-  const marqueeItems = [...FILMS, { isSeeMore: true }];
+  const marqueeItems = FILMS;
 
   return (
     <>
@@ -60,90 +59,85 @@ export default function FilmShowcase({ films }: FilmShowcaseProps) {
         <div style={{
           maxWidth: "1100px", margin: "0 auto", width: "100%",
           padding: "0 2rem", marginBottom: "3.5rem",
+          display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1.5rem"
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-            <div style={{ height: "1px", width: "2rem", background: "rgba(255,255,255,0.3)" }} />
-            <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.3em", color: "rgba(255,255,255,0.5)" }}>
-              Our Films
-            </span>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+              <div style={{ height: "1px", width: "2rem", background: "rgba(255,255,255,0.3)" }} />
+              <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.3em", color: "rgba(255,255,255,0.5)" }}>
+                Our Films
+              </span>
+            </div>
+            <h2 style={{
+              fontFamily: "var(--font-playfair), serif",
+              fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+              fontWeight: 700, color: "#ffffff", lineHeight: 1.2, margin: 0,
+            }}>
+              Movies Produced Under This Banner
+            </h2>
           </div>
-          <h2 style={{
-            fontFamily: "var(--font-playfair), serif",
-            fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
-            fontWeight: 700, color: "#ffffff", lineHeight: 1.2, margin: 0,
-          }}>
-            Movies Produced Under This Banner
-          </h2>
+          <a
+            href="/movies"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "0.5rem",
+              padding: "0.75rem 1.5rem", borderRadius: "9999px",
+              background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
+              color: "#ffffff", fontSize: "12px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em",
+              textDecoration: "none", transition: "all 0.3s ease",
+              whiteSpace: "nowrap", marginBottom: "0.5rem"
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+          >
+            See All Movies
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
 
         {/* Marquee Container */}
         <div className="marquee-wrapper">
           <div className="marquee-track">
             {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
-              'isSeeMore' in item ? (
-                <a
-                  key={`see-more-${i}`}
-                  href="/movies"
-                  style={{
-                    flexShrink: 0, width: "clamp(260px, 22vw, 340px)", aspectRatio: "2/3",
-                    borderRadius: "0.75rem", overflow: "hidden",
-                    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                    gap: "1.25rem", border: "1px solid rgba(255,255,255,0.12)",
-                    background: "rgba(255,255,255,0.03)", textDecoration: "none",
-                    transition: "all 0.4s ease", cursor: "pointer",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
-                >
-                  <div style={{ width: "56px", height: "56px", borderRadius: "9999px", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#ffffff" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                  <span style={{ fontSize: "14px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(255,255,255,0.7)" }}>
-                    See More
+              <div
+                key={`film-${i}`}
+                onClick={() => setSelectedFilm(item as ShowcaseFilm)}
+                style={{
+                  position: "relative", flexShrink: 0,
+                  width: "clamp(260px, 22vw, 340px)", aspectRatio: "2/3",
+                  borderRadius: "0.75rem", overflow: "hidden",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                  cursor: "pointer",
+                }}
+              >
+                {(item as ShowcaseFilm).src ? (
+                  <Image
+                    src={(item as ShowcaseFilm).src}
+                    alt={(item as ShowcaseFilm).title}
+                    fill
+                    sizes="(max-width: 768px) 65vw, 22vw"
+                    style={{ objectFit: "cover", transition: "transform 0.5s ease" }}
+                    unoptimized
+                  />
+                ) : (
+                  <div style={{ width: "100%", height: "100%", background: "rgba(255,255,255,0.05)" }} />
+                )}
+                <div className="sc-film-hover">
+                  <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.8)" }}>
+                    View Details
                   </span>
-                </a>
-              ) : (
-                <div
-                  key={`film-${i}`}
-                  onClick={() => setSelectedFilm(item as ShowcaseFilm)}
-                  style={{
-                    position: "relative", flexShrink: 0,
-                    width: "clamp(260px, 22vw, 340px)", aspectRatio: "2/3",
-                    borderRadius: "0.75rem", overflow: "hidden",
-                    boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-                    cursor: "pointer",
-                  }}
-                >
-                  {(item as ShowcaseFilm).src ? (
-                    <Image
-                      src={(item as ShowcaseFilm).src}
-                      alt={(item as ShowcaseFilm).title}
-                      fill
-                      sizes="(max-width: 768px) 65vw, 22vw"
-                      style={{ objectFit: "cover", transition: "transform 0.5s ease" }}
-                      unoptimized
-                    />
-                  ) : (
-                    <div style={{ width: "100%", height: "100%", background: "rgba(255,255,255,0.05)" }} />
-                  )}
-                  <div className="sc-film-hover">
-                    <span style={{ fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.8)" }}>
-                      View Details
-                    </span>
-                  </div>
-                  <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0,
-                    padding: "3rem 1.25rem 1.25rem",
-                    background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
-                  }}>
-                    <p style={{ margin: 0, fontFamily: "var(--font-playfair), serif", fontSize: "1.125rem", fontWeight: 700, color: "#ffffff" }}>
-                      {(item as ShowcaseFilm).title}
-                    </p>
-                  </div>
                 </div>
-              )
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  padding: "3rem 1.25rem 1.25rem",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+                }}>
+                  <p style={{ margin: 0, fontFamily: "var(--font-playfair), serif", fontSize: "1.125rem", fontWeight: 700, color: "#ffffff" }}>
+                    {(item as ShowcaseFilm).title}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>

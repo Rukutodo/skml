@@ -92,11 +92,10 @@ export const metadata: Metadata = {
   /* ── Icons ── */
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/icon.png", type: "image/png" },
+      { url: "/assets/images/skml-logo.png", type: "image/png" },
     ],
     apple: [
-      { url: "/icon.png" },
+      { url: "/assets/images/skml-logo.png" },
     ],
   },
 
