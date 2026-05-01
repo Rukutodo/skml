@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     const tags = type && TYPE_TAG_MAP[type] ? TYPE_TAG_MAP[type] : Object.values(TYPE_TAG_MAP).flat();
     
     for (const tag of tags) {
-      revalidateTag(tag);
+      revalidateTag(tag, "max");
     }
 
     // Also revalidate the main paths to be safe
