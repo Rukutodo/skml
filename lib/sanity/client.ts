@@ -5,7 +5,7 @@ export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   apiVersion: "2025-04-21",
-  useCdn: true,
+  useCdn: false, // Must be false for ISR — CDN serves stale data during revalidation
 });
 
 const builder = imageUrlBuilder(client);

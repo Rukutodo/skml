@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 60; // Fallback: revalidate every 60s (primary: on-demand via webhook)
 
 interface Props {
   params: Promise<{ slug: string }>;

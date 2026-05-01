@@ -42,7 +42,9 @@ export async function getAbout(): Promise<AboutData | null> {
       description,
       ctaText,
       stats[] { value, label }
-    }`
+    }`,
+    {},
+    { next: { tags: ["about"] } }
   );
 }
 
@@ -55,7 +57,9 @@ export async function getProducer(): Promise<ProducerData | null> {
       portrait,
       bio,
       quote
-    }`
+    }`,
+    {},
+    { next: { tags: ["producer"] } }
   );
 }
 
@@ -72,7 +76,9 @@ export async function getFilms(): Promise<FilmData[]> {
       ottPlatform,
       releaseType,
       order
-    }`
+    }`,
+    {},
+    { next: { tags: ["films"] } }
   );
 }
 
@@ -92,7 +98,8 @@ export async function getFilmsByCategory(
       releaseType,
       order
     }`,
-    { category }
+    { category },
+    { next: { tags: ["films"] } }
   );
 }
 export async function getFilmBySlug(slug: string): Promise<FilmData | null> {
@@ -109,6 +116,8 @@ export async function getFilmBySlug(slug: string): Promise<FilmData | null> {
       releaseType,
       order
     }`,
-    { slug }
+    { slug },
+    { next: { tags: ["films"] } }
   );
 }
+

@@ -6,7 +6,7 @@ import MoviesPageClient from "./MoviesPageClient";
 import { getFilms } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 60; // Fallback: revalidate every 60s (primary: on-demand via webhook)
 
 export const metadata: Metadata = {
 
