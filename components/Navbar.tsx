@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Movies", href: "/movies" },
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
@@ -94,7 +94,7 @@ export default function Navbar() {
               priority
             />
           </div>
-          
+
           <div
             className="logo-text"
             style={{
@@ -103,18 +103,18 @@ export default function Navbar() {
               justifyContent: "center",
             }}
           >
-            <span style={{ 
-              fontFamily: "var(--font-playfair), serif", 
-              fontSize: isScrolled ? "13px" : "15px", 
-              fontWeight: 700, 
-              letterSpacing: "0.02em", 
+            <span style={{
+              fontFamily: "var(--font-playfair), serif",
+              fontSize: isScrolled ? "13px" : "15px",
+              fontWeight: 700,
+              letterSpacing: "0.02em",
               color: isPastHero ? "#111118" : "#ffffff",
               lineHeight: 1.2,
               transition: "all 0.5s ease"
             }}>
               SKML
             </span>
-            <span className="text-[7px] lg:text-[9px] tracking-[0.2em] lg:tracking-[0.3em] font-semibold uppercase transition-all duration-500" style={{ 
+            <span className="text-[7px] lg:text-[9px] tracking-[0.2em] lg:tracking-[0.3em] font-semibold uppercase transition-all duration-500" style={{
               color: isPastHero ? "#6A6A7A" : "rgba(255,255,255,0.7)",
               lineHeight: 1.2
             }}>
@@ -168,7 +168,7 @@ export default function Navbar() {
 
         {/* Right group: Hamburger */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
-                  {/* WhatsApp CTA — Desktop */}
+          {/* WhatsApp CTA — Desktop */}
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I'm%20interested%20in%20your%20film%20production%20services.`}
             target="_blank"

@@ -37,7 +37,6 @@ const TABS: { label: string; value: MovieCategory | "all" }[] = [
   { label: "Distributed", value: "distributed" },
 ];
 
-const MAX_DISPLAY = 6;
 
 const getReleaseLabel = (rt?: string) => {
   if (!rt) return null;
@@ -54,11 +53,19 @@ export default function MoviesSection({ films }: MoviesSectionProps) {
   const [revealedCards, setRevealedCards] = useState<Set<number>>(new Set());
   const [selectedFilm, setSelectedFilm] = useState<MovieItem | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [maxDisplay, setMaxDisplay] = useState(8);
+
+  useEffect(() => {
+    const handleResize = () => setMaxDisplay(window.innerWidth < 768 ? 6 : 8);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const allFiltered = activeTab === "all" ? MOVIES : MOVIES.filter((m) => m.category === activeTab);
-  const filteredMovies = allFiltered.slice(0, MAX_DISPLAY);
-  const hasMore = allFiltered.length > MAX_DISPLAY;
-  const remainingCount = allFiltered.length - MAX_DISPLAY;
+  const filteredMovies = allFiltered.slice(0, maxDisplay);
+  const hasMore = allFiltered.length > maxDisplay;
+  const remainingCount = allFiltered.length - maxDisplay;
 
   useEffect(() => {
     const observer = new IntersectionObserver(

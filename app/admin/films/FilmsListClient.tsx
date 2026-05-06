@@ -65,6 +65,7 @@ export default function FilmsListClient({ films: init }: { films: Film[] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [del, setDel] = useState<string|null>(null);
   const [msg, setMsg] = useState<{t:"success"|"error";x:string}|null>(null);
+  const [confirmDelInfo, setConfirmDelInfo] = useState<{id: string, title: string} | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isSavingOrder, setIsSavingOrder] = useState(false);
   const [hasOrderChanged, setHasOrderChanged] = useState(false);
@@ -79,9 +80,13 @@ export default function FilmsListClient({ films: init }: { films: Film[] }) {
   const filteredByCategory = filter === "all" ? films : films.filter(f => f.category === filter);
   const list = searchQuery.trim() === "" ? filteredByCategory : filteredByCategory.filter(f => f.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  const remove = async (id: string, title: string, e?: React.MouseEvent) => {
+  const remove = (id: string, title: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+    setConfirmDelInfo({ id, title });
+  };
+
+  const executeDelete = async (id: string, title: string) => {
+    setConfirmDelInfo(null);
     setDel(id); setMsg(null);
     try {
       const r = await fetch(`/api/admin/films/${id}`, { method: "DELETE" });
@@ -230,6 +235,32 @@ export default function FilmsListClient({ films: init }: { films: Film[] }) {
                 </tbody>
               )}
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* Custom Delete Confirmation Modal */}
+      {confirmDelInfo && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)", animation: "fadeUp 0.2s ease"
+        }}>
+          <div className="card" style={{ maxWidth: "400px", width: "100%", margin: "0 1rem", animation: "slideD 0.2s ease" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+              <div style={{ width: "40px", height: "40px", borderRadius: "var(--r-full)", background: "var(--err-bg)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--err)" }}>
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <h3 style={{ margin: 0, fontSize: "1.125rem", color: "var(--ink)", fontWeight: 700 }}>Confirm Deletion</h3>
+            </div>
+            <p style={{ margin: "0 0 1.5rem", color: "var(--ink-2)", fontSize: "0.875rem", lineHeight: 1.5 }}>
+              Are you sure you want to delete <strong>"{confirmDelInfo.title}"</strong>? This action cannot be undone and will permanently remove this film.
+            </p>
+            <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end" }}>
+              <button onClick={() => setConfirmDelInfo(null)} className="btn btn-s">Cancel</button>
+              <button onClick={() => executeDelete(confirmDelInfo.id, confirmDelInfo.title)} className="btn btn-p" style={{ background: "var(--err)", color: "white", borderColor: "var(--err)" }}>Delete Film</button>
+            </div>
           </div>
         </div>
       )}

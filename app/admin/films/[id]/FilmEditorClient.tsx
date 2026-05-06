@@ -30,6 +30,7 @@ export default function FilmEditorClient({ id, initialData }: Props) {
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [msg, setMsg] = useState<{t:"success"|"error";x:string}|null>(null);
+  const [confirmPosterRm, setConfirmPosterRm] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
 
   const save = async () => {
@@ -63,8 +64,13 @@ export default function FilmEditorClient({ id, initialData }: Props) {
     setUploading(false);
   };
 
+  const requestRemovePoster = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    setConfirmPosterRm(true);
+  };
+
   const removePoster = async () => {
-    if (!confirm("Remove the poster image?")) return;
+    setConfirmPosterRm(false);
     setRemoving(true); setMsg(null);
     try {
       const r = await fetch(`/api/admin/films/${id}`, {
@@ -113,7 +119,7 @@ export default function FilmEditorClient({ id, initialData }: Props) {
           <input ref={ref} type="file" accept="image/*" onChange={upload} style={{display:"none"}} />
           <button onClick={e=>{e.preventDefault();ref.current?.click()}} disabled={uploading} className="btn btn-s" style={{width:"100%",justifyContent:"center",marginBottom:".375rem"}}>{uploading?"Compressing…":"Upload Poster"}</button>
           {(form.hasPoster || form.previewUrl) && !isNew && (
-            <button onClick={removePoster} disabled={removing} className="btn btn-d btn-sm" style={{width:"100%",justifyContent:"center",marginTop:".375rem"}}>
+            <button onClick={requestRemovePoster} disabled={removing} className="btn btn-d btn-sm" style={{width:"100%",justifyContent:"center",marginTop:".375rem"}}>
               <svg width={12} height={12} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
               {removing?"Removing…":"Remove Poster"}
             </button>
@@ -154,6 +160,32 @@ export default function FilmEditorClient({ id, initialData }: Props) {
         </div>
       </div>
       <style>{`@media(max-width:768px){.editor-grid{grid-template-columns:1fr!important;}}`}</style>
+
+      {/* Custom Poster Remove Modal */}
+      {confirmPosterRm && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)", animation: "fadeUp 0.2s ease"
+        }}>
+          <div className="card" style={{ maxWidth: "400px", width: "100%", margin: "0 1rem", animation: "slideD 0.2s ease" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+              <div style={{ width: "40px", height: "40px", borderRadius: "var(--r-full)", background: "var(--err-bg)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--err)" }}>
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <h3 style={{ margin: 0, fontSize: "1.125rem", color: "var(--ink)", fontWeight: 700 }}>Remove Poster</h3>
+            </div>
+            <p style={{ margin: "0 0 1.5rem", color: "var(--ink-2)", fontSize: "0.875rem", lineHeight: 1.5 }}>
+              Are you sure you want to remove the poster image for this film?
+            </p>
+            <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end" }}>
+              <button onClick={() => setConfirmPosterRm(false)} className="btn btn-s">Cancel</button>
+              <button onClick={removePoster} className="btn btn-p" style={{ background: "var(--err)", color: "white", borderColor: "var(--err)" }}>Remove Poster</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

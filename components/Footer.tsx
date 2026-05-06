@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const QUICK_LINKS = [
   { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Movies", href: "#movies" },
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
@@ -48,7 +48,7 @@ export default function Footer() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
-        style={{ maxWidth: "1100px", margin: "0 auto", padding: "4rem 1.5rem 3rem", position: "relative", zIndex: 1 }}
+        style={{ maxWidth: "1440px", margin: "0 auto", padding: "4rem 2.5rem 3rem", position: "relative", zIndex: 1 }}
       >
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "3rem" }} className="footer-grid">
           

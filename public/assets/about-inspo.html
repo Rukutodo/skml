@@ -1,0 +1,410 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);}
+.pg{width:100%;background:var(--color-background-primary);}
+
+.nav{background:#080808;padding:.7rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid #1a1a1a;}
+.nlogo{font-size:14px;font-weight:500;color:#f0ebe0;}.nlogo span{color:#c9a84c;}
+.nlinks{display:flex;gap:1.5rem;}
+.nlink{font-size:11.5px;color:#555;cursor:pointer;}
+.nlink.on{color:#c9a84c;}
+
+/* HERO - full bleed cinematic */
+.hero{background:#080808;min-height:420px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:0;}
+.hero-img-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.hero-img-fill{position:absolute;inset:0;background:linear-gradient(180deg,#0808080a 0%,#080808cc 60%,#080808 100%);}
+.img-box{background:#1a1a1a;border:.5px solid #2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.img-label{font-size:10px;color:#444;letter-spacing:1px;text-transform:uppercase;}
+.hero-content{position:relative;z-index:2;padding:2.5rem 2.5rem 2.5rem;}
+.hero-eyebrow{font-size:10px;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:.75rem;}
+.hero-h1{font-size:30px;font-weight:500;color:#f5f0e8;line-height:1.25;margin-bottom:1rem;}
+.hero-h1 em{color:#c9a84c;font-style:normal;}
+.hero-desc{font-size:13.5px;color:#888;line-height:1.75;max-width:560px;}
+
+/* SCROLLING chapter label */
+.chapter-label{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+.ch-num{font-size:11px;color:#c9a84c;letter-spacing:2px;font-weight:500;}
+.ch-line{flex:1;height:.5px;background:#2a2a2a;}
+.ch-title{font-size:11px;color:#444;letter-spacing:2px;text-transform:uppercase;}
+
+/* CHAPTER 1 - origin story */
+.ch1{background:#0d0d0d;padding:3rem 2.5rem;}
+.ch1-intro{font-size:22px;font-weight:500;color:#e8e0d0;line-height:1.4;margin-bottom:2rem;max-width:580px;}
+.ch1-intro em{color:#c9a84c;font-style:normal;}
+.ch1-body{font-size:13.5px;color:#888;line-height:1.85;margin-bottom:1.5rem;}
+.ch1-img-row{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin:2rem 0;}
+.ch1-img-tall{height:240px;}
+.ch1-img-sq{height:240px;}
+.ch1-pull{border-left:2px solid #c9a84c;padding:1rem 1.25rem;margin:1.5rem 0;background:#111;}
+.ch1-pull p{font-size:15px;color:#c9a84c;line-height:1.6;font-style:italic;}
+.ch1-pull span{font-size:11px;color:#444;display:block;margin-top:.5rem;letter-spacing:1px;}
+
+/* CHAPTER 2 - founder */
+.ch2{background:#111;padding:3rem 2.5rem;}
+.founder-opener{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;margin-bottom:2.5rem;}
+.founder-img-main{height:360px;}
+.founder-intro-text{}
+.founder-name-big{font-size:24px;font-weight:500;color:#f0ebe0;line-height:1.2;margin-bottom:.25rem;}
+.founder-role-tag{font-size:11px;color:#c9a84c;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1.25rem;}
+.founder-para{font-size:13px;color:#888;line-height:1.85;margin-bottom:1rem;}
+.founder-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#222;border-radius:6px;overflow:hidden;margin-top:1.5rem;}
+.f-stat{background:#161616;padding:1rem;text-align:center;}
+.f-stat-n{font-size:20px;font-weight:500;color:#c9a84c;}
+.f-stat-l{font-size:10px;color:#555;margin-top:3px;}
+
+.founder-story-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:2rem 0;}
+.founder-story-img{height:160px;}
+.founder-long-text{font-size:13px;color:#888;line-height:1.85;margin-bottom:1.25rem;}
+.founder-quote-big{font-size:20px;font-weight:500;color:#e8e0d0;line-height:1.5;padding:2rem 0;border-top:.5px solid #222;border-bottom:.5px solid #222;margin:2rem 0;text-align:center;}
+.founder-quote-big em{color:#c9a84c;font-style:normal;}
+
+/* CHAPTER 3 - behind the scenes */
+.ch3{background:#0a0a0a;padding:3rem 2.5rem;}
+.ch3-h{font-size:22px;font-weight:500;color:#f0ebe0;margin-bottom:.75rem;}
+.ch3-sub{font-size:13px;color:#666;line-height:1.7;margin-bottom:2rem;max-width:520px;}
+.bts-masonry{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:12px;margin-bottom:2rem;}
+.bts-wide{grid-column:span 2;}
+.bts-img{border-radius:6px;}
+.bts-tall{grid-row:span 2;}
+.ch3-text-block{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1rem;}
+.ch3-col-text{font-size:13px;color:#777;line-height:1.85;}
+
+/* CHAPTER 4 - vision & values */
+.ch4{background:#111;padding:3rem 2.5rem;}
+.ch4-intro{font-size:13.5px;color:#888;line-height:1.85;margin-bottom:2rem;max-width:600px;}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#222;border-radius:8px;overflow:hidden;margin-bottom:2rem;}
+.val-cell{background:#161616;padding:1.5rem;}
+.val-num{font-size:11px;color:#c9a84c;letter-spacing:2px;margin-bottom:.5rem;}
+.val-title{font-size:15px;font-weight:500;color:#e8e0d0;margin-bottom:.5rem;}
+.val-body{font-size:12px;color:#666;line-height:1.7;}
+.ch4-img-strip{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:2rem;}
+.strip-img{height:100px;border-radius:6px;}
+
+/* CHAPTER 5 - awards */
+.ch5{background:#f8f6f0;padding:3rem 2.5rem;}
+.ch5-h{font-size:22px;font-weight:500;color:#1a1a1a;margin-bottom:.5rem;}
+.ch5-sub{font-size:13px;color:#888;line-height:1.7;margin-bottom:2rem;max-width:500px;}
+.awards-featured{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:2rem;}
+.award-big{background:#fff;border:.5px solid #e0dbd0;border-radius:10px;overflow:hidden;}
+.award-img-top{height:140px;}
+.award-text{padding:1rem;}
+.award-year{font-size:10px;color:#c9a84c;letter-spacing:2px;text-transform:uppercase;margin-bottom:.25rem;}
+.award-title-l{font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:.25rem;}
+.award-org{font-size:12px;color:#999;}
+.awards-small{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.award-sm{background:#fff;border:.5px solid #e0dbd0;border-radius:8px;padding:.85rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;}
+.award-sm-icon{width:36px;height:36px;background:#fdf3d8;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.award-sm-icon i{font-size:18px;color:#b07d1a;}
+.award-sm-t{font-size:11.5px;font-weight:500;color:#1a1a1a;line-height:1.4;}
+.award-sm-y{font-size:10px;color:#aaa;}
+
+/* CTA */
+.cta{background:#080808;padding:3rem 2.5rem;text-align:center;}
+.cta-h{font-size:22px;font-weight:500;color:#f0ebe0;margin-bottom:.5rem;}
+.cta-s{font-size:13px;color:#555;margin-bottom:1.5rem;line-height:1.7;}
+.cta-btns{display:flex;gap:12px;justify-content:center;}
+.btn-gold{display:inline-flex;align-items:center;gap:6px;background:#c9a84c;color:#080808;border:none;border-radius:6px;padding:10px 22px;font-size:13px;font-weight:500;cursor:pointer;}
+.btn-out{display:inline-flex;align-items:center;gap:6px;background:transparent;color:#c9a84c;border:.5px solid #c9a84c;border-radius:6px;padding:10px 22px;font-size:13px;font-weight:500;cursor:pointer;}
+
+/* image placeholder helper */
+.img-ph{background:#1e1e1e;border:.5px solid #2a2a2a;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.img-ph i{font-size:22px;color:#3a3a3a;}
+.img-ph span{font-size:10px;color:#3a3a3a;letter-spacing:.5px;}
+.img-ph-lt{background:#ede8df;border:.5px solid #d8d2c8;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.img-ph-lt i{font-size:22px;color:#bbb;}
+.img-ph-lt span{font-size:10px;color:#bbb;letter-spacing:.5px;}
+</style>
+
+<div class="pg">
+
+  <div class="nav">
+    <div class="nlogo"><span>SKML</span> Motion Pictures</div>
+    <div class="nlinks">
+      <span class="nlink">Home</span>
+      <span class="nlink on">About</span>
+      <span class="nlink">Movies</span>
+      <span class="nlink">Services</span>
+      <span class="nlink">Insights</span>
+      <span class="nlink">Contact</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-img-placeholder">
+      <div class="img-ph" style="position:absolute;inset:0;border-radius:0;border:none;">
+        <i class="ti ti-photo" aria-hidden="true"></i>
+        <span>Full-width cinematic banner image</span>
+      </div>
+    </div>
+    <div class="hero-img-fill"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Est. 2013 · Hyderabad, Telangana</div>
+      <div class="hero-h1">A production house built not<br>on budgets, but on <em>belief.</em></div>
+      <div class="hero-desc">SKML Motion Pictures has spent over a decade doing one thing — giving powerful Telugu stories the screen they deserve. From Hyderabad to Amazon Prime, this is the full story of how it happened.</div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 1 - THE ORIGIN -->
+  <div class="ch1">
+    <div class="chapter-label">
+      <span class="ch-num">01</span>
+      <div class="ch-line"></div>
+      <span class="ch-title">The Beginning</span>
+    </div>
+
+    <div class="ch1-intro">In 2013, Telugu cinema had a problem. <em>Brilliant stories were dying</em> in the hands of directors who couldn't find a banner willing to take a risk on them.</div>
+
+    <div class="ch1-body">Kandregula Adhinarayana had seen this happen one too many times. He had watched talented writers and directors walk away from their dream projects, not because the stories weren't good enough — but because the industry gatekeepers demanded names, guarantees, and star power before they would even read a script.<br><br>So he decided to do something about it. In a modest office in Hyderabad, with a vision larger than his initial budget, SKML Motion Pictures was born. The name carried a promise: that every film under this banner would be made with full commitment, regardless of the size of the cast or the scale of the production.</div>
+
+    <div class="ch1-img-row">
+      <div class="img-ph ch1-img-tall" style="height:220px;">
+        <i class="ti ti-building" aria-hidden="true"></i>
+        <span>SKML office / studio — 2013</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="img-ph" style="height:104px;">
+          <i class="ti ti-map-pin" aria-hidden="true"></i>
+          <span>Hyderabad, early days</span>
+        </div>
+        <div class="img-ph" style="height:104px;">
+          <i class="ti ti-users" aria-hidden="true"></i>
+          <span>First team photo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch1-body">Those first years were not easy. Getting distributors to trust a new banner took persistence. Convincing experienced crew to work with an emerging producer required not just money but a track record — something SKML was still building. Every decision was made carefully, every rupee invested with intention.</div>
+
+    <div class="ch1-pull">
+      <p>"The first film we produced felt like climbing a mountain with no map. But we got to the top, and the view from there changed everything."</p>
+      <span>— Kandregula Adhinarayana, Founder</span>
+    </div>
+
+    <div class="ch1-body">By the time the first theatrical release happened, SKML had already established something more valuable than a hit film — a reputation. Directors knew that Adhinarayana would not abandon a project midway. Crew knew they would be paid on time. And slowly, the industry began to notice.</div>
+  </div>
+
+  <!-- CHAPTER 2 - THE FOUNDER -->
+  <div class="ch2">
+    <div class="chapter-label">
+      <span class="ch-num">02</span>
+      <div class="ch-line" style="background:#2a2a2a;"></div>
+      <span class="ch-title">The Man Behind the Banner</span>
+    </div>
+
+    <div class="founder-opener">
+      <div class="img-ph founder-img-main" style="height:360px;">
+        <i class="ti ti-user" aria-hidden="true"></i>
+        <span>Kandregula Adhinarayana — portrait</span>
+      </div>
+      <div class="founder-intro-text">
+        <div class="founder-name-big">Kandregula<br>Adhinarayana</div>
+        <div class="founder-role-tag">Founder & Producer</div>
+        <div class="founder-para">He didn't come from a film family. There was no inherited studio, no godfather in the industry. What Kandregula Adhinarayana had was something rarer — an obsessive love for cinema and an entrepreneur's willingness to bet on himself when no one else would.</div>
+        <div class="founder-para">Growing up in Andhra Pradesh, he was the kind of person who watched films not just to be entertained, but to understand how they were made — the choices behind every shot, every dialogue, every edit. Long before he became a producer, he was studying the craft from the audience's seat.</div>
+        <div class="founder-stat-row">
+          <div class="f-stat"><div class="f-stat-n">12+</div><div class="f-stat-l">Years in industry</div></div>
+          <div class="f-stat"><div class="f-stat-n">186+</div><div class="f-stat-l">Films distributed</div></div>
+          <div class="f-stat"><div class="f-stat-n">50M+</div><div class="f-stat-l">Viewers reached</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="founder-long-text">His entry into production was not planned as a business move. It was an act of frustration — frustration at watching good stories go untold. When a close friend, a filmmaker with a gripping script, couldn't find a single producer willing to back the project, Adhinarayana stepped in. That first co-produced film didn't break records, but it taught him everything: how a production is structured, where money gets wasted, how distribution works, and most importantly — what directors actually need from a producer.</div>
+
+    <div class="founder-story-grid">
+      <div class="img-ph founder-story-img" style="height:155px;">
+        <i class="ti ti-camera" aria-hidden="true"></i>
+        <span>On set — early production</span>
+      </div>
+      <div class="img-ph founder-story-img" style="height:155px;">
+        <i class="ti ti-microphone" aria-hidden="true"></i>
+        <span>Audio launch event</span>
+      </div>
+      <div class="img-ph founder-story-img" style="height:155px;">
+        <i class="ti ti-movie" aria-hidden="true"></i>
+        <span>First theatrical release</span>
+      </div>
+    </div>
+
+    <div class="founder-long-text">He then spent three years learning the full cycle — attending shoots, sitting in edit suites, negotiating with distributors, and understanding OTT compliance requirements before most regional producers even knew what metadata meant. When he formally launched SKML Motion Pictures as a full production house, he wasn't just a producer — he was a complete filmmaker by knowledge, even if the camera was always in someone else's hands.<br><br>Today, that depth of understanding shows in every SKML production. Budgets are optimised not by cutting corners, but by knowing exactly where every rupee creates value on screen. Directors who work with SKML consistently say the same thing: it feels like working with someone who has actually been on a film set, not just funded one.</div>
+
+    <div class="founder-quote-big">
+      "I never wanted to be the biggest production house. I wanted to be the most <em>trusted</em> one."
+    </div>
+
+    <div class="founder-long-text">Outside of films, Adhinarayana is known in Hyderabad's creative circles as someone genuinely invested in the ecosystem — mentoring young directors, facilitating introductions between writers and studios, and consistently advocating for better revenue-sharing models for regional OTT content. His influence extends well beyond the films that carry the SKML name.</div>
+  </div>
+
+  <!-- CHAPTER 3 - BEHIND THE SCENES -->
+  <div class="ch3">
+    <div class="chapter-label">
+      <span class="ch-num">03</span>
+      <div class="ch-line" style="background:#1e1e1e;"></div>
+      <span class="ch-title">Behind the Camera</span>
+    </div>
+    <div class="ch3-h">Where every film is made</div>
+    <div class="ch3-sub">Great cinema doesn't happen by accident. It's the result of hundreds of decisions made under pressure, on set, in the edit room, and in distribution meetings. Here's a glimpse of how SKML works.</div>
+
+    <div class="bts-masonry">
+      <div class="img-ph bts-img bts-wide" style="height:160px;">
+        <i class="ti ti-video" aria-hidden="true"></i>
+        <span>Film set — wide shot</span>
+      </div>
+      <div class="img-ph bts-img bts-tall" style="height:332px;">
+        <i class="ti ti-user-circle" aria-hidden="true"></i>
+        <span>Director on set</span>
+      </div>
+      <div class="img-ph bts-img" style="height:160px;">
+        <i class="ti ti-camera-rotate" aria-hidden="true"></i>
+        <span>Cinematography</span>
+      </div>
+      <div class="img-ph bts-img" style="height:160px;">
+        <i class="ti ti-headphones" aria-hidden="true"></i>
+        <span>Sound recording</span>
+      </div>
+    </div>
+
+    <div class="ch3-text-block">
+      <div class="ch3-col-text">SKML's production process is built around one principle: waste nothing, compromise nothing. Every project begins with a detailed breakdown of the script — scene by scene — to identify where the budget can be optimised without affecting the story's visual or emotional impact. Locations are scouted with an eye for production value. Crew is selected not just for skill but for their ability to work within realistic timelines.</div>
+      <div class="ch3-col-text">Post-production at SKML is treated with the same seriousness as the shoot itself. From colour grading to sound design to VFX, each department is managed closely to ensure the final product holds up on the large-format screens of OTT platforms. The goal is always the same: when a viewer sits down to watch an SKML film on Amazon Prime or Aha, they should not be able to tell it was made on an optimised budget.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:1.5rem;">
+      <div class="img-ph" style="height:120px;">
+        <i class="ti ti-cut" aria-hidden="true"></i>
+        <span>Edit suite</span>
+      </div>
+      <div class="img-ph" style="height:120px;">
+        <i class="ti ti-palette" aria-hidden="true"></i>
+        <span>Colour grading</span>
+      </div>
+      <div class="img-ph" style="height:120px;">
+        <i class="ti ti-brand-youtube" aria-hidden="true"></i>
+        <span>OTT delivery</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 4 - VISION & VALUES -->
+  <div class="ch4">
+    <div class="chapter-label">
+      <span class="ch-num">04</span>
+      <div class="ch-line" style="background:#2a2a2a;"></div>
+      <span class="ch-title">What We Stand For</span>
+    </div>
+    <div style="font-size:22px;font-weight:500;color:#f0ebe0;margin-bottom:.75rem;line-height:1.35;">The values that drive every decision we make</div>
+    <div class="ch4-intro">A production house is only as good as the principles it operates by. At SKML, these aren't values written for a website — they're decisions made every single day on set, in negotiations, and in how we treat the people who trust us with their stories.</div>
+    <div class="values-grid">
+      <div class="val-cell">
+        <div class="val-num">01</div>
+        <div class="val-title">Story first, always</div>
+        <div class="val-body">We evaluate every project starting with one question: is this a story worth telling? Budget, star power, and genre come after. The script is the foundation of everything we build.</div>
+      </div>
+      <div class="val-cell">
+        <div class="val-num">02</div>
+        <div class="val-title">Affordable without compromise</div>
+        <div class="val-body">We've proven over 12 years that optimised production costs don't mean lower quality. We find efficiencies in process, not in cutting corners that show up on screen.</div>
+      </div>
+      <div class="val-cell">
+        <div class="val-num">03</div>
+        <div class="val-title">Relationships over transactions</div>
+        <div class="val-body">Every director, every crew member, every distribution partner we work with is a long-term relationship. That's why 80% of the directors who work with SKML come back for their next film.</div>
+      </div>
+      <div class="val-cell">
+        <div class="val-num">04</div>
+        <div class="val-title">Telugu cinema on the world stage</div>
+        <div class="val-body">We genuinely believe Telugu storytelling belongs on global platforms. Every OTT deal we close, every international festival submission — it's part of a larger mission for the industry we love.</div>
+      </div>
+    </div>
+    <div class="ch4-img-strip">
+      <div class="img-ph strip-img" style="height:100px;">
+        <i class="ti ti-article" aria-hidden="true"></i>
+        <span>Script reading</span>
+      </div>
+      <div class="img-ph strip-img" style="height:100px;">
+        <i class="ti ti-users" aria-hidden="true"></i>
+        <span>Team meeting</span>
+      </div>
+      <div class="img-ph strip-img" style="height:100px;">
+        <i class="ti ti-rocket" aria-hidden="true"></i>
+        <span>Film launch</span>
+      </div>
+      <div class="img-ph strip-img" style="height:100px;">
+        <i class="ti ti-brand-amazon" aria-hidden="true"></i>
+        <span>OTT premiere</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 5 - AWARDS -->
+  <div class="ch5">
+    <div class="chapter-label" style="margin-bottom:1.25rem;">
+      <span class="ch-num" style="color:#b07d1a;">05</span>
+      <div class="ch-line" style="background:#d8d2c8;"></div>
+      <span class="ch-title" style="color:#aaa;">Recognition & Awards</span>
+    </div>
+    <div class="ch5-h">The industry's recognition of a decade's work</div>
+    <div class="ch5-sub">Awards don't define us, but they reflect the industry's trust in what we've built. Over the years, SKML films and the banner itself have been recognised across regional and national platforms.</div>
+
+    <div class="awards-featured">
+      <div class="award-big">
+        <div class="img-ph-lt award-img-top" style="height:140px;border-radius:0;border-left:none;border-right:none;border-top:none;">
+          <i class="ti ti-trophy" aria-hidden="true"></i>
+          <span>Award ceremony photo</span>
+        </div>
+        <div class="award-text">
+          <div class="award-year">2022</div>
+          <div class="award-title-l">Best Regional Production House</div>
+          <div class="award-org">South Indian Film Awards, Chennai</div>
+        </div>
+      </div>
+      <div class="award-big">
+        <div class="img-ph-lt award-img-top" style="height:140px;border-radius:0;border-left:none;border-right:none;border-top:none;">
+          <i class="ti ti-star" aria-hidden="true"></i>
+          <span>OTT recognition photo</span>
+        </div>
+        <div class="award-text">
+          <div class="award-year">2023</div>
+          <div class="award-title-l">OTT Distribution Partner of the Year</div>
+          <div class="award-org">Aha Platform Annual Recognition</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="awards-small">
+      <div class="award-sm">
+        <div class="award-sm-icon"><i class="ti ti-award" aria-hidden="true"></i></div>
+        <div class="award-sm-t">Emerging Banner of the Year</div>
+        <div class="award-sm-y">Tollywood Producers Guild · 2021</div>
+      </div>
+      <div class="award-sm">
+        <div class="award-sm-icon"><i class="ti ti-rosette" aria-hidden="true"></i></div>
+        <div class="award-sm-t">5 National Festival Selections</div>
+        <div class="award-sm-y">2019 – 2024</div>
+      </div>
+      <div class="award-sm">
+        <div class="award-sm-icon"><i class="ti ti-device-tv" aria-hidden="true"></i></div>
+        <div class="award-sm-t">Amazon Prime Top Regional Partner</div>
+        <div class="award-sm-y">Telugu Content · 2023</div>
+      </div>
+      <div class="award-sm">
+        <div class="award-sm-icon"><i class="ti ti-heart" aria-hidden="true"></i></div>
+        <div class="award-sm-t">Audience Choice — Best Drama</div>
+        <div class="award-sm-y">Hyderabad Film Club · 2022</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-h">Your story deserves its screen.</div>
+    <div class="cta-s">Whether you're a director looking for a production partner<br>or a distributor seeking quality Telugu content — let's talk.</div>
+    <div class="cta-btns">
+      <button class="btn-gold"><i class="ti ti-phone" aria-hidden="true"></i> Get in touch</button>
+      <button class="btn-out"><i class="ti ti-movie" aria-hidden="true"></i> View our films</button>
+    </div>
+  </div>
+
+</div>
