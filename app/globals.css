@@ -974,3 +974,11 @@ textarea::placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
 }
+
+/* ═══ Services Page — responsive helpers ═══ */
+@media (min-width: 1024px) {
+  .svc-ott-flex {
+    flex-direction: row !important;
+    gap: 5rem !important;
+  }
+}
