@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -10,7 +11,7 @@ const UNSPLASH = {
   set1: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&q=80&w=900",
   set2: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&q=80&w=600",
   set3: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=600",
-  founder: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=700",
+  founder: "/assets/images/producer-portrait.jpeg", // Using local asset if available, fallback to portrait
   bts1: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=900",
   bts2: "https://images.unsplash.com/photo-1585647347384-2593bc35786b?auto=format&fit=crop&q=80&w=600",
   bts3: "https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7?auto=format&fit=crop&q=80&w=600",
@@ -31,7 +32,23 @@ const AWARDS = [
   { year: "2019 – 2024", title: "5 National Festival Selections", body: "Multiple Categories" },
 ];
 
+const fadeIn = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: { transition: { staggerChildren: 0.15 } }
+};
+
 export default function AboutClient() {
+  const { scrollYProgress } = useScroll();
+  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 1.1]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
   return (
     <>
       <Navbar />
@@ -39,60 +56,57 @@ export default function AboutClient() {
 
         {/* ── HERO ── */}
         <section className="about-hero">
-          <div className="about-hero__bg">
+          <motion.div style={{ scale: heroScale, opacity: heroOpacity }} className="about-hero__bg">
             <Image src={UNSPLASH.hero} alt="Cinematic" fill style={{ objectFit: "cover", opacity: 0.45 }} priority />
             <div className="about-hero__gradient" />
-          </div>
+          </motion.div>
           <div className="about-hero__content">
-            <p className="about-eyebrow">Est. 2013 · Hyderabad, Telangana</p>
-            <h1 className="about-hero__title">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="about-eyebrow">
+              Est. 2013 · Hyderabad, Telangana
+            </motion.p>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }} className="about-hero__title">
               A production house built not on budgets,<br />
               but on <em className="about-gold">belief.</em>
-            </h1>
-            <p className="about-hero__sub">
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="about-hero__sub">
               SKML Motion Pictures has spent over a decade giving powerful Telugu stories the screen they deserve.
-            </p>
+            </motion.p>
           </div>
         </section>
 
-        {/* ── CHAPTER 1: THE BEGINNING ── */}
-        <section className="about-section about-section--dark">
+        {/* ── CHAPTER 1: THE BEGINNING (SKML) ── */}
+        <section className="about-section about-section--large">
           <div className="about-container">
-            <div className="about-chapter-tag">
+            <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-num">01</span>
               <span className="about-chapter-line" />
               <span className="about-chapter-label">The Beginning</span>
-            </div>
+            </motion.div>
 
-            <div className="about-two-col">
-              <div className="about-two-col__left">
-                <h2 className="about-section-title">
+            <div className="about-two-col about-two-col--flipped">
+              <motion.div {...fadeIn} className="about-two-col__left">
+                <h2 className="about-section-title about-section-title--huge">
                   In 2013, Telugu cinema had a problem. <em className="about-gold">Brilliant stories were dying</em> in the hands of directors who couldn't find a banner willing to take a risk.
                 </h2>
-                <p className="about-body">
-                  Kandregula Adhinarayana had seen this happen one too many times. He watched talented writers walk away from their dream projects because industry gatekeepers demanded star power before reading a script.
-                </p>
-                <p className="about-body">
-                  So he decided to do something about it. In a modest office in Hyderabad, SKML Motion Pictures was born — with a promise that every film would be made with full commitment, regardless of scale.
-                </p>
-                <blockquote className="about-quote">
+                <div className="about-story-text">
+                  <p className="about-body">
+                    Kandregula Adhinarayana had seen this happen one too many times. He watched talented writers walk away from their dream projects because industry gatekeepers demanded star power before reading a script.
+                  </p>
+                  <p className="about-body">
+                    So he decided to do something about it. In a modest office in Hyderabad, SKML Motion Pictures was born — with a promise that every film would be made with full commitment, regardless of scale.
+                  </p>
+                </div>
+                <motion.blockquote {...fadeIn} className="about-quote">
                   <p>"The first film we produced felt like climbing a mountain with no map. But we got to the top, and the view from there changed everything."</p>
                   <cite>— Kandregula Adhinarayana</cite>
-                </blockquote>
-              </div>
-              <div className="about-two-col__right">
-                <div className="about-img-main">
+                </motion.blockquote>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="about-two-col__right">
+                <div className="about-img-story-hero">
                   <Image src={UNSPLASH.set1} alt="Film Production" fill style={{ objectFit: "cover" }} />
+                  <div className="about-img-overlay" />
                 </div>
-                <div className="about-img-row">
-                  <div className="about-img-half">
-                    <Image src={UNSPLASH.set2} alt="Script Reading" fill style={{ objectFit: "cover" }} />
-                  </div>
-                  <div className="about-img-half">
-                    <Image src={UNSPLASH.set3} alt="Film Reel" fill style={{ objectFit: "cover" }} />
-                  </div>
-                </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -100,142 +114,161 @@ export default function AboutClient() {
         {/* ── CHAPTER 2: THE FOUNDER ── */}
         <section className="about-section about-section--mid">
           <div className="about-container">
-            <div className="about-chapter-tag">
+            <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-num">02</span>
               <span className="about-chapter-line" />
               <span className="about-chapter-label">The Man Behind the Banner</span>
-            </div>
+            </motion.div>
 
             <div className="about-founder">
-              <div className="about-founder__photo">
+              <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="about-founder__photo">
                 <Image src={UNSPLASH.founder} alt="Kandregula Adhinarayana" fill style={{ objectFit: "cover" }} />
                 <div className="about-founder__caption">
                   <h3 className="about-founder__name">Kandregula Adhinarayana</h3>
                   <p className="about-founder__role">Founder &amp; Producer</p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="about-founder__bio">
-                <p className="about-body">
+              <motion.div {...fadeIn} className="about-founder__bio">
+                <p className="about-body about-body--large">
                   He didn't come from a film family. There was no inherited studio, no godfather in the industry. What Adhinarayana had was something rarer — an obsessive love for cinema and an entrepreneur's willingness to bet on himself when no one else would.
                 </p>
                 <p className="about-body">
                   Growing up in Andhra Pradesh, he watched films not just to be entertained, but to understand how they were made. That depth of understanding shows in every SKML production — budgets are optimised by knowing exactly where every rupee creates value on screen.
                 </p>
-                <div className="about-stats">
-                  <div className="about-stat">
-                    <span className="about-stat__num">12+</span>
-                    <span className="about-stat__label">Years</span>
+                <div className="about-stats-modern">
+                  <div className="about-stat-pill">
+                    <span className="about-stat-pill__num">12+</span>
+                    <span className="about-stat-pill__label">Years</span>
                   </div>
-                  <div className="about-stat">
-                    <span className="about-stat__num">186+</span>
-                    <span className="about-stat__label">Films</span>
+                  <div className="about-stat-pill">
+                    <span className="about-stat-pill__num">186+</span>
+                    <span className="about-stat-pill__label">Films</span>
                   </div>
-                  <div className="about-stat">
-                    <span className="about-stat__num">50M+</span>
-                    <span className="about-stat__label">Viewers</span>
+                  <div className="about-stat-pill">
+                    <span className="about-stat-pill__num">50M+</span>
+                    <span className="about-stat-pill__label">Viewers</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ── CHAPTER 3: BEHIND THE CAMERA ── */}
+        {/* ── CHAPTER 3: AWARDS (Moved Up) ── */}
         <section className="about-section about-section--dark">
           <div className="about-container">
-            <div className="about-chapter-tag">
+            <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-num">03</span>
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">Behind the Camera</span>
-            </div>
-
-            <h2 className="about-section-title">Where every film is made</h2>
-            <p className="about-body about-body--wide">
-              Great cinema doesn't happen by accident. It's the result of hundreds of decisions made under pressure — on set, in the edit room, and in distribution meetings.
-            </p>
-
-            <div className="about-bts-grid">
-              <div className="about-bts-main">
-                <Image src={UNSPLASH.bts1} alt="Film set" fill style={{ objectFit: "cover" }} />
-              </div>
-              <div className="about-bts-side">
-                <Image src={UNSPLASH.bts2} alt="Cinematography" fill style={{ objectFit: "cover" }} />
-              </div>
-              <div className="about-bts-bottom-left">
-                <Image src={UNSPLASH.bts3} alt="Sound Recording" fill style={{ objectFit: "cover" }} />
-              </div>
-              <div className="about-bts-bottom-right">
-                <Image src={UNSPLASH.bts4} alt="Edit Suite" fill style={{ objectFit: "cover" }} />
-              </div>
-            </div>
-
-            <div className="about-two-text">
-              <p className="about-body">SKML's production process is built around one principle: waste nothing, compromise nothing. Every project begins with a detailed breakdown of the script to identify where the budget can be optimised without affecting visual or emotional impact.</p>
-              <p className="about-body">Post-production at SKML is treated with the same seriousness as the shoot itself. From colour grading to sound design, each department is managed so that when a viewer watches an SKML film on Amazon Prime or Aha, they cannot tell it was made on an optimised budget.</p>
+              <span className="about-chapter-label">Recognition</span>
+            </motion.div>
+            <div className="about-awards-layout">
+              <motion.div {...fadeIn} className="about-awards-intro">
+                <h2 className="about-section-title">The industry's recognition of a decade's work</h2>
+                <p className="about-body">Awards don't define us, but they reflect the industry's trust in what we've built. SKML films have been recognised across regional and national platforms.</p>
+              </motion.div>
+              <motion.div variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true }} className="about-awards-grid">
+                {AWARDS.map((a) => (
+                  <motion.div variants={fadeIn} key={a.title} className="about-award-card">
+                    <span className="about-award-year">{a.year}</span>
+                    <h3 className="about-award-title">{a.title}</h3>
+                    <p className="about-award-body">{a.body}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ── CHAPTER 4: VALUES ── */}
+        {/* ── CHAPTER 4: WHERE EVERY FILM IS MADE (Services) ── */}
         <section className="about-section about-section--mid">
           <div className="about-container">
-            <div className="about-chapter-tag">
+            <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-num">04</span>
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">What We Stand For</span>
+              <span className="about-chapter-label">Process &amp; Craft</span>
+            </motion.div>
+
+            <motion.h2 {...fadeIn} className="about-section-title">Where every film is made</motion.h2>
+            <motion.p {...fadeIn} className="about-body about-body--wide">
+              Great cinema doesn't happen by accident. It's the result of hundreds of decisions made under pressure — on set, in the edit room, and in distribution meetings.
+            </motion.p>
+
+            <div className="about-bts-visual">
+              <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="about-bts-main-wide">
+                <Image src={UNSPLASH.bts1} alt="Film set" fill style={{ objectFit: "cover" }} />
+                <div className="about-bts-label">On Location</div>
+              </motion.div>
+              <div className="about-bts-details">
+                <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="about-bts-detail-item">
+                  <div className="about-bts-detail-img">
+                    <Image src={UNSPLASH.bts2} alt="Cinematography" fill style={{ objectFit: "cover" }} />
+                  </div>
+                  <h4>Precision Cinematography</h4>
+                </motion.div>
+                <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }} className="about-bts-detail-item">
+                  <div className="about-bts-detail-img">
+                    <Image src={UNSPLASH.bts4} alt="Sound" fill style={{ objectFit: "cover" }} />
+                  </div>
+                  <h4>Advanced Post-Production</h4>
+                </motion.div>
+              </div>
             </div>
-            <h2 className="about-section-title">The values that drive every decision we make</h2>
-            <p className="about-body about-body--wide">
-              A production house is only as good as the principles it operates by. At SKML, these aren't values written for a website — they're decisions made every single day on set and in negotiations.
-            </p>
-            <div className="about-values">
-              {VALUES.map((v) => (
-                <div key={v.num} className="about-value-card">
-                  <span className="about-value-num">{v.num}</span>
-                  <h3 className="about-value-title">{v.title}</h3>
-                  <p className="about-value-desc">{v.desc}</p>
-                </div>
+
+            <motion.div {...fadeIn} className="about-two-text-modern">
+              <div className="about-modern-text-card">
+                <h3>Waste Nothing, Compromise Nothing</h3>
+                <p>SKML's production process is built around one principle: efficiency. Every project begins with a detailed breakdown of the script to identify where the budget can be optimised without affecting visual or emotional impact.</p>
+              </div>
+              <div className="about-modern-text-card">
+                <h3>Global Distribution Standards</h3>
+                <p>Post-production at SKML is treated with the same seriousness as the shoot itself. We ensure that when a viewer watches an SKML film on Amazon Prime or Aha, they experience world-class quality.</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── CHAPTER 5: VALUES (Why Choose Us) ── */}
+        <section className="about-section about-section--dark">
+          <div className="about-container">
+            <motion.div {...fadeIn} className="about-chapter-tag">
+              <span className="about-chapter-num">05</span>
+              <span className="about-chapter-line" />
+              <span className="about-chapter-label">The Core</span>
+            </motion.div>
+            <motion.h2 {...fadeIn} className="about-section-title">The values that drive every decision we make</motion.h2>
+            
+            <div className="about-values-modern">
+              {VALUES.map((v, i) => (
+                <motion.div 
+                  key={v.num} 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: i * 0.1 }}
+                  className="about-value-pill"
+                >
+                  <div className="about-value-pill__header">
+                    <span className="about-value-pill__num">{v.num}</span>
+                    <h3 className="about-value-pill__title">{v.title}</h3>
+                  </div>
+                  <p className="about-value-pill__desc">{v.desc}</p>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── CHAPTER 5: AWARDS ── */}
-        <section className="about-section about-section--dark">
-          <div className="about-container">
-            <div className="about-chapter-tag">
-              <span className="about-chapter-num">05</span>
-              <span className="about-chapter-line" />
-              <span className="about-chapter-label">Recognition</span>
-            </div>
-            <div className="about-awards-layout">
-              <div className="about-awards-intro">
-                <h2 className="about-section-title">The industry's recognition of a decade's work</h2>
-                <p className="about-body">Awards don't define us, but they reflect the industry's trust in what we've built. SKML films have been recognised across regional and national platforms.</p>
-              </div>
-              <div className="about-awards-grid">
-                {AWARDS.map((a) => (
-                  <div key={a.title} className="about-award-card">
-                    <span className="about-award-year">{a.year}</span>
-                    <h3 className="about-award-title">{a.title}</h3>
-                    <p className="about-award-body">{a.body}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── CTA ── */}
-        <section className="about-cta">
+        <motion.section {...fadeIn} className="about-cta">
           <h2 className="about-cta__title">Your story deserves its screen.</h2>
           <p className="about-cta__sub">Whether you're a director looking for a production partner or a distributor seeking quality Telugu content — let's talk.</p>
           <div className="about-cta__btns">
             <a href="/#contact" className="about-btn about-btn--gold">Get in touch</a>
             <a href="/movies" className="about-btn about-btn--outline">View our films</a>
           </div>
-        </section>
+        </motion.section>
 
       </main>
       <Footer />
@@ -247,231 +280,240 @@ export default function AboutClient() {
 
         /* ─── Hero ─── */
         .about-hero {
-          position: relative; height: 90vh; min-height: 560px;
+          position: relative; height: 100vh; min-height: 600px;
           display: flex; align-items: center; justify-content: center;
           text-align: center; overflow: hidden;
         }
         .about-hero__bg { position: absolute; inset: 0; z-index: 0; }
         .about-hero__gradient {
           position: absolute; inset: 0;
-          background: linear-gradient(to top, #0A0A0F 0%, rgba(10,10,15,0.55) 50%, rgba(10,10,15,0.3) 100%);
+          background: radial-gradient(circle at center, transparent 0%, rgba(10,10,15,0.4) 50%, #0A0A0F 100%),
+                      linear-gradient(to top, #0A0A0F 0%, transparent 40%);
         }
         .about-hero__content {
-          position: relative; z-index: 1; max-width: 820px;
-          padding: 0 1.5rem; padding-top: 5rem;
+          position: relative; z-index: 1; max-width: 900px;
+          padding: 0 1.5rem;
         }
         .about-eyebrow {
-          font-size: 11px; font-weight: 600; text-transform: uppercase;
-          letter-spacing: 0.28em; color: #c9a84c; margin-bottom: 1.5rem;
+          font-size: 11px; font-weight: 700; text-transform: uppercase;
+          letter-spacing: 0.35em; color: #c9a84c; margin-bottom: 2rem;
         }
         .about-hero__title {
           font-family: var(--font-playfair), serif;
-          font-size: clamp(2rem, 5vw, 4rem);
-          font-weight: 700; line-height: 1.2; color: #F5F5F8;
-          margin-bottom: 1.5rem; letter-spacing: -0.02em;
+          font-size: clamp(2.5rem, 7vw, 5rem);
+          font-weight: 700; line-height: 1.1; color: #F5F5F8;
+          margin-bottom: 2rem; letter-spacing: -0.03em;
         }
         .about-hero__sub {
-          font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.7;
-          color: rgba(255,255,255,0.5); max-width: 560px; margin: 0 auto;
+          font-size: clamp(1rem, 2.5vw, 1.25rem); line-height: 1.8;
+          color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;
         }
         .about-gold { color: #c9a84c; font-style: italic; }
 
         /* ─── Sections ─── */
-        .about-section { padding: 6rem 0; }
-        .about-section--dark { background: #0d0d12; }
-        .about-section--mid { background: #111118; }
-        .about-container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
-        @media (min-width: 768px) { .about-container { padding: 0 2.5rem; } }
+        .about-section { padding: 8rem 0; }
+        .about-section--large { padding: 12rem 0; }
+        .about-section--dark { background: #0A0A0F; }
+        .about-section--mid { background: #0E0E14; border-top: 1px solid #1A1A24; border-bottom: 1px solid #1A1A24; }
+        .about-container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
 
         /* ─── Chapter Tag ─── */
         .about-chapter-tag {
-          display: flex; align-items: center; gap: 0.75rem;
-          margin-bottom: 2.5rem;
+          display: flex; align-items: center; gap: 1rem;
+          margin-bottom: 4rem;
         }
-        .about-chapter-num { font-size: 13px; font-weight: 700; color: #c9a84c; letter-spacing: 0.1em; }
-        .about-chapter-line { height: 1px; width: 2.5rem; background: #2a2a38; flex-shrink: 0; }
-        .about-chapter-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em; color: #444; }
+        .about-chapter-num { font-size: 14px; font-weight: 800; color: #c9a84c; letter-spacing: 0.1em; }
+        .about-chapter-line { height: 1px; width: 4rem; background: #c9a84c; opacity: 0.3; }
+        .about-chapter-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #555; }
 
         /* ─── Typography ─── */
         .about-section-title {
-          font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-          font-weight: 500; color: #e8e0d0;
-          line-height: 1.3; margin-bottom: 1.25rem; max-width: 680px;
+          font-family: var(--font-playfair), serif;
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 600; color: #F5F5F8;
+          line-height: 1.2; margin-bottom: 2rem; max-width: 800px;
+        }
+        .about-section-title--huge {
+           font-size: clamp(2.5rem, 6vw, 4.5rem);
+           line-height: 1.1;
+           margin-bottom: 3rem;
         }
         .about-body {
-          font-size: 15px; line-height: 1.85; color: #888;
-          margin-bottom: 1.25rem; max-width: 580px;
+          font-size: 17px; line-height: 1.8; color: #A0A0AB;
+          margin-bottom: 1.5rem; max-width: 600px;
         }
-        .about-body--wide { max-width: 680px; }
+        .about-body--large { font-size: 20px; color: #D4D4D8; font-weight: 400; line-height: 1.6; }
+        .about-body--wide { max-width: 800px; }
 
-        /* ─── 2-col layout (ch1) ─── */
+        /* ─── Storytelling Layout ─── */
         .about-two-col {
           display: grid; grid-template-columns: 1fr;
-          gap: 3rem; margin-top: 1rem;
+          gap: 5rem; align-items: center;
         }
         @media (min-width: 1024px) {
-          .about-two-col { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+          .about-two-col { grid-template-columns: 1.2fr 0.8fr; gap: 8rem; }
+          .about-two-col--flipped { grid-template-columns: 1.3fr 0.7fr; }
         }
-        .about-two-col__left {}
-        .about-two-col__right { display: flex; flex-direction: column; gap: 0.75rem; }
-        .about-img-main {
-          position: relative; width: 100%; height: 280px;
-          border-radius: 12px; overflow: hidden;
-          background: #1a1a24;
+        
+        .about-story-text { margin-bottom: 3rem; position: relative; }
+        .about-story-text::before {
+          content: ""; position: absolute; left: -2rem; top: 0.5rem; bottom: 0.5rem;
+          width: 2px; background: linear-gradient(to bottom, #c9a84c, transparent);
+          opacity: 0.4;
         }
-        @media (min-width: 640px) { .about-img-main { height: 360px; } }
-        .about-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .about-img-half {
-          position: relative; height: 150px;
-          border-radius: 12px; overflow: hidden; background: #1a1a24;
+
+        .about-img-story-hero {
+          position: relative; width: 100%; aspect-ratio: 4/5;
+          border-radius: 24px; overflow: hidden;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
-        @media (min-width: 640px) { .about-img-half { height: 190px; } }
+        .about-img-overlay {
+          position: absolute; inset: 0;
+          background: linear-gradient(45deg, rgba(201,168,76,0.1), transparent);
+        }
 
         /* ─── Blockquote ─── */
         .about-quote {
-          border-left: 2px solid #c9a84c; padding: 1.25rem 1.5rem;
-          background: #111; border-radius: 0 8px 8px 0;
-          margin: 2rem 0;
+          padding: 2.5rem; background: #16161E; border-radius: 20px;
+          margin: 4rem 0; position: relative;
         }
         .about-quote p {
           font-family: var(--font-playfair), serif;
-          font-size: 1.05rem; font-style: italic; color: #c9a84c;
-          line-height: 1.6; margin-bottom: 0.75rem;
+          font-size: 1.4rem; font-style: italic; color: #F5F5F8;
+          line-height: 1.5; margin-bottom: 1.5rem;
         }
         .about-quote cite {
-          font-size: 11px; text-transform: uppercase;
-          letter-spacing: 0.18em; color: #444;
+          font-size: 12px; text-transform: uppercase;
+          letter-spacing: 0.2em; color: #c9a84c; font-weight: 700;
+          display: block;
         }
 
-        /* ─── Founder ─── */
+        /* ─── Founder Section ─── */
         .about-founder {
           display: grid; grid-template-columns: 1fr;
-          gap: 3rem; margin-top: 1rem;
+          gap: 5rem; margin-top: 2rem;
         }
         @media (min-width: 1024px) {
-          .about-founder { grid-template-columns: 380px 1fr; gap: 4rem; align-items: start; }
+          .about-founder { grid-template-columns: 420px 1fr; gap: 8rem; align-items: center; }
         }
         .about-founder__photo {
           position: relative; width: 100%; aspect-ratio: 3/4;
-          max-height: 500px; border-radius: 16px; overflow: hidden;
-          background: #1a1a24;
+          border-radius: 30px; overflow: hidden;
+          box-shadow: 0 40px 80px rgba(0,0,0,0.6);
         }
         .about-founder__caption {
           position: absolute; bottom: 0; left: 0; right: 0;
-          padding: 2rem 1.5rem;
-          background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+          padding: 3rem 2rem;
+          background: linear-gradient(to top, #0A0A0F, transparent);
         }
-        .about-founder__name { font-size: 1.4rem; font-weight: 500; color: #f0ebe0; margin-bottom: 0.25rem; }
-        .about-founder__role { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #c9a84c; }
-        .about-stats {
-          display: grid; grid-template-columns: repeat(3,1fr);
-          border: 1px solid #222; border-radius: 12px;
-          overflow: hidden; margin-top: 2rem;
-        }
-        .about-stat {
-          padding: 1.5rem 1rem; text-align: center;
-          background: #161616; border-right: 1px solid #222;
-          transition: background 0.2s;
-        }
-        .about-stat:last-child { border-right: none; }
-        .about-stat:hover { background: #1c1c24; }
-        .about-stat__num { display: block; font-size: 2rem; font-weight: 600; color: #c9a84c; }
-        .about-stat__label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: #555; margin-top: 0.3rem; display: block; }
+        .about-founder__name { font-family: var(--font-playfair), serif; font-size: 2rem; color: #fff; margin-bottom: 0.5rem; }
+        .about-founder__role { font-size: 12px; text-transform: uppercase; letter-spacing: 0.25em; color: #c9a84c; font-weight: 700; }
 
-        /* ─── BTS Grid ─── */
-        .about-bts-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: 260px 220px;
-          gap: 0.75rem;
-          margin: 2.5rem 0;
-          border-radius: 12px; overflow: hidden;
+        .about-stats-modern {
+          display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 4rem;
         }
-        @media (min-width: 768px) {
-          .about-bts-grid {
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: 320px 260px;
-            gap: 1rem;
-          }
+        .about-stat-pill {
+          background: #1A1A24; padding: 1.5rem 2.5rem; border-radius: 100px;
+          border: 1px solid #2A2A38; transition: all 0.3s ease;
         }
-        .about-bts-main {
-          position: relative; border-radius: 10px; overflow: hidden;
-          background: #1a1a24; grid-column: 1; grid-row: 1;
-        }
-        .about-bts-side {
-          position: relative; border-radius: 10px; overflow: hidden;
-          background: #1a1a24; grid-column: 2; grid-row: 1 / 3;
-        }
-        .about-bts-bottom-left {
-          position: relative; border-radius: 10px; overflow: hidden;
-          background: #1a1a24; grid-column: 1; grid-row: 2;
-        }
-        .about-bts-bottom-right { display: none; }
-
-        .about-two-text {
-          display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 0.5rem;
-        }
-        @media (min-width: 768px) { .about-two-text { grid-template-columns: 1fr 1fr; gap: 3rem; } }
-
-        /* ─── Values ─── */
-        .about-values {
-          display: grid; grid-template-columns: 1fr;
-          gap: 1px; background: #222;
-          border-radius: 16px; overflow: hidden;
-          margin-top: 2.5rem;
-        }
-        @media (min-width: 768px) { .about-values { grid-template-columns: 1fr 1fr; } }
-        .about-value-card {
-          background: #161616; padding: 2.5rem 2rem;
-          transition: background 0.2s;
-        }
-        .about-value-card:hover { background: #1c1c24; }
-        .about-value-num { font-size: 11px; font-weight: 700; color: #c9a84c; letter-spacing: 0.2em; display: block; margin-bottom: 0.75rem; }
-        .about-value-title { font-size: 1.1rem; font-weight: 600; color: #e8e0d0; margin-bottom: 0.75rem; }
-        .about-value-desc { font-size: 13px; line-height: 1.7; color: #666; }
+        .about-stat-pill:hover { border-color: #c9a84c; transform: translateY(-5px); }
+        .about-stat-pill__num { display: block; font-size: 2.5rem; font-weight: 700; color: #c9a84c; font-family: var(--font-playfair), serif; }
+        .about-stat-pill__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #71717A; margin-top: 0.25rem; display: block; }
 
         /* ─── Awards ─── */
         .about-awards-layout {
           display: grid; grid-template-columns: 1fr;
-          gap: 2.5rem; margin-top: 1rem;
+          gap: 4rem; margin-top: 2rem;
         }
-        @media (min-width: 1024px) { .about-awards-layout { grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; } }
+        @media (min-width: 1024px) { .about-awards-layout { grid-template-columns: 1fr 2fr; gap: 8rem; } }
         .about-awards-grid {
-          display: grid; grid-template-columns: 1fr;
-          gap: 1rem;
+          display: grid; grid-template-columns: 1fr; gap: 1.5rem;
         }
         @media (min-width: 640px) { .about-awards-grid { grid-template-columns: 1fr 1fr; } }
         .about-award-card {
-          background: #161616; border: 1px solid #222;
-          border-radius: 12px; padding: 1.75rem 1.5rem;
-          transition: border-color 0.2s;
+          background: #111118; border: 1px solid #1A1A24;
+          border-radius: 20px; padding: 2.5rem;
+          transition: all 0.3s ease;
         }
-        .about-award-card:hover { border-color: #333; }
-        .about-award-year { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #c9a84c; display: block; margin-bottom: 0.5rem; }
-        .about-award-title { font-size: 1rem; font-weight: 600; color: #f0ebe0; margin-bottom: 0.4rem; line-height: 1.4; }
-        .about-award-body { font-size: 13px; color: #666; }
+        .about-award-card:hover { border-color: #c9a84c; background: #16161E; }
+        .about-award-year { font-size: 12px; font-weight: 800; color: #c9a84c; display: block; margin-bottom: 1rem; }
+        .about-award-title { font-family: var(--font-playfair), serif; font-size: 1.25rem; color: #fff; margin-bottom: 0.75rem; line-height: 1.3; }
+        .about-award-body { font-size: 14px; color: #71717A; line-height: 1.6; }
+
+        /* ─── BTS Visual ─── */
+        .about-bts-visual {
+          display: grid; grid-template-columns: 1fr; gap: 2rem; margin: 4rem 0;
+        }
+        @media (min-width: 1024px) { .about-bts-visual { grid-template-columns: 2fr 1fr; } }
+        .about-bts-main-wide {
+          position: relative; height: 500px; border-radius: 30px; overflow: hidden;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .about-bts-label {
+          position: absolute; top: 2rem; left: 2rem; background: rgba(0,0,0,0.6);
+          backdrop-filter: blur(10px); padding: 0.5rem 1.5rem; border-radius: 50px;
+          font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #c9a84c;
+        }
+        .about-bts-details { display: flex; flex-direction: column; gap: 2rem; }
+        .about-bts-detail-item { flex: 1; position: relative; }
+        .about-bts-detail-img {
+          position: relative; height: 200px; border-radius: 20px; overflow: hidden;
+          margin-bottom: 1rem; border: 1px solid #1A1A24;
+        }
+        .about-bts-detail-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.15em; color: #F5F5F8; }
+
+        .about-two-text-modern {
+          display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: 5rem;
+        }
+        @media (min-width: 768px) { .about-two-text-modern { grid-template-columns: 1fr 1fr; } }
+        .about-modern-text-card {
+           padding: 3rem; background: #0E0E14; border-radius: 24px;
+           border: 1px solid #1A1A24;
+        }
+        .about-modern-text-card h3 { font-family: var(--font-playfair), serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 1.5rem; }
+        .about-modern-text-card p { font-size: 15px; color: #A0A0AB; line-height: 1.8; }
+
+        /* ─── Values Modern ─── */
+        .about-values-modern {
+          display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 4rem;
+        }
+        @media (min-width: 768px) { .about-values-modern { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1200px) { .about-values-modern { grid-template-columns: repeat(4, 1fr); } }
+        
+        .about-value-pill {
+          background: #111118; border: 1px solid #1A1A24;
+          padding: 3rem 2rem; border-radius: 24px;
+          height: 100%; display: flex; flex-direction: column;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .about-value-pill:hover { border-color: #c9a84c; background: #16161E; transform: translateY(-10px); }
+        .about-value-pill__num { font-size: 12px; font-weight: 800; color: #c9a84c; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; }
+        .about-value-pill__title { font-family: var(--font-playfair), serif; font-size: 1.4rem; color: #fff; margin-bottom: 1rem; line-height: 1.3; }
+        .about-value-pill__desc { font-size: 14px; line-height: 1.7; color: #71717A; }
 
         /* ─── CTA ─── */
         .about-cta {
-          background: #0a0a0f; border-top: 1px solid #1a1a24;
-          padding: 6rem 1.5rem; text-align: center;
+          padding: 10rem 2rem; text-align: center;
+          background: radial-gradient(circle at center, #16161E 0%, #0A0A0F 100%);
+          border-top: 1px solid #1A1A24;
         }
         .about-cta__title {
           font-family: var(--font-playfair), serif;
-          font-size: clamp(1.75rem, 4vw, 3rem);
-          font-weight: 500; color: #f0ebe0; margin-bottom: 1rem;
+          font-size: clamp(2rem, 5vw, 4rem);
+          font-weight: 700; color: #fff; margin-bottom: 1.5rem;
         }
-        .about-cta__sub { font-size: 15px; color: #555; line-height: 1.7; max-width: 520px; margin: 0 auto 2.5rem; }
-        .about-cta__btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+        .about-cta__sub { font-size: 18px; color: #71717A; line-height: 1.7; max-width: 600px; margin: 0 auto 4rem; }
+        .about-cta__btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
         .about-btn {
-          display: inline-block; padding: 0.875rem 2rem;
-          font-size: 13px; font-weight: 600; border-radius: 8px;
-          text-decoration: none; transition: all 0.25s ease; cursor: pointer;
+          display: inline-block; padding: 1.25rem 3rem;
+          font-size: 14px; font-weight: 700; border-radius: 100px;
+          text-decoration: none; transition: all 0.3s ease; cursor: pointer;
+          letter-spacing: 0.05em; text-transform: uppercase;
         }
-        .about-btn--gold { background: #c9a84c; color: #080808; }
-        .about-btn--gold:hover { background: #d4b55a; }
-        .about-btn--outline { background: transparent; color: #c9a84c; border: 1px solid #c9a84c; }
-        .about-btn--outline:hover { background: rgba(201,168,76,0.1); }
+        .about-btn--gold { background: #c9a84c; color: #000; box-shadow: 0 10px 30px rgba(201,168,76,0.2); }
+        .about-btn--gold:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(201,168,76,0.3); }
+        .about-btn--outline { background: transparent; color: #c9a84c; border: 2px solid #c9a84c; }
+        .about-btn--outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-5px); }
       `}</style>
     </>
   );
