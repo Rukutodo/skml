@@ -36,7 +36,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Removed scroll-behavior: smooth for more precise control */
 }
 
 body {

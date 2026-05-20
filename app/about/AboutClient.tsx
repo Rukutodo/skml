@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const UNSPLASH = {
-  hero: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=1600",
+  hero: "/assets/images/about-hero.jpg",
   set1: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&q=80&w=900",
   set2: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&q=80&w=600",
   set3: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=600",
@@ -36,8 +36,8 @@ const fadeIn = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-};
+  transition: { duration: 0.8, ease: "easeOut" }
+} as const;
 
 const staggerContainer = {
   initial: {},
@@ -336,20 +336,20 @@ export default function AboutClient() {
 
         /* ─── Chapter Tag ─── */
         .about-chapter-tag {
-          display: flex; align-items: center; gap: 1rem;
-          margin-bottom: 3.5rem;
+          display: flex; align-items: center; gap: 1.25rem;
+          margin-bottom: 4rem;
         }
-        .about-chapter-num { font-size: 14px; font-weight: 800; letter-spacing: 0.1em; }
+        .about-chapter-num { font-size: 16px; font-weight: 800; letter-spacing: 0.1em; }
         .about-section--white .about-chapter-num { color: #000000; }
         .about-section--black .about-chapter-num { color: #FFFFFF; }
         
-        .about-chapter-line { height: 1px; width: 3rem; opacity: 0.2; }
+        .about-chapter-line { height: 1px; width: 4rem; opacity: 0.3; }
         .about-section--white .about-chapter-line { background: #000000; }
         .about-section--black .about-chapter-line { background: #FFFFFF; }
         
-        .about-chapter-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3em; }
+        .about-chapter-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.35em; }
         .about-section--white .about-chapter-label { color: #6A6A7A; }
-        .about-section--black .about-chapter-label { color: rgba(255,255,255,0.4); }
+        .about-section--black .about-chapter-label { color: rgba(255,255,255,0.6); }
 
         /* ─── Typography ─── */
         .about-section-title {
@@ -412,29 +412,29 @@ export default function AboutClient() {
         }
 
         /* ─── Founder Story ─── */
-        .about-founder-story__grid {
-            display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: flex-start;
+        .about-founder-feature {
+            display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;
         }
         @media (min-width: 1024px) {
-            .about-founder-story__grid { grid-template-columns: 400px 1fr; gap: 6rem; }
+            .about-founder-feature { grid-template-columns: 480px 1fr; gap: 7rem; }
         }
-        .about-founder-story__visual { position: relative; }
-        .about-founder-story__img {
+        .about-founder-feature__visual { position: relative; }
+        .about-founder-feature__img {
             position: relative; width: 100%; aspect-ratio: 3/4;
             border-radius: 0; overflow: hidden;
             border: 1px solid #FFFFFF;
         }
-        .about-founder-story__card {
+        .about-founder-feature__card {
             background: #ffffff; padding: 1.5rem 2rem; border-radius: 0;
             border: 2px solid #000000;
             position: absolute; bottom: -2rem; left: 2rem; right: -1rem;
             box-shadow: 10px 10px 0px #000000;
         }
-        .about-founder-story__card h3 { font-size: 1.1rem; font-weight: 800; color: #000000; }
-        .about-founder-story__card p { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #000000; margin-top: 0.25rem; opacity: 0.6; }
+        .about-founder-feature__card h3 { font-size: 1.1rem; font-weight: 800; color: #000000; }
+        .about-founder-feature__card p { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #000000; margin-top: 0.25rem; opacity: 0.6; }
 
-        .about-founder-story__text { margin-bottom: 4rem; }
-        .about-founder-story__text p {
+        .about-founder-feature__text { margin-bottom: 4rem; }
+        .about-founder-feature__text p {
             font-size: 16px; line-height: 1.8; margin-bottom: 2rem;
         }
 
