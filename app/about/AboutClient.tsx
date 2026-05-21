@@ -102,7 +102,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">
+              <span className="about-chapter-label">The Beginning</span>
             </motion.div>
 
             <div className="about-two-col about-two-col--flipped">
@@ -204,7 +204,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">
+              <span className="about-chapter-label">Recognition</span>
             </motion.div>
             <div className="about-awards-layout">
               <motion.div {...fadeIn} className="about-awards-intro">
@@ -278,7 +278,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">
+              <span className="about-chapter-label">The Core</span>
             </motion.div>
             <motion.h2 {...fadeIn} className="about-section-title">The values that drive every decision we make</motion.h2>
             
