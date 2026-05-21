@@ -409,71 +409,68 @@ export default function AboutClient() {
         
         .about-body--wide { max-width: 780px; }
 
-        /* ─── 2-col Storytelling ─── */
-        .about-two-col {
-          display: grid; grid-template-columns: 1fr;
-          gap: 4rem; align-items: start;
-        }
-        @media (min-width: 1024px) {
-          .about-two-col { grid-template-columns: 1fr 1fr; gap: 8rem; }
-          .about-two-col--flipped { grid-template-columns: 1.1fr 0.9fr; }
-        }
-        .about-story-text { margin-bottom: 3rem; }
-        
+        /* ─── Abstract Collage Wall ─── */
         .about-two-col__right {
            position: relative;
            width: 100%;
-           min-height: 900px;
+           min-height: 1000px;
+           overflow: visible;
         }
         .about-brick-wall {
-          position: relative;
+          position: absolute;
+          inset: 0;
           width: 100%;
-          height: 100%;
         }
         .about-wall-item {
           position: absolute;
-          border: 1px solid #000;
-          box-shadow: 15px 15px 0px #000;
           overflow: hidden;
-          background: #f0f0f0;
-          transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+          background: #000;
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          filter: grayscale(1) contrast(1.1) brightness(0.9);
         }
         .about-wall-item:hover {
+          filter: grayscale(0) contrast(1);
           transform: scale(1.05) rotate(0deg) !important;
-          box-shadow: 25px 25px 0px #000;
           z-index: 100;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
 
-        /* Balanced, vertical staggered layout */
+        /* Abstract Shapes & Positions */
         .about-wall-item--1 {
-          width: 320px; aspect-ratio: 3/4;
-          top: 0; right: 0;
-          transform: rotate(-3deg);
+          width: 400px; aspect-ratio: 4/5;
+          top: -50px; right: -10%;
+          clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 90%);
+          transform: rotate(-2deg);
           z-index: 1;
         }
         .about-wall-item--2 {
-          width: 280px; aspect-ratio: 1/1;
-          top: 250px; left: -10%;
-          transform: rotate(5deg);
-          z-index: 2;
+          width: 350px; aspect-ratio: 1/1;
+          top: 300px; left: -15%;
+          clip-path: polygon(10% 10%, 100% 0%, 90% 90%, 0% 100%);
+          transform: rotate(6deg);
+          z-index: 3;
+          mix-blend-mode: multiply;
+          opacity: 0.9;
         }
         .about-wall-item--3 {
-          width: 340px; aspect-ratio: 16/9;
-          top: 500px; right: -5%;
-          transform: rotate(-2deg);
-          z-index: 3;
+          width: 450px; aspect-ratio: 16/9;
+          top: 550px; right: -20%;
+          clip-path: polygon(0% 10%, 90% 0%, 100% 90%, 10% 100%);
+          transform: rotate(-4deg);
+          z-index: 2;
         }
         .about-wall-item--4 {
-          width: 280px; aspect-ratio: 4/5;
-          top: 720px; left: 5%;
-          transform: rotate(4deg);
+          width: 380px; aspect-ratio: 3/4;
+          top: 800px; left: 0%;
+          clip-path: polygon(5% 5%, 95% 0%, 100% 95%, 0% 100%);
+          transform: rotate(3deg);
           z-index: 4;
         }
 
         @media (max-width: 1024px) {
-          .about-two-col__right { min-height: auto; margin-top: 2rem; }
-          .about-brick-wall { display: flex; flex-direction: column; gap: 3rem; }
-          .about-wall-item { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: 100%; transform: none !important; box-shadow: 10px 10px 0px #000; }
+          .about-two-col__right { min-height: auto; margin-top: 4rem; overflow: hidden; }
+          .about-brick-wall { position: relative; display: flex; flex-direction: column; gap: 2rem; }
+          .about-wall-item { position: relative !important; top: auto !important; left: auto !important; right: auto !important; width: 100% !important; clip-path: none !important; transform: none !important; }
         }
 
         /* ─── Blockquote ─── */
