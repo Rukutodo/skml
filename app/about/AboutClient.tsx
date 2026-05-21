@@ -371,13 +371,13 @@ export default function AboutClient() {
         .about-section--white .about-chapter-num { color: #000000; }
         .about-section--black .about-chapter-num { color: #FFFFFF; }
         
-        .about-chapter-line { height: 1px; width: 4rem; opacity: 0.3; }
+        .about-chapter-line { height: 2px; width: 5rem; opacity: 0.8; }
         .about-section--white .about-chapter-line { background: #000000; }
         .about-section--black .about-chapter-line { background: #FFFFFF; }
         
-        .about-chapter-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.35em; }
-        .about-section--white .about-chapter-label { color: #6A6A7A; }
-        .about-section--black .about-chapter-label { color: rgba(255,255,255,0.6); }
+        .about-chapter-label { font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em; }
+        .about-section--white .about-chapter-label { color: #000000; }
+        .about-section--black .about-chapter-label { color: #FFFFFF; }
 
         /* ─── Typography ─── */
         .about-section-title {
