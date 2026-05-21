@@ -412,33 +412,23 @@ export default function AboutClient() {
         /* ─── 2-col Storytelling ─── */
         .about-two-col {
           display: grid; grid-template-columns: 1fr;
-          gap: 4rem; align-items: center;
+          gap: 4rem; align-items: start;
         }
         @media (min-width: 1024px) {
-          .about-two-col { grid-template-columns: 1.2fr 0.8fr; gap: 6rem; }
-          .about-two-col--flipped { grid-template-columns: 1.3fr 0.7fr; }
+          .about-two-col { grid-template-columns: 1fr 1fr; gap: 8rem; }
+          .about-two-col--flipped { grid-template-columns: 1.1fr 0.9fr; }
         }
         .about-story-text { margin-bottom: 3rem; }
-        .about-img-story-hero {
-          position: relative; width: 100%; aspect-ratio: 4/5;
-          border-radius: 0; overflow: hidden;
-          border: 1px solid #000000;
-          box-shadow: 20px 20px 0px #000000;
-        }
-        .about-two-col__right {
-           position: relative;
-        }
+        
         .about-two-col__right {
            position: relative;
            width: 100%;
-           height: 100%; min-height: 700px;
-           overflow: hidden;
+           min-height: 900px;
         }
         .about-brick-wall {
-          position: absolute;
-          inset: 0;
-          width: 130%;
-          margin-right: -30%;
+          position: relative;
+          width: 100%;
+          height: 100%;
         }
         .about-wall-item {
           position: absolute;
@@ -449,41 +439,41 @@ export default function AboutClient() {
           transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .about-wall-item:hover {
-          transform: scale(1.1) rotate(0deg) !important;
-          box-shadow: 30px 30px 0px #000;
+          transform: scale(1.05) rotate(0deg) !important;
+          box-shadow: 25px 25px 0px #000;
           z-index: 100;
         }
 
-        /* Truly Random Scattering */
+        /* Balanced, vertical staggered layout */
         .about-wall-item--1 {
-          width: 280px; aspect-ratio: 3/4;
-          top: 0; left: 0;
-          transform: rotate(-6deg);
+          width: 320px; aspect-ratio: 3/4;
+          top: 0; right: 0;
+          transform: rotate(-3deg);
           z-index: 1;
         }
         .about-wall-item--2 {
-          width: 240px; aspect-ratio: 1/1;
-          top: 15%; right: 5%;
-          transform: rotate(8deg);
+          width: 280px; aspect-ratio: 1/1;
+          top: 250px; left: -10%;
+          transform: rotate(5deg);
           z-index: 2;
         }
         .about-wall-item--3 {
-          width: 320px; aspect-ratio: 16/9;
-          bottom: 15%; left: 10%;
-          transform: rotate(-4deg);
+          width: 340px; aspect-ratio: 16/9;
+          top: 500px; right: -5%;
+          transform: rotate(-2deg);
           z-index: 3;
         }
         .about-wall-item--4 {
-          width: 260px; aspect-ratio: 4/5;
-          bottom: 0; right: 0;
-          transform: rotate(5deg);
+          width: 280px; aspect-ratio: 4/5;
+          top: 720px; left: 5%;
+          transform: rotate(4deg);
           z-index: 4;
         }
 
         @media (max-width: 1024px) {
-          .about-two-col__right { min-height: 500px; margin-top: 4rem; }
-          .about-brick-wall { width: 100%; margin: 0; position: relative; display: flex; flex-wrap: wrap; gap: 2rem; }
-          .about-wall-item { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: 45%; transform: none !important; }
+          .about-two-col__right { min-height: auto; margin-top: 2rem; }
+          .about-brick-wall { display: flex; flex-direction: column; gap: 3rem; }
+          .about-wall-item { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: 100%; transform: none !important; box-shadow: 10px 10px 0px #000; }
         }
 
         /* ─── Blockquote ─── */
