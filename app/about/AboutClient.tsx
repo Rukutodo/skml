@@ -102,7 +102,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">The Beginning</span>
+              <h2 className="about-chapter-label">The Beginning</h2>
             </motion.div>
 
             <div className="about-two-col about-two-col--flipped">
@@ -148,7 +148,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">The Man Behind the Banner</span>
+              <h2 className="about-chapter-label">The Man Behind the Banner</h2>
             </motion.div>
 
             <div className="about-founder-feature">
@@ -204,7 +204,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">Recognition</span>
+              <h2 className="about-chapter-label">Recognition</h2>
             </motion.div>
             <div className="about-awards-layout">
               <motion.div {...fadeIn} className="about-awards-intro">
@@ -231,7 +231,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">Process &amp; Craft</span>
+              <h2 className="about-chapter-label">Process &amp; Craft</h2>
             </motion.div>
 
             <motion.h2 {...fadeIn} className="about-section-title">Where every film is made</motion.h2>
@@ -278,7 +278,7 @@ export default function AboutClient() {
           <div className="about-container">
             <motion.div {...fadeIn} className="about-chapter-tag">
               <span className="about-chapter-line" />
-              <span className="about-chapter-label">The Core</span>
+              <h2 className="about-chapter-label">The Core</h2>
             </motion.div>
             <motion.h2 {...fadeIn} className="about-section-title">The values that drive every decision we make</motion.h2>
             
@@ -375,7 +375,10 @@ export default function AboutClient() {
         .about-section--white .about-chapter-line { background: #000000; }
         .about-section--black .about-chapter-line { background: #FFFFFF; }
         
-        .about-chapter-label { font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em; }
+        .about-chapter-label { 
+          font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em; 
+          margin: 0; line-height: 1;
+        }
         .about-section--white .about-chapter-label { color: #000000; }
         .about-section--black .about-chapter-label { color: #FFFFFF; }
 
