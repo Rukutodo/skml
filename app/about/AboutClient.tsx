@@ -11,12 +11,34 @@ const UNSPLASH = {
   set1: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&q=80&w=900",
   set2: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&q=80&w=600",
   set3: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=600",
+  set4: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=600",
+  set5: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=600",
+  set6: "https://images.unsplash.com/photo-1524712245354-2c4e5e7124c5?auto=format&fit=crop&q=80&w=600",
   founder: "/assets/images/producer-portrait.jpeg",
   bts1: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=900",
   bts2: "https://images.unsplash.com/photo-1585647347384-2593bc35786b?auto=format&fit=crop&q=80&w=600",
   bts3: "https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7?auto=format&fit=crop&q=80&w=600",
   bts4: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=600",
 };
+
+const POSTERS = [
+  "/assets/images/poster-aaj.jpeg",
+  "/assets/images/poster-aghora.jpeg",
+  "/assets/images/poster-ddd.jpeg",
+  "/assets/images/poster-hb.jpeg",
+  "/assets/images/poster-mrlonely.jpeg",
+  "/assets/images/poster-vyuntapali.jpeg",
+];
+
+const WALL_IMAGES = [
+  ...POSTERS,
+  UNSPLASH.set1,
+  UNSPLASH.set2,
+  UNSPLASH.set3,
+  UNSPLASH.set4,
+  UNSPLASH.set5,
+  UNSPLASH.set6,
+];
 
 const VALUES = [
   { num: "01", title: "Story first, always", desc: "We evaluate every project starting with one question: is this a story worth telling? Budget, star power, and genre come after." },
@@ -102,9 +124,20 @@ export default function AboutClient() {
                   <cite>— Kandregula Adhinarayana</cite>
                 </motion.blockquote>
               </motion.div>
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="about-two-col__right">
-                <div className="about-img-story-hero">
-                  <Image src={UNSPLASH.set1} alt="Film Production" fill style={{ objectFit: "cover" }} />
+              <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1.2 }} className="about-two-col__right">
+                <div className="about-brick-wall">
+                  {WALL_IMAGES.slice(0, 4).map((img, idx) => (
+                    <motion.div 
+                      key={idx}
+                      variants={fadeIn} 
+                      initial="initial" 
+                      whileInView="whileInView" 
+                      viewport={{ once: true }} 
+                      className={`about-wall-item about-wall-item--${idx + 1}`}
+                    >
+                      <Image src={img} alt="Film Story" fill style={{ objectFit: "cover" }} />
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             </div>
@@ -291,7 +324,7 @@ export default function AboutClient() {
 
       <style>{`
         /* ─── DESIGN SYSTEM: STRICT B&W ─── */
-        .about-main { background: #FFFFFF; color: #000000; min-height: 100vh; overflow-x: hidden; }
+        .about-main { background: #FFFFFF; color: #000000; position: relative; }
 
         /* ─── Hero ─── */
         .about-hero {
@@ -392,6 +425,66 @@ export default function AboutClient() {
           border-radius: 0; overflow: hidden;
           border: 1px solid #000000;
           box-shadow: 20px 20px 0px #000000;
+        }
+        .about-two-col__right {
+           position: relative;
+        }
+        .about-two-col__right {
+           position: relative;
+           width: 100%;
+           height: 100%; min-height: 700px;
+           overflow: hidden;
+        }
+        .about-brick-wall {
+          position: absolute;
+          inset: 0;
+          width: 130%;
+          margin-right: -30%;
+        }
+        .about-wall-item {
+          position: absolute;
+          border: 1px solid #000;
+          box-shadow: 15px 15px 0px #000;
+          overflow: hidden;
+          background: #f0f0f0;
+          transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .about-wall-item:hover {
+          transform: scale(1.1) rotate(0deg) !important;
+          box-shadow: 30px 30px 0px #000;
+          z-index: 100;
+        }
+
+        /* Truly Random Scattering */
+        .about-wall-item--1 {
+          width: 280px; aspect-ratio: 3/4;
+          top: 0; left: 0;
+          transform: rotate(-6deg);
+          z-index: 1;
+        }
+        .about-wall-item--2 {
+          width: 240px; aspect-ratio: 1/1;
+          top: 15%; right: 5%;
+          transform: rotate(8deg);
+          z-index: 2;
+        }
+        .about-wall-item--3 {
+          width: 320px; aspect-ratio: 16/9;
+          bottom: 15%; left: 10%;
+          transform: rotate(-4deg);
+          z-index: 3;
+        }
+        .about-wall-item--4 {
+          width: 260px; aspect-ratio: 4/5;
+          bottom: 0; right: 0;
+          transform: rotate(5deg);
+          z-index: 4;
+        }
+
+        @media (max-width: 1024px) {
+          .about-two-col__right { min-height: 500px; margin-top: 4rem; }
+          .about-brick-wall { width: 100%; margin: 0; position: relative; display: flex; flex-wrap: wrap; gap: 2rem; }
+          .about-wall-item { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: 45%; transform: none !important; }
         }
 
         /* ─── Blockquote ─── */

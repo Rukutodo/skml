@@ -36,7 +36,8 @@
 }
 
 html {
-  /* Removed scroll-behavior: smooth for more precise control */
+  overflow-x: hidden;
+  height: 100%;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
   color: #111118;
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch;
