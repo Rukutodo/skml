@@ -376,7 +376,7 @@ export default function AboutClient() {
         .about-section--black .about-chapter-line { background: #FFFFFF; }
         
         .about-chapter-label { 
-          font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em; 
+          font-size: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em; 
           margin: 0; line-height: 1;
         }
         .about-section--white .about-chapter-label { color: #000000; }
