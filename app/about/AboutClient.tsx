@@ -73,7 +73,7 @@ export default function AboutClient() {
       <Navbar />
       <main className="sk-about">
         
-        {/* ── MONOCHROME HERO ── */}
+        {/* ── MONOCHROME HERO (WHITE) ── */}
         <section className="sk-hero">
           <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="sk-hero__bg">
             <Image 
@@ -106,8 +106,8 @@ export default function AboutClient() {
           </div>
         </section>
 
-        {/* ── THE BEGINNING ── */}
-        <section className="sk-section sk-section--white">
+        {/* ── CHAPTER 1 (BLACK) ── */}
+        <section className="sk-section sk-section--black">
           <div className="sk-container">
             <div className="sk-grid-editorial">
               <div className="sk-col-text">
@@ -152,8 +152,8 @@ export default function AboutClient() {
           </div>
         </section>
 
-        {/* ── THE FOUNDER ── */}
-        <section className="sk-section sk-section--grey">
+        {/* ── CHAPTER 2 (WHITE) ── */}
+        <section className="sk-section sk-section--white">
           <div className="sk-container">
             <div className="sk-grid-founder">
               <motion.div 
@@ -193,8 +193,8 @@ export default function AboutClient() {
           </div>
         </section>
 
-        {/* ── AWARDS & VALUES ── */}
-        <section className="sk-section sk-section--white">
+        {/* ── CHAPTER 3 (BLACK) ── */}
+        <section className="sk-section sk-section--black">
           <div className="sk-container">
             <div className="sk-awards-grid">
                <div className="sk-awards-intro">
@@ -241,8 +241,8 @@ export default function AboutClient() {
           </div>
         </section>
 
-        {/* ── CTA ── */}
-        <section className="sk-cta">
+        {/* ── CTA (WHITE) ── */}
+        <section className="sk-cta sk-section--white">
            <div className="sk-container">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -294,8 +294,14 @@ export default function AboutClient() {
 
         /* Sections */
         .sk-section { padding: 15vh 0; }
-        .sk-section--white { background: var(--sk-bg); }
-        .sk-section--grey { background: var(--sk-surface); }
+        .sk-section--white { background: var(--sk-bg); color: var(--sk-text); }
+        .sk-section--black { 
+          background: oklch(12% 0.01 280); 
+          color: #fff; 
+          --sk-text: #fff; 
+          --sk-text-muted: oklch(70% 0.01 280);
+          --sk-accent: #fff;
+        }
 
         /* Editorial Grid */
         .sk-grid-editorial { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
@@ -324,11 +330,13 @@ export default function AboutClient() {
         @media (min-width: 1024px) { .sk-grid-founder { grid-template-columns: 1fr 1fr; gap: 10vw; } }
 
         .sk-founder-img { position: relative; aspect-ratio: 4/5; background: #eee; }
-        .sk-founder-badge { position: absolute; bottom: -2rem; right: -2rem; background: var(--sk-accent); color: #fff; padding: 2rem; }
+        .sk-founder-badge { position: absolute; bottom: -2rem; right: -2rem; background: var(--sk-accent); color: var(--sk-bg); padding: 2rem; }
+        .sk-section--black .sk-founder-badge { background: #fff; color: #000; }
         .sk-founder-badge h3 { font-family: var(--font-serif); font-size: 1.5rem; line-height: 1; }
         .sk-founder-badge span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
 
         .sk-stats { display: flex; gap: 4rem; margin-top: 4rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 3rem; }
+        .sk-section--black .sk-stats { border-top-color: rgba(255,255,255,0.1); }
         .sk-stat__val { display: block; font-family: var(--font-serif); font-size: 3rem; color: var(--sk-accent); }
         .sk-stat__label { font-size: 0.75rem; text-transform: uppercase; color: var(--sk-text-muted); }
 
@@ -337,7 +345,9 @@ export default function AboutClient() {
         @media (min-width: 1024px) { .sk-awards-grid { grid-template-columns: 1fr 2fr; gap: 8rem; } }
         
         .sk-awards-list { display: flex; flex-direction: column; border-top: 1px solid rgba(0,0,0,0.05); }
+        .sk-section--black .sk-awards-list { border-top-color: rgba(255,255,255,0.1); }
         .sk-award-item { display: grid; grid-template-columns: 120px 1fr; padding: 2.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .sk-section--black .sk-award-item { border-bottom-color: rgba(255,255,255,0.1); }
         .sk-award-year { font-family: var(--font-mono); font-size: 0.875rem; color: var(--sk-accent); font-weight: 700; }
         .sk-award-body h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
         .sk-award-body p { font-size: 0.875rem; color: var(--sk-text-muted); }
@@ -349,15 +359,19 @@ export default function AboutClient() {
         .sk-value p { font-size: 0.95rem; line-height: 1.7; color: var(--sk-text-muted); }
 
         /* CTA */
-        .sk-cta { padding: 20vh 0; text-align: center; background: var(--sk-surface); }
+        .sk-cta { padding: 20vh 0; text-align: center; }
         .sk-cta-card { padding: 10vh 2rem; position: relative; }
         .sk-cta-actions { display: flex; justify-content: center; gap: 1.5rem; margin-top: 4rem; }
 
         .sk-btn { padding: 1.25rem 2.5rem; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.4s ease; border-radius: 2px; }
-        .sk-btn--primary { background: var(--sk-accent); color: #fff; }
-        .sk-btn--primary:hover { background: #000; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .sk-btn--primary { background: var(--sk-accent); color: var(--sk-bg); }
+        .sk-section--black .sk-btn--primary { background: #fff; color: #000; }
+        .sk-btn--primary:hover { background: #000; color: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .sk-section--black .sk-btn--primary:hover { background: #eee; color: #000; }
+        
         .sk-btn--outline { border: 1px solid var(--sk-accent); color: var(--sk-accent); }
-        .sk-btn--outline:hover { background: var(--sk-accent); color: #fff; }
+        .sk-btn--outline:hover { background: var(--sk-accent); color: var(--sk-bg); }
+        .sk-section--black .sk-btn--outline:hover { background: #fff; color: #000; }
 
         @media (max-width: 768px) {
           .sk-col-visual { min-height: 800px; }
