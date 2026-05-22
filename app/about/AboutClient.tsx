@@ -80,7 +80,7 @@ export default function AboutClient() {
               src="/assets/images/about-hero.jpg" 
               alt="Film set" 
               fill 
-              style={{ objectFit: "cover", filter: "grayscale(1) brightness(1.1) contrast(1.1)" }} 
+              style={{ objectFit: "cover", brightness: "1.1", contrast: "1.1" }} 
               priority 
             />
             <div className="sk-hero__overlay" />
@@ -163,7 +163,7 @@ export default function AboutClient() {
                 transition={{ duration: 1 }}
                 className="sk-founder-img"
               >
-                <Image src="/assets/images/producer-portrait.jpeg" alt="Kandregula Adhinarayana" fill style={{ objectFit: "cover", filter: "grayscale(1)" }} />
+                <Image src="/assets/images/producer-portrait.jpeg" alt="Kandregula Adhinarayana" fill style={{ objectFit: "cover" }} />
                 <div className="sk-founder-badge">
                    <h3>Adhinarayana</h3>
                    <span>Founder & Producer</span>
@@ -318,10 +318,10 @@ export default function AboutClient() {
         /* Poster Sequence */
         .sk-col-visual { position: relative; min-height: 600px; }
         .poster-sequence { position: relative; width: 100%; height: 100%; }
-        .poster-item { position: absolute; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); filter: grayscale(1); transition: filter 0.5s ease; }
-        .poster-item:hover { filter: grayscale(0); }
+        .poster-item { position: absolute; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); transition: transform 0.5s ease; }
+        .poster-item:hover { transform: scale(1.05); z-index: 10; }
         .poster-item--1 { width: 280px; aspect-ratio: 2/3; top: 0; left: 10%; z-index: 2; }
-        .poster-item--2 { width: 220px; aspect-ratio: 2/3; top: 150px; right: 10%; z-index: 1; opacity: 0.6; }
+        .poster-item--2 { width: 220px; aspect-ratio: 2/3; top: 150px; right: 10%; z-index: 1; opacity: 0.8; }
         .poster-item--3 { width: 200px; aspect-ratio: 2/3; top: 400px; left: 0; z-index: 3; }
         .poster-item--4 { width: 240px; aspect-ratio: 2/3; top: 450px; right: 0; z-index: 2; }
 
