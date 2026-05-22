@@ -80,7 +80,7 @@ export default function AboutClient() {
               src="/assets/images/about-hero.jpg" 
               alt="Film set" 
               fill 
-              style={{ objectFit: "cover", brightness: "1.1", contrast: "1.1" }} 
+              style={{ objectFit: "cover", filter: "brightness(1.1) contrast(1.1)" }} 
               priority 
             />
             <div className="sk-hero__overlay" />
