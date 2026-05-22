@@ -125,6 +125,9 @@ export default function AboutClient() {
                   In 2013, Telugu cinema <br/>
                   had a <em className="sk-accent-serif">problem.</em>
                 </h2>
+                <h3 className="sk-title-sub">
+                  Because few were willing <br/> to take a risk.
+                </h3>
                 
                 <div className="sk-story">
                   <p>Brilliant stories were dying in the hands of directors who couldn&apos;t find a banner willing to take a risk on them.</p>
@@ -169,7 +172,7 @@ export default function AboutClient() {
 
               <div className="sk-founder-content">
                 <span className="sk-meta">The Visionary</span>
-                <h2 className="sk-title-md">The Man Behind <br/>the Banner</h2>
+                <h2 className="sk-title-md">A Vision Built on Persistence</h2>
                 <div className="sk-story">
                    <p>He didn&apos;t come from a film family. No inherited studio, no industry godfather. What he had was an obsessive love for cinema and the grit to bet on himself.</p>
                    <p>Today, SKML stands as a testament to that persistence — transforming from a small Hyderabad-based banner into a respected name in regional cinema.</p>
@@ -195,7 +198,8 @@ export default function AboutClient() {
           <div className="sk-container">
             <div className="sk-awards-grid">
                <div className="sk-awards-intro">
-                  <h2 className="sk-title-md">Recognition</h2>
+                  <span className="sk-meta">Honors</span>
+                  <h2 className="sk-title-md">The industry&apos;s recognition <br/> of a decade&apos;s work</h2>
                   <p className="sk-body-muted">Awards reflect the industry&apos;s trust in our craft over the last decade.</p>
                </div>
                <div className="sk-awards-list">
@@ -280,8 +284,9 @@ export default function AboutClient() {
 
         /* Typography */
         .sk-title-xl { font-family: var(--font-serif); font-size: clamp(4rem, 12vw, 8rem); line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 2rem; }
-        .sk-title-lg { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
-        .sk-title-md { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 1.5rem; }
+        .sk-title-lg { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .sk-title-sub { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--sk-text-muted); line-height: 1.2; margin-bottom: 2.5rem; font-weight: 500; }
+        .sk-title-md { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; margin-bottom: 1.5rem; }
         .sk-accent-serif { font-style: italic; color: var(--sk-accent); font-weight: 400; }
         .sk-meta { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--sk-accent); display: block; margin-bottom: 1rem; }
         .sk-body-lg { font-size: 1.25rem; line-height: 1.6; color: var(--sk-text-muted); max-width: 500px; }
