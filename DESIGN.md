@@ -3,23 +3,23 @@
 ## Register
 brand
 
-## Colors (OKLCH)
-- **Background (Deep Night):** `oklch(12% 0.01 280)` - A deep, slightly blue-tinted black to avoid #000 flatness.
-- **Surface (Moonlit Stone):** `oklch(18% 0.01 280)` - For depth layers.
-- **Accent (Gilded Screen):** `oklch(82% 0.12 85)` - A refined, cinematic gold/brass, used sparingly (<5%).
-- **Text (Faded Script):** `oklch(95% 0.01 280)` - Soft white to reduce eye strain and feel analog.
+## Colors (OKLCH) - Monochrome Editorial
+- **Background (Paper White):** `oklch(99% 0.002 280)` - A crisp, clean white with a surgical blue tint to avoid yellowing.
+- **Surface (Silver Silk):** `oklch(96% 0.002 280)` - Subtle depth for secondary layers.
+- **Accent (Deep Ink):** `oklch(12% 0.01 280)` - The primary anchor; used for headings, buttons, and high-contrast lines.
+- **Muted (Graphite):** `oklch(60% 0.01 280)` - For secondary copy and non-critical details.
 
 ## Typography
 - **Headings:** Playfair Display (Serif) - Large, bold, and editorial.
 - **Body:** Inter (Sans) - Clean, legible, with generous line height (1.75).
-- **Metadata:** Space Grotesk (Mono-ish) - For labels, years, and technical details.
+- **Metadata:** Space Grotesk (Mono-ish) - For labels and technical data.
 
 ## Layout & Rhythm
 - **Cinematic Spacing:** Use large vertical gaps (`20vh` to `30vh`) to let content breathe.
-- **Asymmetry:** Avoid perfect 50/50 splits. Use 60/40 or 70/30 ratios for a more dynamic, film-poster feel.
-- **Layering:** Use absolute positioning and negative margins to overlap elements (text over images) like a title sequence.
+- **Asymmetry:** 60/40 or 70/30 ratios for dynamic compositions.
+- **Strict Monochrome:** No secondary colors. Contrast and scale drive the hierarchy.
 
 ## Motion
-- **Parallax:** Subtle background image movement.
-- **Reveal:** Slow, cinematic fades (`1.2s`) and upward drifts.
-- **No Bounce:** Smooth exponential easing only.
+- **Parallax:** Subtle poster movement.
+- **Reveal:** Smooth 1.2s fades.
+- **No Bounce:** Exponential easing only.

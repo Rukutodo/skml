@@ -73,14 +73,14 @@ export default function AboutClient() {
       <Navbar />
       <main className="sk-about">
         
-        {/* ── CINEMATIC HERO ── */}
+        {/* ── MONOCHROME HERO ── */}
         <section className="sk-hero">
           <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="sk-hero__bg">
             <Image 
               src="/assets/images/about-hero.jpg" 
               alt="Film set" 
               fill 
-              style={{ objectFit: "cover", filter: "grayscale(0.4) brightness(0.6)" }} 
+              style={{ objectFit: "cover", filter: "grayscale(1) brightness(1.1) contrast(1.1)" }} 
               priority 
             />
             <div className="sk-hero__overlay" />
@@ -107,7 +107,7 @@ export default function AboutClient() {
         </section>
 
         {/* ── THE BEGINNING ── */}
-        <section className="sk-section sk-section--dark">
+        <section className="sk-section sk-section--white">
           <div className="sk-container">
             <div className="sk-grid-editorial">
               <div className="sk-col-text">
@@ -126,7 +126,7 @@ export default function AboutClient() {
                   had a <em className="sk-accent-serif">problem.</em>
                 </h2>
                 <h3 className="sk-title-sub">
-                  Because few were willing <br/> to take a risk.
+                   Because few were willing <br/> to take a risk.
                 </h3>
                 
                 <div className="sk-story">
@@ -153,7 +153,7 @@ export default function AboutClient() {
         </section>
 
         {/* ── THE FOUNDER ── */}
-        <section className="sk-section sk-section--accent">
+        <section className="sk-section sk-section--grey">
           <div className="sk-container">
             <div className="sk-grid-founder">
               <motion.div 
@@ -163,7 +163,7 @@ export default function AboutClient() {
                 transition={{ duration: 1 }}
                 className="sk-founder-img"
               >
-                <Image src="/assets/images/producer-portrait.jpeg" alt="Kandregula Adhinarayana" fill style={{ objectFit: "cover" }} />
+                <Image src="/assets/images/producer-portrait.jpeg" alt="Kandregula Adhinarayana" fill style={{ objectFit: "cover", filter: "grayscale(1)" }} />
                 <div className="sk-founder-badge">
                    <h3>Adhinarayana</h3>
                    <span>Founder & Producer</span>
@@ -185,7 +185,7 @@ export default function AboutClient() {
                   </div>
                   <div className="sk-stat">
                     <span className="sk-stat__val">186+</span>
-                    <span className="sk-stat__label">Films</span>
+                    <span className="sk-stat__label">Films distributed</span>
                   </div>
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function AboutClient() {
         </section>
 
         {/* ── AWARDS & VALUES ── */}
-        <section className="sk-section sk-section--dark">
+        <section className="sk-section sk-section--white">
           <div className="sk-container">
             <div className="sk-awards-grid">
                <div className="sk-awards-intro">
@@ -264,38 +264,38 @@ export default function AboutClient() {
       <FloatingWhatsApp />
 
       <style>{`
-        /* ─── CINEMATIC DESIGN SYSTEM ─── */
+        /* ─── MONOCHROME EDITORIAL DESIGN SYSTEM ─── */
         :root {
-          --sk-bg: oklch(12% 0.01 280);
-          --sk-surface: oklch(16% 0.01 280);
-          --sk-accent: oklch(82% 0.12 85);
-          --sk-text: oklch(95% 0.01 280);
-          --sk-text-muted: oklch(70% 0.01 280);
+          --sk-bg: oklch(99% 0.002 280);
+          --sk-surface: oklch(96% 0.002 280);
+          --sk-accent: oklch(12% 0.01 280);
+          --sk-text: oklch(12% 0.01 280);
+          --sk-text-muted: oklch(50% 0.01 280);
         }
 
         .sk-about { background: var(--sk-bg); color: var(--sk-text); }
         .sk-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
         /* Hero */
-        .sk-hero { position: relative; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+        .sk-hero { position: relative; height: 100vh; display: flex; align-items: center; overflow: hidden; background: #fff; }
         .sk-hero__bg { position: absolute; inset: 0; z-index: 0; }
         .sk-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, var(--sk-bg)); }
         .sk-hero__content { position: relative; z-index: 1; max-width: 800px; }
 
         /* Typography */
-        .sk-title-xl { font-family: var(--font-serif); font-size: clamp(4rem, 12vw, 8rem); line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 2rem; }
+        .sk-title-xl { font-family: var(--font-serif); font-size: clamp(4rem, 12vw, 8rem); line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 2rem; color: var(--sk-text); }
         .sk-title-lg { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
         .sk-title-sub { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--sk-text-muted); line-height: 1.2; margin-bottom: 2.5rem; font-weight: 500; }
         .sk-title-md { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; margin-bottom: 1.5rem; }
-        .sk-accent-serif { font-style: italic; color: var(--sk-accent); font-weight: 400; }
-        .sk-meta { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--sk-accent); display: block; margin-bottom: 1rem; }
+        .sk-accent-serif { font-style: italic; color: var(--sk-text); font-weight: 400; text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 1px; text-decoration-color: rgba(0,0,0,0.1); }
+        .sk-meta { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--sk-text); display: block; margin-bottom: 1rem; opacity: 0.6; }
         .sk-body-lg { font-size: 1.25rem; line-height: 1.6; color: var(--sk-text-muted); max-width: 500px; }
         .sk-body-muted { color: var(--sk-text-muted); line-height: 1.7; }
 
         /* Sections */
         .sk-section { padding: 15vh 0; }
-        .sk-section--dark { background: var(--sk-bg); }
-        .sk-section--accent { background: var(--sk-surface); }
+        .sk-section--white { background: var(--sk-bg); }
+        .sk-section--grey { background: var(--sk-surface); }
 
         /* Editorial Grid */
         .sk-grid-editorial { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
@@ -303,18 +303,19 @@ export default function AboutClient() {
 
         .sk-chapter { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
         .sk-chapter__line { width: 40px; height: 1px; background: var(--sk-accent); }
-        .sk-chapter__label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sk-accent); }
+        .sk-chapter__label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sk-accent); font-weight: 700; }
 
         .sk-story { font-size: 1.125rem; line-height: 1.8; color: var(--sk-text-muted); display: flex; flex-direction: column; gap: 1.5rem; }
         .sk-quote { margin: 4rem 0; font-family: var(--font-serif); font-size: 1.75rem; line-height: 1.4; color: var(--sk-text); font-style: italic; border-left: 1px solid var(--sk-accent); padding-left: 2rem; }
-        .sk-quote cite { display: block; font-size: 0.75rem; font-style: normal; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sk-accent); margin-top: 1rem; }
+        .sk-quote cite { display: block; font-size: 0.75rem; font-style: normal; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sk-text-muted); margin-top: 1rem; }
 
         /* Poster Sequence */
         .sk-col-visual { position: relative; min-height: 600px; }
         .poster-sequence { position: relative; width: 100%; height: 100%; }
-        .poster-item { position: absolute; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .poster-item { position: absolute; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); filter: grayscale(1); transition: filter 0.5s ease; }
+        .poster-item:hover { filter: grayscale(0); }
         .poster-item--1 { width: 280px; aspect-ratio: 2/3; top: 0; left: 10%; z-index: 2; }
-        .poster-item--2 { width: 220px; aspect-ratio: 2/3; top: 150px; right: 10%; z-index: 1; filter: grayscale(1) brightness(0.6); }
+        .poster-item--2 { width: 220px; aspect-ratio: 2/3; top: 150px; right: 10%; z-index: 1; opacity: 0.6; }
         .poster-item--3 { width: 200px; aspect-ratio: 2/3; top: 400px; left: 0; z-index: 3; }
         .poster-item--4 { width: 240px; aspect-ratio: 2/3; top: 450px; right: 0; z-index: 2; }
 
@@ -322,12 +323,12 @@ export default function AboutClient() {
         .sk-grid-founder { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
         @media (min-width: 1024px) { .sk-grid-founder { grid-template-columns: 1fr 1fr; gap: 10vw; } }
 
-        .sk-founder-img { position: relative; aspect-ratio: 4/5; }
-        .sk-founder-badge { position: absolute; bottom: -2rem; right: -2rem; background: var(--sk-accent); color: var(--sk-bg); padding: 2rem; }
+        .sk-founder-img { position: relative; aspect-ratio: 4/5; background: #eee; }
+        .sk-founder-badge { position: absolute; bottom: -2rem; right: -2rem; background: var(--sk-accent); color: #fff; padding: 2rem; }
         .sk-founder-badge h3 { font-family: var(--font-serif); font-size: 1.5rem; line-height: 1; }
         .sk-founder-badge span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
 
-        .sk-stats { display: flex; gap: 4rem; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem; }
+        .sk-stats { display: flex; gap: 4rem; margin-top: 4rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 3rem; }
         .sk-stat__val { display: block; font-family: var(--font-serif); font-size: 3rem; color: var(--sk-accent); }
         .sk-stat__label { font-size: 0.75rem; text-transform: uppercase; color: var(--sk-text-muted); }
 
@@ -335,28 +336,28 @@ export default function AboutClient() {
         .sk-awards-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 20vh; }
         @media (min-width: 1024px) { .sk-awards-grid { grid-template-columns: 1fr 2fr; gap: 8rem; } }
         
-        .sk-awards-list { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.1); }
-        .sk-award-item { display: grid; grid-template-columns: 120px 1fr; padding: 2.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sk-award-year { font-family: var(--font-mono); font-size: 0.875rem; color: var(--sk-accent); }
+        .sk-awards-list { display: flex; flex-direction: column; border-top: 1px solid rgba(0,0,0,0.05); }
+        .sk-award-item { display: grid; grid-template-columns: 120px 1fr; padding: 2.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .sk-award-year { font-family: var(--font-mono); font-size: 0.875rem; color: var(--sk-accent); font-weight: 700; }
         .sk-award-body h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
         .sk-award-body p { font-size: 0.875rem; color: var(--sk-text-muted); }
 
         .sk-values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 4rem; }
-        .sk-value__num { display: block; font-family: var(--font-serif); font-size: 1.5rem; color: var(--sk-accent); margin-bottom: 1.5rem; }
+        .sk-value__num { display: block; font-family: var(--font-serif); font-size: 1.5rem; color: var(--sk-accent); margin-bottom: 1.5rem; position: relative; width: fit-content; }
+        .sk-value__num::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 100%; height: 1px; background: currentColor; opacity: 0.2; }
         .sk-value h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
         .sk-value p { font-size: 0.95rem; line-height: 1.7; color: var(--sk-text-muted); }
 
         /* CTA */
-        .sk-cta { padding: 20vh 0; text-align: center; }
-        .sk-cta-card { background: var(--sk-surface); padding: 10vh 2rem; position: relative; overflow: hidden; }
-        .sk-cta-card::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, oklch(82% 0.12 85 / 0.05), transparent); }
+        .sk-cta { padding: 20vh 0; text-align: center; background: var(--sk-surface); }
+        .sk-cta-card { padding: 10vh 2rem; position: relative; }
         .sk-cta-actions { display: flex; justify-content: center; gap: 1.5rem; margin-top: 4rem; }
 
-        .sk-btn { padding: 1.25rem 2.5rem; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.4s ease; }
-        .sk-btn--primary { background: var(--sk-accent); color: var(--sk-bg); }
-        .sk-btn--primary:hover { background: var(--sk-text); transform: translateY(-2px); }
+        .sk-btn { padding: 1.25rem 2.5rem; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.4s ease; border-radius: 2px; }
+        .sk-btn--primary { background: var(--sk-accent); color: #fff; }
+        .sk-btn--primary:hover { background: #000; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .sk-btn--outline { border: 1px solid var(--sk-accent); color: var(--sk-accent); }
-        .sk-btn--outline:hover { background: var(--sk-accent); color: var(--sk-bg); }
+        .sk-btn--outline:hover { background: var(--sk-accent); color: #fff; }
 
         @media (max-width: 768px) {
           .sk-col-visual { min-height: 800px; }
