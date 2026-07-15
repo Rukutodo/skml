@@ -174,3 +174,6 @@ To access the custom admin panel:
 
 Design and Development by **[StackX](https://github.com/skmlmotionpictures)**.
 *Made with Next.js, Sanity, and a lot of coffee.*
+
+*Checked and verified on branch Check/SKML-FEAT-0001.*
+

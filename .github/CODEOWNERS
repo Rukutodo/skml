@@ -1,0 +1,18 @@
+# This is the CODEOWNERS file for SKML Motion Pictures.
+# It defines individuals or teams that are responsible for code in this repository.
+# These owners will be automatically requested for review when a Pull Request touches these paths.
+
+# By default, assign everything to the repository owner
+*               @Rukutodo
+
+# Next.js App and UI Components
+/app/           @Rukutodo
+/components/    @Rukutodo
+
+# CMS Schemas and Config
+/sanity/        @Rukutodo
+
+# Configuration files
+/*.json         @Rukutodo
+/*.ts           @Rukutodo
+/*.mjs          @Rukutodo
