@@ -1,0 +1,155 @@
+import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import MarqueeSection from "@/components/MarqueeSection";
+import AboutSection from "@/components/AboutSection";
+import ProducerSection from "@/components/ProducerSection";
+import ServicesSection from "@/components/ServicesSection";
+import FilmShowcase from "@/components/FilmShowcase";
+import MoviesSection from "@/components/MoviesSection";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import OTTPlatforms from "@/components/OTTPlatforms";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+
+import { getAbout, getProducer, getFilms } from "@/lib/sanity/queries";
+import { urlFor } from "@/lib/sanity/image";
+
+const BASE_URL = "https://skmlmotionpictures.com";
+
+export const revalidate = 60; // Fallback: revalidate every 60s (primary: on-demand via webhook)
+
+
+export const metadata: Metadata = {
+  title: "SKML Motion Pictures | Official Homepage",
+  alternates: { canonical: BASE_URL },
+  openGraph: {
+    title: "SKML Motion Pictures | Official Homepage",
+    description:
+      "Welcome to the official homepage of SKML Motion Pictures.",
+    url: BASE_URL,
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SKML Motion Pictures — Official Homepage",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SKML Motion Pictures | Official Homepage",
+    description: "Welcome to the official homepage of SKML Motion Pictures.",
+    images: ["/og-image.png"],
+  },
+};
+
+/* JSON-LD — Organization schema for Google Knowledge Panel */
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "SKML Motion Pictures",
+  url: BASE_URL,
+  logo: `${BASE_URL}/icon.png`,
+  description:
+    "A premier film production and distribution company producing high-quality Telugu cinema. Distributed across theaters, Amazon Prime, and Aha.",
+  founder: {
+    "@type": "Person",
+    name: "Kandregula Adhinarayana",
+  },
+  sameAs: [],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    availableLanguage: ["Telugu", "English"],
+  },
+};
+
+export default async function Home() {
+  // Fetch all CMS data in parallel
+  const [aboutData, producerData, filmsData] = await Promise.all([
+    getAbout().catch(() => null),
+    getProducer().catch(() => null),
+    getFilms().catch(() => []),
+  ]);
+
+  // Transform producer portrait to URL
+  const producerPortraitUrl = producerData?.portrait
+    ? urlFor(producerData.portrait).width(800).quality(85).url()
+    : undefined;
+
+  // Transform films for MoviesSection
+  const moviesForSection = filmsData.map((f) => ({
+    title: f.title,
+    year: f.year || "",
+    genre: f.genre || "",
+    platform: f.ottPlatform || "",
+    poster: f.poster ? urlFor(f.poster).width(600).quality(80).url() : "",
+    alt: f.poster?.alt,
+    caption: f.poster?.caption,
+    category: f.category as "produced" | "distributed",
+    slug: f.slug?.current,
+    releaseType: f.releaseType || "",
+  }));
+
+  // Transform films for FilmShowcase (only 'produced' category)
+  const showcaseFilms = filmsData
+    .filter((f) => f.category === "produced")
+    .slice(0, 6)
+    .map((f) => ({
+      src: f.poster ? urlFor(f.poster).width(700).quality(80).url() : "",
+      title: f.title,
+      year: f.year || "",
+      genre: f.genre || "",
+      category: f.category as "produced" | "distributed",
+      ottPlatform: f.ottPlatform || "",
+      releaseType: f.releaseType || "",
+    }));
+
+  // Extract posters for Hero background (only 'distributed', up to 7 images)
+  const heroPosters = filmsData
+    .filter((f) => f.category === "distributed" && f.poster)
+    .slice(0, 7)
+    .map((f) => urlFor(f.poster).width(400).quality(60).url());
+
+  return (
+    <main>
+      {/* JSON-LD structured data for search engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
+      <Navbar />
+      <Hero posters={heroPosters} />
+      <MarqueeSection />
+      <AboutSection
+        headline={aboutData?.headline || undefined}
+        headlineAccent={aboutData?.headlineAccent || undefined}
+        description={aboutData?.description || undefined}
+        ctaText={aboutData?.ctaText || undefined}
+        stats={aboutData?.stats || undefined}
+      />
+      <ProducerSection
+        firstName={producerData?.firstName || undefined}
+        lastName={producerData?.lastName || undefined}
+        role={producerData?.role || undefined}
+        portraitUrl={producerPortraitUrl || undefined}
+        portraitAlt={producerData?.portrait?.alt}
+        portraitCaption={producerData?.portrait?.caption}
+        bio={producerData?.bio || undefined}
+        quote={producerData?.quote || undefined}
+      />
+      <ServicesSection />
+      <FilmShowcase films={showcaseFilms.length > 0 ? showcaseFilms : undefined} />
+      <MoviesSection films={moviesForSection.length > 0 ? moviesForSection : undefined} />
+      <WhyChooseUs />
+      <OTTPlatforms />
+      <ContactSection />
+      <Footer />
+      <FloatingWhatsApp />
+    </main>
+  );
+}

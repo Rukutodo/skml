@@ -1,0 +1,16 @@
+/* TEAM */
+    Founder: Kandregula Adhinarayana
+    Studio: SKML Motion Pictures
+    Site: https://skmlmotionpictures.com
+
+/* THANKS */
+    The Telugu Film Industry
+    Our audience and OTT partners (Amazon Prime, Aha)
+
+/* SITE TECHNOLOGY */
+    Framework: Next.js
+    CMS: Professional CMS
+
+    Hosting: Vercel
+    Components: React, Framer Motion
+    Typography: Inter, Playfair Display

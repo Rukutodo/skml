@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block protected system routes
+Disallow: /admin/
+Disallow: /studio/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://skmlmotionpictures.com/sitemap.xml
