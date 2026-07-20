@@ -1,10 +1,18 @@
-# 🎬 SKML Motion Pictures
+# SKML Motion Pictures
+
+```text
+   ███████╗████████╗ █████╗  ██████╗██╗  ██╗██╗  ██╗
+   ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝╚██╗██╔╝
+   ███████╗   ██║   ███████║██║     █████╔╝  ╚███╔╝
+   ╚════██║   ██║   ██╔══██║██║     ██╔═██╗  ██╔██╗
+   ███████║   ██║   ██║  ██║╚██████╗██║  ██╗██╔╝ ██╗
+   ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝
+              ENGINEERED BY STACKX
+```
 
 Welcome to the official repository for **SKML Motion Pictures** — a premium, highly dynamic, and responsive web application built to showcase a curated portfolio of produced and distributed films.
 
 This project features a modern frontend for visitors to explore films, alongside a custom-built Admin Dashboard integrated with Sanity CMS for seamless content management.
-
-![SKML Motion Pictures Overview](/public/favicon.ico) *(Note: Ensure the logo image exists in this path or update accordingly)*
 
 ---
 
@@ -48,14 +56,6 @@ The visual language of SKML Motion Pictures emphasizes a "Premium Cinematic" aes
   - **Glassmorphism:** Used in navigation and floating elements for a modern layered feel.
   - **Hover States:** Interactive elements scale slightly, adjust brightness, or reveal underlying details (e.g., Movie Cards showing descriptions on hover).
   - **Micro-Animations:** Fade-ins, slide-ups on scroll, staggered list appearances.
-
-### Key Components
-- **Navbar:** Sticky, glassmorphic header with responsive mobile menu.
-- **Hero / MarqueeSection:** Dynamic entry points grabbing user attention with auto-scrolling logos or cinematic visuals.
-- **MoviesSection / FilmShowcase:** Grid layouts showcasing posters with hover overlays for details.
-- **ProducerSection:** Clean layout for spotlighting key personnel.
-- **FloatingWhatsApp:** Fixed contact widget for instant communication.
-- **Footer:** Comprehensive site map and legal links.
 
 ## ✨ Key Features
 
@@ -110,9 +110,59 @@ npm install
 
 ### 3. Environment Variables
 
-Create a `.env.local` file in the root directory. You will need to populate it with your specific Sanity credentials and JWT secrets:
+Create a `.env.local` file in the root directory. You will need to populate it with your specific Sanity credentials and JWT secrets. Here is the template to use:
 
+```env
+# ==================================================================================================
+# 
+#    ███████╗████████╗ █████╗  ██████╗██╗  ██╗██╗  ██╗
+#    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝╚██╗██╔╝
+#    ███████╗   ██║   ███████║██║     █████╔╝  ╚███╔╝
+#    ╚════██║   ██║   ██╔══██║██║     ██╔═██╗  ██╔██╗
+#    ███████║   ██║   ██║  ██║╚██████╗██║  ██╗██╔╝ ██╗
+#    ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝
+# 
+#  PROJECT: SKML Motion Pictures
+#  ENVIRONMENT: Local Configuration
+#  MAINTAINER: StackX Engineering Team
+# 
+# ==================================================================================================
+# 
+#  CONFIDENTIALITY NOTICE:
+#  This file contains sensitive environment variables, API keys, and configuration secrets.
+#  It is the exclusive property of StackX.
+# 
+#  SECURITY POLICIES:
+#  1. DO NOT commit this file to any version control system (Git, SVN, etc.).
+#  2. DO NOT share these credentials via unencrypted channels (Slack, Email, etc.).
+#  3. Ensure this file is explicitly ignored in your `.gitignore` file.
+#  4. Unauthorized access or distribution is strictly prohibited.
+# 
+#  © 2026 StackX. All rights reserved.
+# ==================================================================================================
 
+# --------------------------------------------------------------------------------------------------
+#  [ SANITY CMS CONFIGURATION ]
+# --------------------------------------------------------------------------------------------------
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+NEXT_PUBLIC_SANITY_DATASET=your_sanity_dataset
+
+# Sanity Write Token (server-side only — generate from sanity.io/manage > API > Tokens)
+SANITY_API_WRITE_TOKEN=your_sanity_write_token
+
+# --------------------------------------------------------------------------------------------------
+#  [ AUTHENTICATION & SECURITY ]
+# --------------------------------------------------------------------------------------------------
+# JWT Secret (random string for signing auth tokens)
+JWT_SECRET=your_jwt_secret
+
+# --------------------------------------------------------------------------------------------------
+#  [ ADMIN CREDENTIALS ]
+# --------------------------------------------------------------------------------------------------
+# Admin Dashboard Credentials
+ADMIN_EMAIL=admin@stackx.co.in
+ADMIN_PASSWORD=your_secure_password
+```
 
 ### 4. Run the Development Server
 
@@ -152,9 +202,10 @@ To access the custom admin panel:
 ## 📚 Documentation
 
 - [API Reference](./API.md) - Details on internal API routes and integrations.
+- [SEO Guide](./SEO.md) - Guidelines for managing Search Engine Optimization.
 - [Docs Directory](./docs) - Further architectural reading.
 
 ## 👨‍💻 Credits
 
-Design and Development by **[StackX](https://github.com/skmlmotionpictures)**.
-*Made with Next.js, Sanity, and a lot of coffee.*
+Design and Development by **[StackX](https://stackx.co.in)**.
+*Built for production with Next.js, Sanity, and absolute precision.*
