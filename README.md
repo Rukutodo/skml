@@ -112,23 +112,7 @@ npm install
 
 Create a `.env.local` file in the root directory. You will need to populate it with your specific Sanity credentials and JWT secrets:
 
-```env
-# Next.js Application URL
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# Sanity Configuration
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2023-05-03
-
-# Sanity API Token (for write access in Admin Dashboard)
-SANITY_API_TOKEN=your_sanity_api_read_write_token
-
-# Admin Authentication
-JWT_SECRET=your_super_secret_jwt_string
-ADMIN_EMAIL=admin@skml.com
-ADMIN_PASSWORD=your_secure_password
-```
 
 ### 4. Run the Development Server
 
