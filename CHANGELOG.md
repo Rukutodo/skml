@@ -11,7 +11,7 @@ Use this file to record user-facing changes in reverse chronological order.
 - 
 
 ### Fixed
-- 
+- Fixed button hover color-swap and lift effect on About page CTA buttons — hovering either button now swaps both simultaneously (SKM-BUG-0032)
 
 ### Removed
 - 

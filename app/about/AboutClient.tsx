@@ -817,13 +817,18 @@ export default function AboutClient() {
         .about-btn {
           display: inline-flex; align-items: center; justify-content: center;
           padding: 1rem 2.5rem; font-size: 14px; font-weight: 700; border-radius: 0;
-          text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
-          text-transform: uppercase; letter-spacing: 0.1em;
+          text-decoration: none;
+          transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                      color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;
         }
+        .about-btn:hover { transform: translateY(-3px); }
         .about-btn--dark { background: #FFFFFF; color: #000000; border: 2px solid #FFFFFF; }
-        .about-btn--dark:hover { background: transparent; color: #FFFFFF; }
         .about-btn--outline { background: transparent; color: #FFFFFF; border: 2px solid #FFFFFF; }
-        .about-btn--outline:hover { background: #FFFFFF; color: #000000; }
+        /* Mirror swap: hovering either button flips both simultaneously */
+        .about-cta__btns:has(:hover) .about-btn--dark { background: transparent; color: #FFFFFF; }
+        .about-cta__btns:has(:hover) .about-btn--outline { background: #FFFFFF; color: #000000; }
       `}</style>
     </>
   );
