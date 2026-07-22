@@ -8,7 +8,7 @@ Use this file to record user-facing changes in reverse chronological order.
 - 
 
 ### Changed
-- 
+- Changed "Ready To Release Your Film?" section to include a single "Contact Us" button instead of two buttons 
 
 ### Fixed
 - 
