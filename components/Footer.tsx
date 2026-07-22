@@ -131,36 +131,36 @@ export default function Footer() {
           {/* Contact */}
           <motion.div variants={fadeUpItem}>
             <h4 style={{ fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.55)" }}>Contact Us</h4>
-            <div style={{ marginTop: "1.25rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ marginTop: "1.25rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               <motion.a href="tel:+919299992173" whileHover={{ x: 4 }} style={{ display: "flex", gap: "12px", alignItems: "flex-start", cursor: "pointer", textDecoration: "none" }}>
-                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
+                <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
                   <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Phone</span>+91 92999 92173</p>
+                  <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Phone</span>+91 92999 92173</p>
                 </div>
               </motion.a>
               
               <motion.a href="mailto:info@skmlmotionpictures.com" whileHover={{ x: 4 }} style={{ display: "flex", gap: "12px", alignItems: "flex-start", cursor: "pointer", textDecoration: "none" }}>
-                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
+                <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
                   <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Email</span>info@skmlmotionpictures.com</p>
+                  <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Email</span>info@skmlmotionpictures.com</p>
                 </div>
               </motion.a>
 
               <motion.a href="https://maps.google.com/?q=Hyderabad,+Telangana,+India" target="_blank" rel="noopener noreferrer" whileHover={{ x: 4 }} style={{ display: "flex", gap: "12px", alignItems: "flex-start", cursor: "pointer", textDecoration: "none" }}>
-                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
+                <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
                   <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Location</span>Hyderabad, Telangana, India</p>
+                  <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Location</span>Hyderabad, Telangana, India</p>
                 </div>
               </motion.a>
 
               <motion.a href="https://instagram.com/producer_adhinarayana_skml" target="_blank" rel="noopener noreferrer" whileHover={{ x: 4 }} style={{ display: "flex", gap: "12px", alignItems: "flex-start", cursor: "pointer", textDecoration: "none" }}>
-                <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
+                <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)", transition: "all 0.3s" }} className="contact-icon">
                   <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" viewBox="0 0 24 24">
                     <rect x="3" y="3" width="18" height="18" rx="5" strokeLinecap="round" strokeLinejoin="round"/>
                     <circle cx="12" cy="12" r="4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -168,7 +168,7 @@ export default function Footer() {
                   </svg>
                 </div>
                 <div>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Instagram</span>@producer_adhinarayana_skml</p>
+                  <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", margin: 0 }}><span style={{ color: "rgba(255,255,255,0.55)", display: "block", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "2px" }}>Instagram</span>@producer_adhinarayana_skml</p>
                 </div>
               </motion.a>
             </div>

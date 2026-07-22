@@ -23,13 +23,6 @@ const CONTACT_INFO = [
     href: "mailto:info@skmlmotionpictures.com",
     description: "We reply within 24 hours",
   },
-  {
-    icon: "location",
-    label: "Office",
-    value: "Hyderabad, Telangana, India",
-    href: "https://maps.google.com/?q=Hyderabad,+Telangana,+India",
-    description: "Film Nagar, Hyderabad",
-  },
 ];
 
 const INQUIRY_TYPES = [

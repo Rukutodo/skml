@@ -1320,7 +1320,7 @@ textarea::placeholder {
 
 @media (min-width: 1024px) {
   .contact-cards-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 2fr);
     gap: 1.25rem;
   }
 }
@@ -1375,6 +1375,8 @@ textarea::placeholder {
 .contact-info-card--instagram {
   background: #fdf2f8;
   border-color: rgba(193, 53, 132, 0.15);
+  font-size: 13px;     
+  letter-spacing: -0.01em;
 }
 
 .contact-info-card--instagram:hover {
@@ -1439,8 +1441,9 @@ textarea::placeholder {
   font-weight: 600;
   color: #111118;
   line-height: 1.4;
-  word-break: break-word;
+  word-break: nowrap;
   hyphens: none;
+  text-overflow: ellipsis; 
 }
 
 .contact-info-card__desc {
