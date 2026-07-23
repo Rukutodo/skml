@@ -677,7 +677,7 @@ export default function ServicesPage() {
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "flex-start" }}>
               <Link
-                href="/#contact"
+                href="/contact"
                 style={{ display: "inline-flex", alignItems: "center", padding: "1.1rem 2.5rem", borderRadius: "9999px", background: colors.dark, color: "#fff", fontWeight: 600, fontSize: "1rem", textDecoration: "none", boxShadow: "0 10px 25px rgba(0,0,0,0.15)", transition: "transform 0.2s ease" }}
               >
                 Contact Us
